@@ -23,7 +23,7 @@ export type CreateClientConfig<T extends DefaultClientOptions = ClientOptions> =
 
 export const client = createClient(
   createConfig<ClientOptions>({
-    baseUrl: 'https://example.com/v1/content/api',
+    baseUrl: 'https://example.com/content/api',
     fetch: clientSdkfetch,
   }),
 );

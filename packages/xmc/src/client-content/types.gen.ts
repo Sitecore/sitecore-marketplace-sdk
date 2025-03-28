@@ -22,7 +22,7 @@ export type GraphqlData = {
      */
     sitecoreContextId?: string;
   };
-  url: '/graphql';
+  url: '/graphql/v1';
 };
 
 export type GraphqlErrors = {
@@ -65,5 +65,5 @@ export type GraphqlResponses = {
 export type GraphqlResponse = GraphqlResponses[keyof GraphqlResponses];
 
 export type ClientOptions = {
-  baseUrl: 'https://example.com/v1/content/api' | (string & {});
+  baseUrl: 'https://example.com/content/api' | (string & {});
 };

@@ -3,7 +3,7 @@
 This monorepo hosts the three main packages, client applications (running inside iframes), core SDK, and XMC module, which extend the functionality of the system. The project consists of:
 
 - **Core SDK** – A lightweight, type-safe communication layer that uses the browser’s `postMessage` API to facilitate secure messaging between different window contexts. It handles low-level details such as secure handshakes, request/response patterns, event pub/sub, and origin validation. Consumed by Host SDK and Client SDK to abstract the communication layer.
-- **Client SDK** – This high-level SDK is designed to be used within client applications (typically in an iframe). Inspired by React Query, it offers a query/mutation API that manages internal state, loading status, and error handling while leveraging the Core SDK for communication.
+- **Client SDK** – This high-level SDK is designed to be used within client applications (typically in an iframe). Inspired by React Query , it offers a query/mutation API that manages internal state, loading status, and error handling while leveraging the Core SDK for communication.
 - **XMC Module** – A lightweight, type-safe extension that builds on top of the Client SDK to provide seamless integration with XMCloud APIs. It simplifies querying and mutating data related to Sitecore Marketplace.
 
 ## Monorepo Structure

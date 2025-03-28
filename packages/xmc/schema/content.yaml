@@ -3,9 +3,9 @@ info:
   title: Sitecore GraphQL API
   version: 1.0.0
 servers:
-  - url: https://example.com/v1/content/api
+  - url: https://example.com/content/api
 paths:
-  /graphql:
+  /graphql/v1:
     post:
       summary: Execute a GraphQL query
       description: Send a GraphQL query request to the Sitecore GraphQL API. Mutations are not supported by the Preview API and Delivery API.

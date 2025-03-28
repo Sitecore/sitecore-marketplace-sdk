@@ -29,7 +29,7 @@ export const graphql = <ThrowOnError extends boolean = false>(
   options: Options<GraphqlData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).post<GraphqlResponse, unknown, ThrowOnError>({
-    url: '/graphql',
+    url: '/graphql/v1',
     ...options,
     headers: {
       'Content-Type': 'application/json',

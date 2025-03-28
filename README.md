@@ -99,6 +99,6 @@ Repeat the same for the Client SDK and XMC module.
 - **Purpose:** Provides client applications (typically running in an iframe) with a developer-friendly API to interact with the host application.
 - **Key Features:** Query/mutation API inspired by React Query, automatic state management (data, status, isLoading), and seamless integration with the Core SDK.
 
-### XMC
+### XMC Module
 - **Purpose:** Extends the Client SDK to provide direct access to XMCloud APIs for Sitecore Marketplace applications.
 - **Key Features:** Easy initialization, type-safe query/mutation system, and seamless integration with the Client SDK.

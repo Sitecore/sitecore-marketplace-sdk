@@ -1,0 +1,27 @@
+name: run-unit-tests
+
+on:
+  workflow_call:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    name: run-unit-tests
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install pnpm
+        run: npm i -g pnpm
+      - name: Install dependencies
+        run: pnpm i
+      - name: Setup bc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bc
+      - name: Build
+        run: pnpm build
+      - name: Run unit tests
+        run: pnpm coverage

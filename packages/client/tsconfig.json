@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "declaration": true,
+    "composite": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "types": ["vitest"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "src/__tests__/*"]
+}

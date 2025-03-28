@@ -1,0 +1,5101 @@
+openapi: 3.0.1
+info:
+  title: Sitecore XM Apps REST API
+  description: >-
+    Use the XM Apps REST API for managing sites, site collections, pages, and
+    languages in the XM Apps system.
+
+
+    This API lets you interact with:
+
+    - The Site Collection object. Use a site collection to group together
+    related sites that share the same resources.
+
+    - The Site object. The site object is the core entity that represents a
+    website in the customer portfolio.
+
+    - The Language object. The language object is used to manage the languages
+    available to a tenant and site.
+
+    - The Job object. The job object is used to manage running background jobs.
+
+
+    Note the following:
+       - All API requests are made in your production environment.
+
+     For more information, see the [official Sitecore XM Cloud developer documentation](https://doc.sitecore.com/xmc/en/developers/xm-cloud/getting-started-with-xm-cloud.html).
+
+    # Authorization
+
+    To authorize your requests, use environment automation client credentials
+    and generate a JSON Web Token (JWT).
+
+
+    Note: To create client credentials, you must be an [Organization
+    Admin](https://doc.sitecore.com/portal/en/developers/sitecore-cloud-portal/roles.html)
+    or Organization Owner.
+
+
+    ## Create an automation client
+     1. In the Sitecore Cloud Portal, open XM Cloud Deploy.
+     2. Click **Credentials** > **Environment** > **Create credentials** > **Automation**.
+     3. Fill out the automation client details, then click **Create**.
+     4. Copy the client ID and the client secret because you won't be able to view them again in XM Cloud Deploy. You'll use them to request a JWT.
+
+    ## Request a JWT
+
+
+    Run the following cURL command to request a JWT. Replace the placeholder
+    values with your client ID and client secret.
+
+    ```curl
+      curl -X POST 'https://auth.sitecorecloud.io/oauth/token' \
+      --header 'Content-Type: application/x-www-form-urlencoded' \
+      --data-urlencode 'client_id={YOUR_CLIENT_ID}' \
+      --data-urlencode 'client_secret={YOUR_CLIENT_SECRET}' \
+      --data-urlencode 'grant_type=client_credentials' \
+      --data-urlencode 'audience=https://api.sitecorecloud.io'
+    ```
+
+
+    In the response, the `access_token` key contains the JWT:
+
+
+    ```json
+      {
+        "access_token": "{YOUR_JWT}",
+        "scope": "xmcloud.cm:admin",
+        "expires_in": 86400,
+        "token_type": "Bearer"
+      }
+    ```
+
+
+    The JWT expires in 24 hours. If your requests unexpectedly return a response
+    with status `401 Unauthorized`, request a new JWT by repeating this `POST`
+    request.
+
+
+    We recommend that you cache the JWT for 24 hours to avoid repeating this
+    `POST` request while the JWT is still valid.
+
+
+    ## Include the JWT in the request header
+
+
+    You can now start making REST API requests. You must include the JWT in the
+    request header of every request. For example:
+      ```curl
+      curl -X GET '{YOUR_BASE_URL}/...' \
+      -H 'Authorization: Bearer {YOUR_JWT}' \
+      -H 'Accept: application/json'
+      ```
+  contact:
+    name: Sitecore Corporation A/S
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: v1
+  x-metadata:
+    product: Sitecore XM Cloud
+servers:
+  - url: https://example.com/authoring
+    description: Production server
+paths:
+  /api/v1/languages:
+    get:
+      tags:
+        - Languages
+      summary: List languages
+      description: Retrieves the list of languages added to the environment.
+      operationId: ListLanguages
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Language"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+    post:
+      tags:
+        - Languages
+      summary: Add a language
+      description: "Adds a language to your environment, so you can create content and build websites in that language. You can choose from the language supported by Sitecore XM Cloud. If you do not know the language code of the language, first retrieve the list of languages supported in Sitecore XM Cloud.\r\n            To add a language to the system, you must provide the language code. You can optionally input additional parameters, such as region code and spell checker.\r\n            If you want to add a custom language not in the default cultures, register it as a custom culture (as described in .NET CultureInfo class) and update the LanguageDefinitions.config file."
+      operationId: CreateLanguage
+      requestBody:
+        description: Input parameters
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddLanguageModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddLanguageModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddLanguageModel"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Language"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/languages/supported:
+    get:
+      tags:
+        - Languages
+      summary: List supported languages
+      description: >-
+        Retrieves the list of languages supported by Sitecore XM Cloud, and
+        associated data.
+      operationId: ListSupportedLanguages
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SupportedLanguage"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/pages/{pageId}/live/variants:
+    get:
+      tags:
+        - Pages
+      summary: List live variant identifiers for a page
+      description: >-
+        Fetches the identifiers of currently active personalization variants for
+        a page.
+      operationId: ListPageVariants
+      parameters:
+        - name: pageId
+          in: path
+          description: The page identifier
+          required: true
+          schema:
+            type: string
+          example: 8f0b81bc-7388-46be-b109-6e73d1114470
+        - name: language
+          in: query
+          description: The page language
+          required: true
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: >-
+            Live page personalization variant identifiers retrieved
+            successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: Page was not found from the provided identifier and language.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/pages/{pageId}/live:
+    get:
+      tags:
+        - Pages
+      summary: Checks if a page is active
+      description: Checks if the requested page is active.
+      operationId: GetLivePageState
+      parameters:
+        - name: pageId
+          in: path
+          description: The page identifier
+          required: true
+          schema:
+            type: string
+          example: 8f0b81bc-7388-46be-b109-6e73d1114470
+        - name: language
+          in: query
+          description: The page language
+          required: true
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: The page is live and published to Edge.
+        "404":
+          description: This page language version isn’t published to Edge.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/collections:
+    get:
+      tags:
+        - Collections
+      summary: List site collections
+      description: >-
+        Fetches the list of site collections in the environment, with associated
+        details.
+      operationId: ListCollections
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SiteCollection"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+    post:
+      tags:
+        - Collections
+      summary: Create a site collection
+      description: >-
+        Creates a collection by specifying a name and, optionally, a display
+        name and description.
+      operationId: CreateCollection
+      requestBody:
+        description: Input data containing name and the description of the site collection
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSiteCollectionInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateSiteCollectionInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateSiteCollectionInput"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/collections/{collectionId}:
+    get:
+      tags:
+        - Collections
+      summary: Retrieve a site collection
+      description: Fetches information about a site collection.
+      operationId: RetrieveCollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: The identifier of the site collection.
+          required: true
+          schema:
+            type: string
+          example: ff34f39f190b4079bf8a0242200b6780
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteCollection"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    patch:
+      tags:
+        - Collections
+      summary: Update a site collection
+      description: >-
+        Updates the display name and the description of the site collection. To
+        change the system name of a collection, see [rename a site
+        collection](#tag/Collections/operation/Rename).
+      operationId: UpdateCollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: The identifier of the site collection.
+          required: true
+          schema:
+            type: string
+          example: ff34f39f190b4079bf8a0242200b6780
+      requestBody:
+        description: Input data containing name and the description of the site collection
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteCollectionInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteCollectionInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteCollectionInput"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteCollection"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    delete:
+      tags:
+        - Collections
+      summary: Delete a site collection
+      description: Deletes a site collection, including sites in that collection.
+      operationId: DeleteCollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: The identifier of the site collection.
+          required: true
+          schema:
+            type: string
+          example: ff34f39f190b4079bf8a0242200b6780
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/favorites/sites:
+    get:
+      tags:
+        - Favorites
+      summary: List favorite sites
+      description: Fetches a list of your favorite sites
+      operationId: GetFavoriteSites
+      responses:
+        "200":
+          description: Favorite sites retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Site"
+        "400":
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+    post:
+      tags:
+        - Favorites
+      summary: Adds a site to favorites
+      description: Adds a site to your list of favorites
+      operationId: AddFavoriteSite
+      requestBody:
+        description: The input model.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddFavoriteSiteInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddFavoriteSiteInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddFavoriteSiteInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Provided site not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/jobs:
+    get:
+      tags:
+        - Jobs
+      summary: List site job statuses
+      description: >-
+        Fetches information about background jobs. Returns empty array if no
+        jobs are running.
+      operationId: ListJobs
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/jobs/{jobHandle}/status:
+    get:
+      tags:
+        - Jobs
+      summary: Retrieve a job status
+      description: Fetches information about a background job.
+      operationId: RetrieveJob
+      parameters:
+        - name: jobHandle
+          in: path
+          description: >-
+            The handle of the job. If you don’t know the handle of the job,
+            first retrieve the list of site job statuses.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "404":
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/aggregation/pages/live/variants:
+    post:
+      tags:
+        - Aggregation
+      summary: Aggregate personalization variants for multiple pages
+      description: >-
+        Returns currently active personalization variants for the requested
+        pages.
+      operationId: AggregateLivePageVariants
+      requestBody:
+        description: >-
+          The collection of pages (by their identifier and language) for which
+          to get personalization variants.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+      responses:
+        "200":
+          description: Live page personalization variants retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageVariantsAggregationResponse"
+        "400":
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/aggregation/pages:
+    post:
+      tags:
+        - Aggregation
+      summary: Aggregate page data
+      description: Aggregates data about multiple pages and their components.
+      operationId: AggregatePageData
+      requestBody:
+        description: >-
+          The collection of pages, by their identifier and language, for which
+          to get data.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/PageRequest"
+      responses:
+        "200":
+          description: Page details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagesAggregationResponse"
+        "400":
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/collections/{collectionId}/rename:
+    post:
+      tags:
+        - Collections
+      summary: Rename a site collection
+      description: Changes the system name of a site collection.
+      operationId: RenameCollection
+      parameters:
+        - name: collectionId
+          in: path
+          description: The identifier of the site collection.
+          required: true
+          schema:
+            type: string
+          example: ff34f39f190b4079bf8a0242200b6780
+      requestBody:
+        description: Input object containing the new system name of the site collection.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteCollectionInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteCollectionInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteCollectionInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/collections/sort:
+    post:
+      tags:
+        - Collections
+      summary: Sort site collections
+      description: >-
+        By assigning a sort value to site collection IDs, you can use this
+        endpoint to apply an order by which collections are sorted in the Sites
+        user interface and in Content Editor. The lower the sort value, the
+        higher the site appears in the interface.
+      operationId: SortCollections
+      requestBody:
+        description: >-
+          A _collections_ JSON object of key-value pairs where the collection ID
+          (string) is the key and the sort order (integer) is the value.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SortCollectionsInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SortCollectionsInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SortCollectionsInput"
+        required: true
+      responses:
+        "204":
+          description: Site collections sort order updated successfully
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: One or more site collections could not be found from provided IDs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/collections/name/validate:
+    post:
+      tags:
+        - Collections
+      summary: Validate site collection name
+      description: "Validates a site collection name to ensure it meets the required criteria. The validations applied to the collection name:\r\n- Is a string and can't be null.\r\n- Is unique.\r\n- The length of the name is a maximum of 50 characters.\r\n- Can't start or end with a space.\r\n- Can't start with a dash.\r\n- Can include Latin alphanumeric characters, spaces and dashes."
+      operationId: ValidateCollectionName
+      requestBody:
+        description: The site collection name to validate.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateCollectionNameInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ValidateCollectionNameInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ValidateCollectionNameInput"
+        required: true
+      responses:
+        "200":
+          description: Returns a NameValidationResult indicating the validation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameValidationResult"
+        "400":
+          description: If the input is invalid, returns a ProblemDetails object.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/languages/{isoCode}:
+    patch:
+      tags:
+        - Languages
+      summary: Update a language
+      description: "Updates a [language supported](https://doc.sitecore.com/xmc/en/users/xm-cloud/add-a-language-to-your-xm-cloud-environment.html#add-a-custom-language) by Sitecore XM Cloud.\r\n            To update a language, you must provide the regional ISO code of the language. If you do not know the ISO code of the language, first retrieve the list of languages supported in Sitecore XM Cloud."
+      operationId: UpdateLanguage
+      parameters:
+        - name: isoCode
+          in: path
+          description: Regional ISO code of the language to update
+          required: true
+          schema:
+            type: string
+          example: en-US
+      requestBody:
+        description: Input parameters
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EditLanguageInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/EditLanguageInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/EditLanguageInput"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Language"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    delete:
+      tags:
+        - Languages
+      summary: Delete a language
+      description: "Deletes a language from the XM Cloud environment.\r\n            To delete a language from the system, you must provide the regional ISO code of the language. If you do not know the ISO code of the language, first retrieve the list of languages added to the environment."
+      operationId: DeleteLanguage
+      parameters:
+        - name: isoCode
+          in: path
+          description: Regional ISO code of the language to remove.
+          required: true
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/favorites/sites/{siteId}:
+    delete:
+      tags:
+        - Favorites
+      summary: Remove site from favorites
+      description: Removes a site from your list of favorites
+      operationId: RemoveFavoriteSite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      responses:
+        "202":
+          description: Successful operation.
+        "400":
+          description: One or more validation errors occurred.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Favorite site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites:
+    get:
+      tags:
+        - Sites
+      summary: List sites
+      description: Fetches the list of sites in the environment, with associated details.
+      operationId: ListSites
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Site"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+    post:
+      tags:
+        - Sites
+      summary: Create a site
+      description: "[Creates a site](https://doc.sitecore.com/xmc/en/users/xm-cloud/create-a-site.html) for the environment.\r\n            Sites are created using  [site templates](https://doc.sitecore.com/xmc/en/developers/xm-cloud/create-a-site-template-for-the-xm-cloud-dashboard.html). Every site belongs to a [site collection](https://doc.sitecore.com/xmc/en/users/xm-cloud/create-a-site-collection.html). You can either create a site inside an existing collection or create a new one.\r\n            It is also possible to create a site by duplicating a site."
+      operationId: CreateSite
+      requestBody:
+        description: Input model
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewSiteInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/NewSiteInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/NewSiteInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/{siteId}:
+    get:
+      tags:
+        - Sites
+      summary: Retrieve a site
+      description: Fetches information about a site.
+      operationId: RetrieveSite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Site"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    patch:
+      tags:
+        - Sites
+      summary: Update a site
+      description: >-
+        Updates various parameters of a site. To change the name of a site, see
+        [rename a site](#tag/Sites/operation/Rename).
+      operationId: UpdateSite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      requestBody:
+        description: Various site configuration properties
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSiteInput"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Site"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    delete:
+      tags:
+        - Sites
+      summary: Delete a site
+      description: "Deletes a site, including its pages, settings, media files, data sources, presentation elements, dictionaries, components, variants, and page designs. Everyone in the environment will lose access to the deleted site.\r\n           Deleting a site affects related websites in the collection:\r\n           • If the site [shares](https://doc.sitecore.com/xmc/en/users/xm-cloud/create-a-site.html#share-a-site) items with other sites, this might result in broken links.\r\n           • Items that are cloned to other sites are turned into regular items, and the links removed."
+      operationId: DeleteSite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        - name: force
+          in: query
+          description: >-
+            If this is set to true, the site will be deleted even if it is
+            published to Edge.
+          schema:
+            type: boolean
+          example: false
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/copy:
+    post:
+      tags:
+        - Sites
+      summary: Duplicate a site
+      description: >-
+        You can create a site by duplicating an existing one. When you duplicate
+        a site, its content items (such as pages and images, folder structure,
+        and links) are copied. Most of the settings are also copied, but you can
+        change those later. The new site's path parameters and response body
+        schema will be the same as the original site.
+      operationId: CopySite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site you want to duplicate.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      requestBody:
+        description: Input object containing the name and description of the new site
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CopySiteInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CopySiteInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CopySiteInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/rename:
+    post:
+      tags:
+        - Sites
+      summary: Rename a site
+      description: Changes the system name of a site.
+      operationId: RenameSite
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site you want to rename.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      requestBody:
+        description: Input object containing new name of the site
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RenameSiteInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/sort:
+    post:
+      tags:
+        - Sites
+      summary: Sort sites
+      description: >-
+        By assigning a sort value to site IDs, you can use this endpoint to
+        apply an order by which sites are sorted in the Sites user interface and
+        in Content Editor. The lower the sort value, the higher the site appears
+        in the interface.
+      operationId: SortSites
+      requestBody:
+        description: >-
+          A _sites_ JSON object of key-value pairs where the site ID (string) is
+          the key and the sort order (integer) is the value.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SortSitesInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SortSitesInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SortSitesInput"
+        required: true
+      responses:
+        "204":
+          description: Sites sort order updated successfully
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: One or more sites could not be found from provided IDs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/name/validate:
+    post:
+      tags:
+        - Sites
+      summary: Validate site name
+      description: "Validates a site name to ensure it meets the required criteria. The validations applied to the site name:\r\n- Is a string and can't be null.\r\n- Is unique.\r\n- The length of the name is a maximum of 50 characters.\r\n- Can't start or end with a space.\r\n- Can't start with a dash.\r\n- Can include Latin alphanumeric characters, spaces and dashes."
+      operationId: ValidateSiteName
+      requestBody:
+        description: The site name to validate.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateSiteNameInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ValidateSiteNameInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ValidateSiteNameInput"
+        required: true
+      responses:
+        "200":
+          description: Returns a NameValidationResult indicating the validation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameValidationResult"
+        "400":
+          description: If the input is invalid, returns a ProblemDetails object.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/analytics-identifiers/{analyticsIdentifier}:
+    get:
+      tags:
+        - Sites
+      summary: List sites that use an analytics identifier
+      description: >-
+        Fetches a list of sites that use an [analytics
+        identifier](https://doc.sitecore.com/xmc/en/users/xm-cloud/manage-personalization-and-analytics-for-sites.html).
+      operationId: ListTrackedSites
+      parameters:
+        - name: analyticsIdentifier
+          in: path
+          description: Analytics identifier.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Site"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Identifier not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/collections/{collectionId}/sites:
+    get:
+      tags:
+        - Collections
+      summary: List sites in a site collection
+      description: Fetches a list of sites in a site collection.
+      operationId: ListCollectionSites
+      parameters:
+        - name: collectionId
+          in: path
+          description: The identifier of the site collection.
+          required: true
+          schema:
+            type: string
+          example: ff34f39f190b4079bf8a0242200b6780
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Site"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Collection not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/analytics-identifiers/{analyticsIdentifier}/detach:
+    post:
+      tags:
+        - Sites
+      summary: Unassign analytics identifiers from sites
+      description: Removes the analytics identifiers from one or more sites.
+      operationId: DetachAnalyticsIdentifier
+      parameters:
+        - name: analyticsIdentifier
+          in: path
+          description: Analytics identifier.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Input containing an array of site identifiers.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetachFromSitesInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/DetachFromSitesInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/DetachFromSitesInput"
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "202":
+          description: Successful operation
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Identifier not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/hierarchy:
+    get:
+      tags:
+        - Sites
+      summary: Retrieve the hierarchy of a site's main page
+      description: >-
+        Fetches hierarchy information about the main page of a site, including
+        its children, ancestors, and siblings.
+      operationId: RetrieveSiteHierarchy
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 3875AC96-8ECF-44AE-8E25-851068B373CE
+        - name: language
+          in: query
+          description: >-
+            The ISO country-region language code for which to retrieve the
+            hierarchy, for example: en-US, ar-AE.
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: Site hierarchy retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageHierarchy"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Invalid site ID or root page ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/hierarchy/{pageId}:
+    get:
+      tags:
+        - Sites
+      summary: Retrieve the hierarchy of a page
+      description: >-
+        Fetches hierarchy information about a page, including its children,
+        ancestors, and siblings.
+      operationId: RetrievePageHierarchy
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 3875AC96-8ECF-44AE-8E25-851068B373CE
+        - name: pageId
+          in: path
+          description: Page identifier.
+          required: true
+          schema:
+            type: string
+          example: 54106BDF-4C3C-4101-A07D-3BB41B63A76A
+        - name: language
+          in: query
+          description: >-
+            The ISO country-region language code for which to retrieve the
+            hierarchy, for example: en-US, ar-AE.
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: Page hierarchy retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageHierarchy"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Invalid site ID or page ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/hierarchy/{pageId}/ancestors:
+    get:
+      tags:
+        - Sites
+      summary: List ancestors for a page
+      description: Fetches information about the ancestors of a page.
+      operationId: ListPageAncestors
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 3875AC96-8ECF-44AE-8E25-851068B373CE
+        - name: pageId
+          in: path
+          description: Page identifier.
+          required: true
+          schema:
+            type: string
+          example: 54106BDF-4C3C-4101-A07D-3BB41B63A76A
+        - name: language
+          in: query
+          description: >-
+            The ISO country-region language code for which to retrieve the
+            ancestors, for example: en-US, ar-AE.
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: List of retrieved ancestor pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PageResponse"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/{siteId}/hierarchy/{pageId}/children:
+    get:
+      tags:
+        - Sites
+      summary: List children for a page
+      description: Fetches information about the children of a page.
+      operationId: ListPageChildren
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 3875AC96-8ECF-44AE-8E25-851068B373CE
+        - name: pageId
+          in: path
+          description: Page identifier.
+          required: true
+          schema:
+            type: string
+          example: 54106BDF-4C3C-4101-A07D-3BB41B63A76A
+        - name: language
+          in: query
+          description: >-
+            The ISO country-region language code for which to retrieve the
+            children, for example: en-US, ar-AE.
+          schema:
+            type: string
+          example: en-US
+      responses:
+        "200":
+          description: List of retrieved child pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PageResponse"
+        "400":
+          description: Invalid input format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/{siteId}/hosts:
+    get:
+      tags:
+        - Sites
+      summary: List hosts for a site
+      description: Retrieves the list of hosts for a site.
+      operationId: ListHosts
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Hosts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Host"
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+    post:
+      tags:
+        - Sites
+      summary: Create a site host
+      description: Creates a host for a site.
+      operationId: CreateHost
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The parameters of a host.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateHostInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateHostInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateHostInput"
+        required: true
+      responses:
+        "201":
+          description: Host created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Host"
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "409":
+          description: The host name is already in use
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.8
+                title: Conflict
+                status: 409
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+  /api/v1/sites/{siteId}/hosts/{hostId}:
+    get:
+      tags:
+        - Sites
+      summary: Retrieve a site host by host ID
+      description: Fetches details about a site host.
+      operationId: RetrieveHost
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+        - name: hostId
+          in: path
+          description: The identifier of the host.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the host found by the host ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Host"
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Invalid host ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    patch:
+      tags:
+        - Sites
+      summary: Update a host by host ID
+      description: Modifies the properties of a host.
+      operationId: UpdateHost
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+        - name: hostId
+          in: path
+          description: The identifier of the host.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: New parameter values for the host.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateHostInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateHostInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateHostInput"
+        required: true
+      responses:
+        "204":
+          description: Host updated successfully
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Invalid host ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+        "409":
+          description: The host name is already in use
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.8
+                title: Conflict
+                status: 409
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+    delete:
+      tags:
+        - Sites
+      summary: Delete a site host by host ID
+      description: >-
+        Deletes a site using a hostID. Deletes a site, including its pages,
+        settings, media files, data sources, presentation elements,
+        dictionaries, components, variants, and page designs. Everyone in the
+        environment will lose access to the deleted site.
+      operationId: DeleteHost
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+        - name: hostId
+          in: path
+          description: The identifier of the host.
+          required: true
+          schema:
+            type: string
+        - name: force
+          in: query
+          description: >-
+            If this is set to true, the host will be deleted even if it is
+            published to Edge.
+          schema:
+            type: boolean
+      responses:
+        "202":
+          description: Host deleted successfully
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Invalid host ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/renderinghosts:
+    get:
+      tags:
+        - Sites
+      summary: List rendering hosts for a site
+      description: Fetches a list of rendering hosts for a site.
+      operationId: GetRenderingHosts
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RenderingHost"
+        "400":
+          description: Incorrect site ID format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site could not be found from the provided ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/templates:
+    get:
+      tags:
+        - Sites
+      summary: List site templates
+      description: >-
+        Gets the site templates available in the environment that can be used
+        for creating sites. Learn more about [site
+        templates](https://doc.sitecore.com/xmc/en/developers/xm-cloud/create-a-site-template-for-the-xm-cloud-dashboard.html).
+      operationId: ListSiteTemplates
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SiteTemplate"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/{siteId}/upload-thumbnail:
+    post:
+      tags:
+        - Sites
+      summary: Upload a thumbnail for a site
+      description: >-
+        Uploads an image to be used as
+        [thumbnail](https://doc.sitecore.com/xmc/en/users/ea-xm-cloud/manage-sites.html#manage-general-site-settings)
+        for a site when it is displayed in the [XM Cloud Sites
+        application](https://doc.sitecore.com/xmc/en/users/xm-cloud/sites.html).
+      operationId: UploadSiteThumbnail
+      parameters:
+        - name: siteId
+          in: path
+          description: The identifier of the site.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                ContentType:
+                  type: string
+                ContentDisposition:
+                  type: string
+                Headers:
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                Length:
+                  type: integer
+                  format: int64
+                Name:
+                  type: string
+                FileName:
+                  type: string
+            encoding:
+              ContentType:
+                style: form
+              ContentDisposition:
+                style: form
+              Headers:
+                style: form
+              Length:
+                style: form
+              Name:
+                style: form
+              FileName:
+                style: form
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadMediaOutput"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/statistics/localization:
+    get:
+      tags:
+        - Sites
+      summary: List localization statistics for a site
+      description: >-
+        Fetches localization statistics for a site, including the number of
+        pages in each locale.
+      operationId: RetrieveLocalizationStatistics
+      parameters:
+        - name: siteId
+          in: path
+          description: The site identifier.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocalizationStatistics"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+  /api/v1/sites/{siteId}/configuration/sitemap:
+    get:
+      tags:
+        - Sites
+      summary: Retrieve the sitemap configuration
+      description: >-
+        Fetches a
+        [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configure-a-sitemap.html)
+        configuration.
+      operationId: RetrieveSitemapConfiguration
+      parameters:
+        - name: siteId
+          in: path
+          description: The site identifier.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SitemapConfiguration"
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site or sitemap configuration not found for the provided ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+    patch:
+      tags:
+        - Sites
+      summary: Update a sitemap configuration
+      description: >-
+        Updates a
+        [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configure-a-sitemap.html)
+        configuration.
+      operationId: UpdateSitemapConfiguration
+      parameters:
+        - name: siteId
+          in: path
+          description: The site identifier.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Configuration details of a sitemap.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSitemapConfigurationInput"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSitemapConfigurationInput"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateSitemapConfigurationInput"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SitemapConfiguration"
+        "400":
+          description: One or more validation errors occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+        "404":
+          description: Site or sitemap configuration not found for the provided ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.4
+                title: Not Found
+                status: 404
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+  /api/v1/sites/{siteId}/statistics/workflow:
+    get:
+      tags:
+        - Sites
+      summary: List workflow statistics for a site
+      description: >-
+        Fetches the workflows defined for a site, their states, and the number
+        of pages in each state.
+      operationId: RetrieveWorkflowStatistics
+      parameters:
+        - name: siteId
+          in: path
+          description: The site identifier.
+          required: true
+          schema:
+            type: string
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowsStatistics"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+              example:
+                type: https://tools.ietf.org/html/rfc7231#section-6.5.1
+                title: Bad Request
+                status: 400
+                detail: >-
+                  A detailed explanation, specific to this occurrence of the
+                  problem.
+                instance: >-
+                  If available, a URI reference that identifies the specific
+                  occurrence of the problem.
+                traceId: 00-982607166a542147b435be3a847ddd71-fc75498eb9f09d48-00
+                errors:
+                  sampleProperty:
+                    - The sampleProperty field is required
+components:
+  schemas:
+    AddFavoriteSiteInput:
+      required:
+        - favoriteSiteId
+      type: object
+      properties:
+        favoriteSiteId:
+          minLength: 1
+          type: string
+          description: |-
+            The site identifier..
+            Example value: 110d559fdea542ea9c1c8a5df7e70ef9
+          example: 110d559fdea542ea9c1c8a5df7e70ef9
+      additionalProperties: false
+      description: The details of the site to add to favorites.
+    AddLanguageModel:
+      required:
+        - languageCode
+      type: object
+      properties:
+        charset:
+          type: string
+          description: >-
+            The character encoding, that specifies how characters are
+            represented in a document or web page.
+
+            Example value: iso-8859-1
+          nullable: true
+          example: iso-8859-1
+        codePage:
+          type: string
+          description: |-
+            Code Page
+            Example value: 65001
+          nullable: true
+          example: "65001"
+        customCode:
+          type: string
+          description: >-
+            If you wish to support a nonstandard country or region code, you can
+            provide a custom language code.
+
+            Example value: en-EU
+          nullable: true
+          example: en-EU
+        database:
+          type: string
+          description: |-
+            Database
+            Example value: master
+          nullable: true
+          example: master
+        encoding:
+          type: string
+          description: |-
+            Example value: utf-8
+            Example value: utf-8
+          nullable: true
+          example: utf-8
+        languageCode:
+          minLength: 1
+          type: string
+          description: |-
+            The ISO code for the language.
+            Example value: en
+          example: en
+        name:
+          type: string
+          description: |-
+            The name that will be used for the language.
+            Example value: en-US
+          nullable: true
+          example: en-US
+        regionCode:
+          type: string
+          description: >-
+            The regional ISO code of the language. Example values: US for the
+            USA, or DK for Denmark.
+
+            Example value: US
+          nullable: true
+          example: US
+        fallbackLanguage:
+          type: string
+          description: >-
+            If you wish to configure fallback for the new language, add the ISO
+            language code for the fallback language.
+
+            Example value: en
+          nullable: true
+          example: en
+        spellChecker:
+          type: string
+          description: >-
+            A reference to the dictionary file name that you want to use to
+            spellcheck in the new language.
+
+            Example value: en-US.tdf
+          nullable: true
+          example: en-US.tdf
+      additionalProperties: false
+    AnalyticsIdentifier:
+      required:
+        - language
+        - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: |-
+            The name of the analytics identifier.
+            Example value: skate-park
+          example: skate-park
+        language:
+          minLength: 1
+          type: string
+          description: |-
+            The language for the analytics identifier.
+            Example value: en
+          example: en
+      additionalProperties: false
+      description: An Analytics tracker identifer for a site.
+    ComponentAggregationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The component identifier.
+            Example value: 86a03271-dff4-470a-92bd-b68c67de2e25
+          nullable: true
+          example: 86a03271-dff4-470a-92bd-b68c67de2e25
+        uid:
+          type: string
+          description: >-
+            The unique identifier of the component on this page. The UID is
+            assigned to the component when it's added to the page.
+
+            Example value: 3d42bec0-60ad-45f3-a8f7-ddb6a5543c34
+          nullable: true
+          example: 3d42bec0-60ad-45f3-a8f7-ddb6a5543c34
+        name:
+          type: string
+          description: |-
+            The component name.
+            Example value: RichText
+          nullable: true
+          example: RichText
+        displayName:
+          type: string
+          description: |-
+            The display name of the component for the specified language.
+            Example value: Rich Text
+          nullable: true
+          example: Rich Text
+      additionalProperties: false
+    CopySiteInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            Name for the new site.
+            Example value: skate-park
+          default: string
+          example: skate-park
+        displayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            Display name for the new site.
+            Example value: Skate Park
+          nullable: true
+          example: Skate Park
+        description:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: |-
+            Description for the new site.
+            Example value: Sample showcase website description.
+          nullable: true
+          example: Sample showcase website description.
+        posMappings:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsIdentifier"
+          description: Analytics identifiers for the new site.
+          nullable: true
+      additionalProperties: false
+      description: A site duplication request.
+    CreateHostInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            The name of the new host.
+            Example value: skate-park
+          default: string
+          example: skate-park
+        hostnames:
+          type: array
+          items:
+            type: string
+          description: |-
+            One or more hostnames.
+            Example value: [
+              "dev.skate-park.com",
+              "uat.skate-park.com"
+            ]
+          nullable: true
+          example:
+            - dev.skate-park.com
+            - uat.skate-park.com
+        targetHostname:
+          type: string
+          description: |-
+            The target hostname.
+            Example value: www.skate-park.com
+          nullable: true
+          example: www.skate-park.com
+        renderingHost:
+          type: string
+          description: |-
+            The rendering host.
+            Example value: Default
+          nullable: true
+          example: Default
+        homePageId:
+          pattern: >-
+            (?i)^(?:[({][0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]|[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12})$
+          type: string
+          description: |-
+            The identifier of the home page.
+            Example value: 110d559fdea542ea9c1c8a5df7e70ef9
+          nullable: true
+          example: 110d559fdea542ea9c1c8a5df7e70ef9
+        thumbnail:
+          type: string
+          description: The thumbnail information.
+          nullable: true
+        analyticsIdentifiers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsIdentifier"
+          description: >-
+            The list of analytics tracker identifiers mapped to the host, per
+            language.
+          nullable: true
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The host settings collection.
+          nullable: true
+        languageSettings:
+          $ref: "#/components/schemas/SiteLanguageSettings"
+      additionalProperties: false
+      description: A host creation request
+    CreateSiteCollectionInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            The unique system name of the new collection.
+            Example value: skate-brand-sites
+          default: string
+          example: skate-brand-sites
+        displayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            A short, meaningful name for the collection.
+            Example value: Skate Brand Websites
+          nullable: true
+          example: Skate Brand Websites
+        description:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: |-
+            A longer, more detailed description of the collection.
+            Example value: Collection for all Skate Park brand websites.
+          nullable: true
+          example: Collection for all Skate Park brand websites.
+      additionalProperties: false
+      description: A site collection creation request.
+    DetachFromSitesInput:
+      required:
+        - sitesIdentifiers
+      type: object
+      properties:
+        sitesIdentifiers:
+          type: array
+          items:
+            type: string
+          description: >-
+            The list of sites, based on their identifier, for which the analytic
+            identifier should be unassigned.
+      additionalProperties: false
+      description: Analytics identifier detach request.
+    EditLanguageInput:
+      type: object
+      properties:
+        languageCode:
+          type: string
+          nullable: true
+        regionCode:
+          type: string
+          nullable: true
+        fallbackLanguageIso:
+          type: string
+          nullable: true
+        baseIsoCultureCode:
+          type: string
+          nullable: true
+        fallbackRegionDisplayName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorPage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the page.
+            Example value: 68900348a3b84eb8ac7df4d179c25727
+          nullable: true
+          example: 68900348a3b84eb8ac7df4d179c25727
+        path:
+          type: string
+          description: |-
+            The path for the page.
+            Example value: Sitecore/Content/Home/Categories/Products/MyProduct
+          nullable: true
+          example: Sitecore/Content/Home/Categories/Products/MyProduct
+      additionalProperties: false
+      description: The error page response entity.
+    ErrorPages:
+      type: object
+      properties:
+        errorPage:
+          type: string
+          description: >-
+            The identifier of the site's 500 error page. You can get page
+            identifiers by calling the /hierarchy endpoint.
+
+            Example value: c5a2fe31-46bd-34ae-91fb-d3c24b5a6e7f
+          nullable: true
+          example: c5a2fe31-46bd-34ae-91fb-d3c24b5a6e7f
+        notFoundPage:
+          type: string
+          description: >-
+            The identifier of the site's 404 error page. You can get page
+            identifiers by calling the /hierarchy endpoint.
+
+            Example value: a2fc5e31-6b4d-a43e-9f1b-c2d34b5a6e7f
+          nullable: true
+          example: a2fc5e31-6b4d-a43e-9f1b-c2d34b5a6e7f
+      additionalProperties: false
+      description: An object containing the site error pages identifiers
+    ErrorPagesConfiguration:
+      type: object
+      properties:
+        errorPage:
+          $ref: "#/components/schemas/ErrorPage"
+        notFoundPage:
+          $ref: "#/components/schemas/ErrorPage"
+      additionalProperties: false
+      description: An object containing the site error pages
+    Host:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The host ID.
+            Example value: 5aae1eeaea2440bf96f11f43da82c77b
+          nullable: true
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        name:
+          type: string
+          description: |-
+            The name of the site host.
+            Example value: skate-park
+          nullable: true
+          example: skate-park
+        hostnames:
+          type: array
+          items:
+            type: string
+          description: |-
+            One or more hostnames.
+            Example value: [
+              "dev.skate-park.com",
+              "uat.skate-park.com"
+            ]
+          nullable: true
+          example:
+            - dev.skate-park.com
+            - uat.skate-park.com
+        targetHostname:
+          type: string
+          description: |-
+            The target hostname.
+            Example value: www.skate-park.com
+          nullable: true
+          example: www.skate-park.com
+        homePageId:
+          type: string
+          description: |-
+            The identifier of the home page.
+            Example value: 5aae1eeaea2440bf96f11f43da82c77b
+          nullable: true
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        renderingHost:
+          $ref: "#/components/schemas/RenderingHost"
+        permissions:
+          $ref: "#/components/schemas/Permissions"
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The host settings collection.
+          nullable: true
+          example:
+            isSiteThumbnailSource: "true"
+            sxaLinkable: "false"
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: Readonly host properties collection.
+          nullable: true
+          example:
+            siteDefinitionID: "{9004989A-E482-4587-B5C5-F9AECCD43565}"
+            startItem: /Home
+        analyticsIdentifiers:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            The list of analytics tracker identifiers mapped to the host, per
+            language.
+
+            Example value: [
+              {
+                "name": "skate-park",
+                "language": "en-US"
+              }
+            ]
+          nullable: true
+          example:
+            - name: skate-park
+              language: en-US
+        languageSettings:
+          $ref: "#/components/schemas/SiteLanguageSettings"
+        created:
+          type: string
+          description: |-
+            The date when the host was created.
+            Example value: 2019-08-24T14:15:22Z
+          format: date-time
+          nullable: true
+          example: "2019-08-24T14:15:22Z"
+        createdBy:
+          type: string
+          description: |-
+            The ID of the user who created the host.
+            Example value: L6kfw52ZVf
+          nullable: true
+          example: L6kfw52ZVf
+      additionalProperties: false
+      description: A host response entity
+    Job:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |-
+            The name of the job.
+            Example value: Create site
+          nullable: true
+          example: Create site
+        done:
+          type: boolean
+          description: Indicates whether the job has finished.
+        queueTime:
+          type: string
+          description: |-
+            A timestamp of when the job was added to the queue.
+            Example value: 2024-06-12T01:47:37.316Z
+          format: date-time
+          example: "2024-06-12T01:47:37.316Z"
+        handle:
+          type: string
+          description: >-
+            The handle of the job.
+
+            Example value:
+            4d97d35a-b605-4fc6-8a03-5bb8e403cdaf;customer-tenant-env
+          nullable: true
+          example: 4d97d35a-b605-4fc6-8a03-5bb8e403cdaf;customer-tenant-env
+        site:
+          type: string
+          description: |-
+            The name of the site.
+            Example value: new-site
+          nullable: true
+          example: new-site
+        siteCollection:
+          type: string
+          description: |-
+            The identifier or name of the site collection.
+            Example value: {81D27BA9-F798-4190-8536-CA20203AA6EA}
+          nullable: true
+          example: "{81D27BA9-F798-4190-8536-CA20203AA6EA}"
+      additionalProperties: false
+      description: A job response entity.
+    Language:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the language.
+            Example value: af58419145c9420187405409f4cf8bdd
+          nullable: true
+          example: af58419145c9420187405409f4cf8bdd
+        iso:
+          type: string
+          description: |-
+            The ISO code of the language.
+            Example value: en
+          nullable: true
+          example: en
+        regionalIsoCode:
+          type: string
+          description: >-
+            The regional ISO code of the language, for example, US for the USA,
+            or DK for Denmark.
+
+            Example value: en-US
+          nullable: true
+          example: en-US
+        fallbackLanguageIso:
+          type: string
+          description: |-
+            The ISO code of the fallback language
+            Example value: en
+          nullable: true
+          example: en
+        name:
+          type: string
+          description: |-
+            The ISO language code (e.g., "en" for English, "es" for Spanish).
+            Example value: en-US
+          nullable: true
+          example: en-US
+        displayName:
+          type: string
+          description: >-
+            The human-readable name of the language as it appears in the user
+            interface, for example, "English" or "Español."
+
+            Example value: English (United States) : English (United States)
+          nullable: true
+          example: "English (United States) : English (United States)"
+        nativeName:
+          type: string
+          description: >-
+            The language name in its original script or characters. For
+            instance, "English" would be displayed as "English" itself, but
+            "日本語" would appear as "日本語."
+
+            Example value: English (United States)
+          nullable: true
+          example: English (United States)
+        englishName:
+          type: string
+          description: >-
+            The language name in English, regardless of the language being
+            described. For example, "Deutsch" would be displayed as "German."
+
+            Example value: English (United States)
+          nullable: true
+          example: English (United States)
+        baseIsoCultureCode:
+          type: string
+          description: "Base ISO culture code. If this is a custom language, this ISO culture code will represent the language code used as the base of this language.\r\nFor example, if the custom language uses the same writing system, calendar, and date format as American English, the value would be 'en-US'.\nExample value: en-US"
+          nullable: true
+          example: en-US
+        fallbackRegionDisplayName:
+          type: string
+          description: >-
+            If this is a custom language, the Fallback Region Display Name
+            respresents the region name that should be displayed.
+
+            Example value: North America
+          nullable: true
+          example: North America
+      additionalProperties: false
+      description: Language
+    LanguageData:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: |-
+            The display name of the language.
+            Example value: Japanese (Japan) : 日本語 (日本)
+          nullable: true
+          example: "Japanese (Japan) : 日本語 (日本)"
+        englishName:
+          type: string
+          description: >-
+            The language name in English, regardless of the language being
+            described. For example, "Deutsch" would be displayed as "German."
+
+            Example value: English (United States)
+          nullable: true
+          example: English (United States)
+        locale:
+          type: string
+          description: |-
+            The language code of the locale.
+            Example value: ja-JP
+          nullable: true
+          example: ja-JP
+      additionalProperties: false
+      description: Data for the site locales.
+    LocaleStatistics:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/LanguageData"
+        pageCount:
+          type: integer
+          description: |-
+            The number of pages in this locale.
+            Example value: 60
+          format: int32
+          example: 60
+      additionalProperties: false
+      description: Represents the statistics for a locale.
+    LocalizationStatistics:
+      type: object
+      properties:
+        locales:
+          type: array
+          items:
+            $ref: "#/components/schemas/LocaleStatistics"
+          description: A collection of locales defined for the site and their statistics.
+          nullable: true
+        totalPageCount:
+          type: integer
+          description: |-
+            The total number of pages across all locales.
+            Example value: 60
+          format: int32
+          example: 60
+      additionalProperties: false
+      description: Represents the localization statistics for a site.
+    NameValidationResult:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          description: "indicates whether the name is valid. "
+        message:
+          type: string
+          description: details about the request.
+          nullable: true
+      additionalProperties: false
+    NewSiteInput:
+      required:
+        - language
+        - siteName
+        - templateId
+      type: object
+      properties:
+        siteName:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            The name of the site.
+            Example value: skate-park
+          default: string
+          example: skate-park
+        displayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            The display name for the site.
+            Example value: Skate Park Site
+          nullable: true
+          example: Skate Park Site
+        templateId:
+          minLength: 1
+          pattern: >-
+            (?i)^(?:[({][0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]|[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12})$
+          type: string
+          description: >-
+            The ID of the template used to create the site. If you don't know
+            the template ID, first [retrieve site
+            templates](#tag/Sites/operation/GetTemplates).
+
+            Example value: 5aae1eeaea2440bf96f11f43da82c77b
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        collectionId:
+          pattern: >-
+            (?i)^(?:[({][0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]|[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12})$
+          type: string
+          description: "The ID of the collection you want the new site to belong to. If you don't know the collection ID, first [retrieve collections](#tag/Collections/operation/Get).\r\nRequired if Sitecore.XmApps.Sites.Models.REST.NewSiteInput.CollectionName is not provided. If left empty, you must provide collectionName instead and a new collection will be created along with the newly created site.\r\nIf both collectionId and collectionName are provided, collectionName will be ignored.\nExample value: 5aae1eeaea2440bf96f11f43da82c77b"
+          nullable: true
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        language:
+          minLength: 1
+          type: string
+          description: "The language for the site. If you do not know what languages are available in the environment, first [retrieve the list of languages](#tag/Languages/operation/Get).\r\nIf the language you want is not available in the environment, [add the language](#tag/Languages/operation/Create) first.\nExample value: en"
+          example: en
+        languages:
+          type: array
+          items:
+            type: string
+          description: |-
+            The list of supported languages for the site.
+            Example value: [
+              "en",
+              "da"
+            ]
+          nullable: true
+          example:
+            - en
+            - da
+        hostName:
+          type: string
+          description: |-
+            Optional hostname for the new site. Default value: *
+            Example value: dev.skate-park.com
+          nullable: true
+          example: dev.skate-park.com
+        description:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: |-
+            Optional text that provides a meaningful description of the site.
+            Example value: New site for Brand A in English-speaking countries.
+          nullable: true
+          example: New site for Brand A in English-speaking countries.
+        collectionName:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: "The name of the new collection you want the new site to belong to.\r\nRequired if Sitecore.XmApps.Sites.Models.REST.NewSiteInput.CollectionId is not provided. If left empty, you must provide collectionId of an existing collection you want the new site to belong to.\r\nIf both collectionId and collectionName are provided, collectionName will be ignored.\nExample value: Brand A"
+          nullable: true
+          example: Brand A
+        collectionDisplayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            The display name for the collection.
+            Example value: Skate Park Site
+          nullable: true
+          example: Skate Park Site
+        collectionDescription:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: >-
+            If you want to create a new site collection while creating a new
+            site, you can provide a collection description.
+
+            Example value: Sample description for the site collection containing
+            Sites for Brand A
+          nullable: true
+          example: >-
+            Sample description for the site collection containing Sites for
+            Brand A
+        posMappings:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsIdentifier"
+          description: "The [site identifier](https://doc.sitecore.com/xmc/en/users/xm-cloud/manage-personalization-and-analytics-for-sites.html) for the site.\r\nThis identifier lets you control analytics and personalization for the site."
+          nullable: true
+      additionalProperties: false
+      description: A site creation request.
+    PageAggregationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The page identifier.
+            Example value: 8f0b81bc-7388-46be-b109-6e73d1114470
+          nullable: true
+          example: 8f0b81bc-7388-46be-b109-6e73d1114470
+        language:
+          type: string
+          description: |-
+            The language of the page.
+            Example value: en-US
+          nullable: true
+          example: en-US
+        name:
+          type: string
+          description: |-
+            The page name.
+            Example value: Home
+          nullable: true
+          example: Home
+        displayName:
+          type: string
+          description: |-
+            The display name of the page for the specified language.
+            Example value: Home
+          nullable: true
+          example: Home
+        components:
+          type: array
+          items:
+            $ref: "#/components/schemas/ComponentAggregationResponse"
+          description: A collection of the page components.
+          nullable: true
+      additionalProperties: false
+    PageHierarchy:
+      type: object
+      properties:
+        page:
+          $ref: "#/components/schemas/PageResponse"
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageResponse"
+          description: Details of this page's children.
+          nullable: true
+        ancestors:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageResponse"
+          description: Details of this page's ancestors.
+          nullable: true
+        siblings:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageResponse"
+          description: Details of this page's siblings.
+          nullable: true
+      additionalProperties: false
+      description: Page hierarchy response entity.
+    PageInsertOption:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            Template ID
+            Example value: 6fe7d655-1e3d-4c27-8010-5777f06c6c4f
+          nullable: true
+          example: 6fe7d655-1e3d-4c27-8010-5777f06c6c4f
+        displayName:
+          type: string
+          description: |-
+            Template display name
+            Example value: Page
+          nullable: true
+          example: Page
+      additionalProperties: false
+    PageLocking:
+      type: object
+      properties:
+        canUnlock:
+          type: boolean
+          description: >-
+            If set to true, canUnlock gives you permission to unlock a Page
+            entity.
+
+            Example value: False
+          example: false
+        isLocked:
+          type: boolean
+          description: >-
+            If set to true, isLocked denotes that the Page entity has been
+            locked.
+
+            Example value: False
+          example: false
+        lockedBy:
+          type: string
+          description: >-
+            If the Page entity is locked, lockedBy provides information about
+            which user locked the entity.
+
+            Example value: john.smith@skate-park.com
+          nullable: true
+          example: john.smith@skate-park.com
+        lockedByCurrentUser:
+          type: boolean
+          description: >-
+            If set to true, lockedByCurrentUser denotes whether the Page entity
+            was locked by the currently authenticated user.
+
+            Example value: False
+          example: false
+      additionalProperties: false
+    PageRequest:
+      required:
+        - id
+        - language
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: |-
+            The identifier of the page.
+            Example value: 8f0b81bc-7388-46be-b109-6e73d1114470
+          example: 8f0b81bc-7388-46be-b109-6e73d1114470
+        language:
+          minLength: 1
+          type: string
+          description: |-
+            The language of the page.
+            Example value: en-US
+          example: en-US
+      additionalProperties: false
+    PageResponse:
+      type: object
+      properties:
+        insertOptions:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageInsertOption"
+          description: Insert options for the page.
+          nullable: true
+        hasVersions:
+          type: boolean
+          description: Indicates whether the page has versions in the queried language.
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageResponse"
+          description: Children of the page.
+          nullable: true
+        id:
+          type: string
+          description: |-
+            The identifier of the page.
+            Example value: 68900348a3b84eb8ac7df4d179c25727
+          nullable: true
+          example: 68900348a3b84eb8ac7df4d179c25727
+        name:
+          type: string
+          description: |-
+            The page's system name.
+            Example value: Home
+          nullable: true
+          example: Home
+        displayName:
+          type: string
+          description: |-
+            The page's display name.
+            Example value: Site Home
+          nullable: true
+          example: Site Home
+        language:
+          type: string
+          description: |-
+            The page language.
+            Example value: en-US
+          nullable: true
+          example: en-US
+        version:
+          type: integer
+          description: |-
+            The current version of the page.
+            Example value: 1
+          format: int32
+          example: 1
+        templateId:
+          type: string
+          description: |-
+            The identifier of the template this page is based on.
+            Example value: 6fe7d6551e3d4c2780105777f06c6c4f
+          nullable: true
+          example: 6fe7d6551e3d4c2780105777f06c6c4f
+        parentId:
+          type: string
+          description: |-
+            The identifier of the page's parent.
+            Example value: 4bc0c81a280b4b13890b7b074b9d68f4
+          nullable: true
+          example: 4bc0c81a280b4b13890b7b074b9d68f4
+        hasPresentation:
+          type: boolean
+          description: >-
+            If set to true, this page can be rendered in the XM Cloud Pages
+            application. This endpoint is set to false for the root item of the
+            site, as well as for the folders if there are any.
+
+            Example value: True
+          example: true
+        hasChildren:
+          type: boolean
+          description: |-
+            Whether the page has any child pages.
+            Example value: True
+          example: true
+        permissions:
+          $ref: "#/components/schemas/Permissions"
+        locking:
+          $ref: "#/components/schemas/PageLocking"
+        path:
+          type: string
+          description: |-
+            The path for the page.
+            Example value: Sitecore/Content/Home/Categories/Products/MyProduct
+          nullable: true
+          example: Sitecore/Content/Home/Categories/Products/MyProduct
+      additionalProperties: false
+    PageVariantsAggregationResponse:
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageVariantsResponse"
+          description: Aggregated data of the currently active variants for this page.
+          nullable: true
+      additionalProperties: false
+    PageVariantsResponse:
+      type: object
+      properties:
+        pageId:
+          type: string
+          description: |-
+            The identifier of the page.
+            Example value: 8f0b81bc-7388-46be-b109-6e73d1114470
+          nullable: true
+          example: 8f0b81bc-7388-46be-b109-6e73d1114470
+        language:
+          type: string
+          description: |-
+            The language of the page.
+            Example value: en-US
+          nullable: true
+          example: en-US
+        variantIds:
+          type: array
+          items:
+            type: string
+          description: |-
+            The list of page personalization variant identifiers.
+            Example value: [
+              "edc7cee9-14b5-4218-a7a8-13664c714bdb",
+              "5f457136-fd9f-4a5b-be3f-2d46709f01a4"
+            ]
+          nullable: true
+          example:
+            - edc7cee9-14b5-4218-a7a8-13664c714bdb
+            - 5f457136-fd9f-4a5b-be3f-2d46709f01a4
+      additionalProperties: false
+    PagesAggregationResponse:
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: "#/components/schemas/PageAggregationResponse"
+          nullable: true
+      additionalProperties: false
+    Permissions:
+      type: object
+      properties:
+        canAdmin:
+          type: boolean
+          description: >-
+            If set to true, canAdmin gives you admin rights. Being an admin
+            means that you control access permissions for other users. The
+            Administer access right requires Read and Write access rights.
+
+            Example value: False
+          example: false
+        canWrite:
+          type: boolean
+          description: >-
+            If set to true, canWrite gives you permission to edit values. The
+            canWrite access right requires the canRead access right.
+
+            Example value: False
+          example: false
+        canCreate:
+          type: boolean
+          description: |-
+            If set to true, canCreate gives you permission to create entities.
+            Example value: False
+          example: false
+        canDelete:
+          type: boolean
+          description: |-
+            If set to true, canDelete gives you permission to delete entities.
+            Example value: False
+          example: false
+        canRename:
+          type: boolean
+          description: |-
+            If set to true, canRename gives you permission to rename entities.
+            Example value: False
+          example: false
+        canRead:
+          type: boolean
+          description: >-
+            If set to true, canRead gives you permission to see entities,
+            including all their parameters.
+
+            Example value: False
+          example: false
+        canPublish:
+          type: boolean
+          description: >-
+            If set to true, canPublish gives you permission to publish sites in
+            this environment.
+
+            Example value: False
+          example: false
+        canDuplicate:
+          type: boolean
+          description: >-
+            If set to true, canDuplicate gives you permission to duplicate
+            entities.
+
+            Example value: False
+          example: false
+      additionalProperties: false
+      description: The access rights of the current user to the site.
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the error response entity.
+          nullable: true
+        title:
+          type: string
+          description: The title of the error response entity.
+          nullable: true
+        status:
+          type: integer
+          description: The response status code.
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          description: A detailed explanation, specific to this occurrence of the problem.
+          nullable: true
+        instance:
+          type: string
+          description: >-
+            If available, a URI reference that identifies the specific
+            occurrence of the problem.
+          nullable: true
+      additionalProperties:
+        description: Any additional optional properties that describe the error(s).
+    RenameSiteCollectionInput:
+      required:
+        - systemName
+      type: object
+      properties:
+        systemName:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            The new system name for the site collection.
+            Example value: skate-brand-sites
+          default: string
+          example: skate-brand-sites
+      additionalProperties: false
+      description: Site collection rename request.
+    RenameSiteInput:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            The new name for the site.
+            Example value: new-site
+          default: string
+          example: new-site
+      additionalProperties: false
+      description: A site rename request.
+    RenderingHost:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The rendering host ID.
+            Example value: 5aae1eeaea2440bf96f11f43da82c77b
+          nullable: true
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        name:
+          type: string
+          description: |-
+            The name of the rendering host.
+            Example value: Default
+          nullable: true
+          example: Default
+        appName:
+          type: string
+          description: |-
+            The name of the app.
+            Example value: Default
+          nullable: true
+          example: Default
+        layoutServiceConfiguration:
+          type: string
+          description: >-
+            The server side rendering engine configuration URL.
+
+            Example value:
+            https://xmc-eh-uniqueid.sitecorecloud.io:443/api/editing/config
+          nullable: true
+          example: https://xmc-eh-uniqueid.sitecorecloud.io:443/api/editing/config
+        serverSideRenderingEngineEndpointUrl:
+          type: string
+          description: >-
+            The server side rendering engine endpoint URL.
+
+            Example value:
+            https://xmc-eh-uniqueid.sitecorecloud.io:443/api/editing/render
+          nullable: true
+          example: https://xmc-eh-uniqueid.sitecorecloud.io:443/api/editing/render
+        serverSideRenderingEngineApplicationUrl:
+          type: string
+          description: |-
+            The server side rendering engine application URL.
+            Example value: https://xmc-eh-uniqueid.sitecorecloud.io/
+          nullable: true
+          example: https://xmc-eh-uniqueid.sitecorecloud.io/
+      additionalProperties: false
+      description: The rendering host response entity.
+    Site:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the site.
+            Example value: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          nullable: true
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        name:
+          type: string
+          description: |-
+            The name of the site.
+            Example value: skate-park
+          nullable: true
+          example: skate-park
+        description:
+          type: string
+          description: |-
+            The description of the site.
+            Example value: New site for Brand A in English-speaking countries
+          nullable: true
+          example: New site for Brand A in English-speaking countries
+        displayName:
+          type: string
+          description: |-
+            The display name of the site.
+            Example value: Skate Park Website
+          nullable: true
+          example: Skate Park Website
+        thumbnail:
+          $ref: "#/components/schemas/Thumbnail"
+        collectionId:
+          type: string
+          description: |-
+            The identifier of the collection to which the site belongs.
+            Example value: 5aae1eeaea2440bf96f11f43da82c77b
+          nullable: true
+          example: 5aae1eeaea2440bf96f11f43da82c77b
+        created:
+          type: string
+          description: |-
+            The date when the site was created.
+            Example value: 2019-08-24T14:15:22Z
+          format: date-time
+          example: "2019-08-24T14:15:22Z"
+        createdBy:
+          type: string
+          description: |-
+            The ID of the user who created the site.
+            Example value: L6kfw52ZVf
+          nullable: true
+          example: L6kfw52ZVf
+        sortOrder:
+          type: integer
+          description: |-
+            Sort order of the site.
+            Example value: 100
+          format: int32
+          nullable: true
+          example: 100
+        brandKitId:
+          type: string
+          description: |-
+            The identifier of the brand kit associated with this site.
+            Example value: e3f1c5a2-4b6d-4a3e-9f1b-2d3c4b5a6e7f
+          nullable: true
+          example: e3f1c5a2-4b6d-4a3e-9f1b-2d3c4b5a6e7f
+        permissions:
+          $ref: "#/components/schemas/Permissions"
+        languages:
+          type: array
+          items:
+            type: string
+          description: |-
+            The list of languages in use by the site.
+            Example value: [
+              "en-US",
+              "en-CA"
+            ]
+          nullable: true
+          example:
+            - en-US
+            - en-CA
+        hosts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Host"
+          description: The list of hosts that the site resolves to.
+          nullable: true
+        supportedLanguages:
+          type: array
+          items:
+            type: string
+          description: |-
+            The list of languages supported by Sitecore.
+            Example value: [
+              "en-US",
+              "en-CA"
+            ]
+          nullable: true
+          example:
+            - en-US
+            - en-CA
+        errorPagesConfiguration:
+          $ref: "#/components/schemas/ErrorPagesConfiguration"
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The settings for the site.
+          nullable: true
+          example:
+            thumbnailsRootPath: /sitecore/media library/Project/sample-collection/sample-site
+            generateThumbnails: "true"
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The read-only properties of the site.
+          nullable: true
+          example:
+            SxaSiteTemplate: "{E46F3AF2-39FA-4866-A157-7017C4B2A40C}"
+            IsSxaSite: "true"
+      additionalProperties: false
+      description: A site response entity.
+    SiteCollection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the site collection.
+            Example value: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          nullable: true
+          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        name:
+          type: string
+          description: |-
+            The unique system name of the site collection.
+            Example value: skate-park-sites
+          nullable: true
+          example: skate-park-sites
+        description:
+          type: string
+          description: |-
+            The description of the site collection.
+            Example value: Collection for all Skate Park brand websites.
+          nullable: true
+          example: Collection for all Skate Park brand websites.
+        displayName:
+          type: string
+          description: |-
+            The display name of the site collection.
+            Example value: Skate Park Websites
+          nullable: true
+          example: Skate Park Websites
+        sortOrder:
+          type: integer
+          description: |-
+            Sort order of the site collection.
+            Example value: 100
+          format: int32
+          nullable: true
+          example: 100
+        createdBy:
+          type: string
+          description: |-
+            The ID of the user who created the site collection.
+            Example value: L6kfw52ZVf
+          nullable: true
+          example: L6kfw52ZVf
+        created:
+          type: string
+          description: |-
+            The date when the site collection was created.
+            Example value: 2019-08-24T14:15:22Z
+          format: date-time
+          example: "2019-08-24T14:15:22Z"
+        permissions:
+          $ref: "#/components/schemas/Permissions"
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The site collection settings.
+          nullable: true
+          example:
+            itemPath: /sitecore/content/skate-park-sites
+      additionalProperties: false
+      description: Site collection response entity.
+    SiteLanguageSettings:
+      type: object
+      properties:
+        defaultLanguage:
+          type: string
+          description: |-
+            The default language.
+            Example value: en
+          nullable: true
+          example: en
+        languageEmbedding:
+          type: boolean
+          description: |-
+            Whether language embedding is enabled.
+            Example value: False
+          nullable: true
+          example: false
+        itemLanguageFallback:
+          type: boolean
+          description: |-
+            Whether item language fallback is enabled.
+            Example value: False
+          nullable: true
+          example: false
+        fieldLanguageFallback:
+          type: boolean
+          description: |-
+            Whether field language fallback is enabled.
+            Example value: False
+          nullable: true
+          example: false
+      additionalProperties: false
+      description: The language settings of the host.
+    SiteTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the site template.
+            Example value: {5AAE1EEA-EA24-40BF-96F1-1F43DA82C77B}
+          nullable: true
+          example: "{5AAE1EEA-EA24-40BF-96F1-1F43DA82C77B}"
+        name:
+          type: string
+          description: |-
+            The name of the site template.
+            Example value: Basic
+          nullable: true
+          example: Basic
+        enabled:
+          type: boolean
+          description: |-
+            Indicates whenever the template is enabled.
+            Example value: True
+          example: true
+        description:
+          type: string
+          description: >-
+            The description of the site template.
+
+            Example value: An example of a simple website with homepage,
+            subpage, navigation, and footer.
+          nullable: true
+          example: >-
+            An example of a simple website with homepage, subpage, navigation,
+            and footer.
+        contents:
+          type: array
+          items:
+            $ref: "#/components/schemas/StringStringKeyValuePair"
+          description: >-
+            The summary of what pages, components, or integrations are included
+            in the template.
+          nullable: true
+        createdBy:
+          type: string
+          description: The author of the site template.
+          nullable: true
+        updatedOn:
+          type: string
+          description: |-
+            The date of the last update.
+            Example value: 2019-08-24T14:15:22Z
+          format: date-time
+          example: "2019-08-24T14:15:22Z"
+        thumbnail:
+          type: string
+          description: >-
+            The thumbnail of the site template.
+
+            Example value:
+            https://customer-tenant.sitecorecloud.io/-/media/Feature/JSS-Experience-Accelerator/Basic-Site/template-thumbnail.png?w=176
+          nullable: true
+          example: >-
+            https://customer-tenant.sitecorecloud.io/-/media/Feature/JSS-Experience-Accelerator/Basic-Site/template-thumbnail.png?w=176
+        image:
+          type: string
+          description: >-
+            Large resolution screenshot of the site template.
+
+            Example value:
+            https://customer-tenant.sitecorecloud.io/-/media/Feature/JSS-Experience-Accelerator/Basic-Site/template-thumbnail.png
+          nullable: true
+          example: >-
+            https://customer-tenant.sitecorecloud.io/-/media/Feature/JSS-Experience-Accelerator/Basic-Site/template-thumbnail.png
+      additionalProperties: false
+      description: Site template response entity.
+    SitemapAlternateLinksOptions:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: >-
+            Whether alternate link generation is enabled. When enabled,
+            xhtml:link elements are added to the URL elements in the sitemap.
+
+            Example value: True
+          nullable: true
+          example: true
+        includeXDefault:
+          type: boolean
+          description: >-
+            Whether alternate links include an x-default link element. The
+            x-default value signals to the search algorithm that the page does
+            not target any specific language or region.
+
+            Example value: True
+          nullable: true
+          example: true
+      additionalProperties: false
+      description: Alternate link sitemap configuration.
+    SitemapCacheOptions:
+      type: object
+      properties:
+        refreshThreshold:
+          type: integer
+          description: |-
+            Threshold in minutes for refreshing the sitemap cache.
+            Example value: 60
+          format: int32
+          nullable: true
+          example: 60
+      additionalProperties: false
+      description: Sitemap caching configuration.
+    SitemapConfiguration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The identifier of the sitemap configuration item.
+            Example value: 2905a9c7-30b0-4d3f-bced-f1f9382c8041
+          nullable: true
+          example: 2905a9c7-30b0-4d3f-bced-f1f9382c8041
+        enabled:
+          type: boolean
+          description: |-
+            Whether sitemap generation is enabled.
+            Example value: True
+          nullable: true
+          example: true
+        maxNumberOfPages:
+          type: integer
+          description: |-
+            Maximum number of pages to include in a single sitemap file.
+            Example value: 1000
+          format: int32
+          nullable: true
+          example: 1000
+        alternateLinksOptions:
+          $ref: "#/components/schemas/SitemapAlternateLinksOptions"
+        urlOptions:
+          $ref: "#/components/schemas/SitemapUrlOptions"
+        cacheOptions:
+          $ref: "#/components/schemas/SitemapCacheOptions"
+        permissions:
+          $ref: "#/components/schemas/Permissions"
+      additionalProperties: false
+      description: Configuration settings for sitemap generation.
+    SitemapUrlOptions:
+      type: object
+      properties:
+        includeChangeFreq:
+          type: boolean
+          description: >-
+            Whether to include a change frequency attribute in the sitemap, that
+            specifies how often the page changes its content.
+
+            Example value: True
+          nullable: true
+          example: true
+        includeLastMod:
+          type: boolean
+          description: |-
+            hether to include the last modification date in the sitemap.
+            Example value: True
+          nullable: true
+          example: true
+        includePriority:
+          type: boolean
+          description: >-
+            Whether to include priority information in the sitemap. The priority
+            is a number between 0 and 1 that represents the importance of a
+            page.
+
+            Example value: True
+          nullable: true
+          example: true
+      additionalProperties: false
+      description: URL property configurations in the sitemap.
+    SortCollectionsInput:
+      type: object
+      properties:
+        collections:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+          description: A collection containing collection IDs and sort order.
+          nullable: true
+          example:
+            "{E7ACF719-9448-4B82-B9E9-E35E612392B1}": 0
+            "{3BB5127B-9B19-479E-A560-DDAB73050C0D}": 100
+            "{1E3D6D62-2EE7-4B99-B973-9C861E535236}": 200
+      additionalProperties: false
+      description: Sort collections request.
+    SortSitesInput:
+      type: object
+      properties:
+        sites:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+          description: A collection containing site IDs and sort order.
+          nullable: true
+          example:
+            "{43550C6A-2FFF-4DE6-B773-9133CEAF9099}": 0
+            "{258D18A4-B06B-4CE6-95A7-C0D78574552B}": 100
+            "{2C6B1648-E371-43B4-80F5-FAF4ECA43E48}": 200
+      additionalProperties: false
+      description: Sort sites request.
+    StringStringKeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SupportedLanguage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |-
+            The full name of the language.
+            Example value: de-DE
+          nullable: true
+          example: de-DE
+        englishName:
+          type: string
+          description: |-
+            The english name of the language.
+            Example value: German (Germany)
+          nullable: true
+          example: German (Germany)
+        displayName:
+          type: string
+          description: |-
+            The display name of the language.
+            Example value: German (Germany) : Deutsch (Deutschland)
+          nullable: true
+          example: "German (Germany) : Deutsch (Deutschland)"
+        charSet:
+          type: string
+          description: >-
+            The character encoding, that specifies how characters are
+            represented in a document or web page.
+
+            Example value: iso-8859-1
+          nullable: true
+          example: iso-8859-1
+        codePage:
+          type: string
+          description: |-
+            The code of the page.
+            Example value: 65001
+          nullable: true
+          example: "65001"
+        encoding:
+          type: string
+          description: |-
+            The encoding.
+            Example value: utf-8
+          nullable: true
+          example: utf-8
+        languageCode:
+          type: string
+          description: |-
+            The code for the language.
+            Example value: de
+          nullable: true
+          example: de
+        regionCode:
+          type: string
+          description: >-
+            The regional ISO code of the language. For example, US for the USA,
+            or DK for Denmark.
+
+            Example value: DE
+          nullable: true
+          example: DE
+      additionalProperties: false
+    Thumbnail:
+      type: object
+      properties:
+        url:
+          type: string
+          description: >-
+            The URL of the image used as thumbnail.
+
+            Example value:
+            https://xmc-customer-tenant.sitecorecloud.io/-/media/Project/sample-collection/sample-site/System/7/0/B/C/thumbnail_70BC64BDE257400E82BFDB3344797DB7.png
+          nullable: true
+          example: >-
+            https://xmc-customer-tenant.sitecorecloud.io/-/media/Project/sample-collection/sample-site/System/7/0/B/C/thumbnail_70BC64BDE257400E82BFDB3344797DB7.png
+        rootPath:
+          type: string
+          description: >-
+            The path to the media folder where thumbnail images are stored.
+
+            Example value: sitecore/media
+            library/Project/sample-collection/sample-site
+          nullable: true
+          example: sitecore/media library/Project/sample-collection/sample-site
+        autogenerated:
+          type: boolean
+          description: >-
+            Indicates whether the thumbnail was autogenerated or manually
+            uploaded.
+
+            Example value: True
+          example: true
+      additionalProperties: false
+      description: The thumbnail response entity.
+    UpdateHostInput:
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 0
+          pattern: ^(?![\s-])[a-zA-Z0-9_\s-]*(?<!\s)$
+          type: string
+          description: |-
+            Name of the host
+            Example value: skate-park
+          default: string
+          nullable: true
+          example: skate-park
+        hostnames:
+          type: array
+          items:
+            type: string
+          description: |-
+            One or more hostnames.
+            Example value: [
+              "dev.skate-park.com",
+              "uat.skate-park.com"
+            ]
+          nullable: true
+          example:
+            - dev.skate-park.com
+            - uat.skate-park.com
+        targetHostname:
+          type: string
+          description: |-
+            The target hostname.
+            Example value: www.skate-park.com
+          nullable: true
+          example: www.skate-park.com
+        renderingHost:
+          type: string
+          description: |-
+            The rendering host.
+            Example value: Default
+          nullable: true
+          example: Default
+        homePageId:
+          pattern: >-
+            (?i)^(?:[({][0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]|[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12})$
+          type: string
+          description: |-
+            The identifier of the home page.
+            Example value: 110d559fdea542ea9c1c8a5df7e70ef9
+          nullable: true
+          example: 110d559fdea542ea9c1c8a5df7e70ef9
+        thumbnail:
+          type: string
+          description: The thumbnail information.
+          nullable: true
+        analyticsIdentifiers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyticsIdentifier"
+          description: >-
+            The list of analytics tracker identifiers mapped to the host, per
+            language.
+          nullable: true
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The host settings collection.
+          nullable: true
+        languageSettings:
+          $ref: "#/components/schemas/SiteLanguageSettings"
+      additionalProperties: false
+      description: A host update request.
+    UpdateSiteCollectionInput:
+      type: object
+      properties:
+        displayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            Display name for the site collection.
+            Example value: Skate Brand Websites
+          default: string
+          nullable: true
+          example: Skate Brand Websites
+        description:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: |-
+            Description of the site collection.
+            Example value: Example site collection description.
+          default: string
+          nullable: true
+          example: Example site collection description.
+        sortOrder:
+          type: integer
+          description: |-
+            The name of the site collection.
+            Example value: 100
+          format: int32
+          nullable: true
+          example: 100
+      additionalProperties: false
+      description: Update site collection request
+    UpdateSiteInput:
+      type: object
+      properties:
+        displayName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: |-
+            The display name for the site.
+            Example value: Skate Park Site
+          default: string
+          nullable: true
+          example: Skate Park Site
+        description:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: |-
+            The description for the site.
+            Example value: New site for Brand A in English-speaking countries.
+          default: string
+          nullable: true
+          example: New site for Brand A in English-speaking countries.
+        supportedLanguages:
+          type: array
+          items:
+            type: string
+          description: |-
+            The list of languages supported by Sitecore.
+            Example value: [
+              "en-US",
+              "en-CA"
+            ]
+          nullable: true
+          example:
+            - en-US
+            - en-CA
+        shared:
+          type: boolean
+          description: >-
+            Indicates if the site should be marked as shared or not. True - site
+            will be shared. False - site will not be marked as shared.
+
+            Example value: True
+          nullable: true
+          example: true
+        errorPages:
+          $ref: "#/components/schemas/ErrorPages"
+        sortOrder:
+          type: integer
+          description: |-
+            The sort order of the site.
+            Example value: 100
+          format: int32
+          nullable: true
+          example: 100
+        brandKitId:
+          type: string
+          description: |-
+            The identifier of the brand kit associated with this site.
+            Example value: e3f1c5a2-4b6d-4a3e-9f1b-2d3c4b5a6e7f
+          nullable: true
+          example: e3f1c5a2-4b6d-4a3e-9f1b-2d3c4b5a6e7f
+      additionalProperties: false
+      description: A site update request.
+    UpdateSitemapConfigurationInput:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          minLength: 1
+          pattern: >-
+            (?i)^(?:[({][0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]|[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12})$
+          type: string
+          description: |-
+            The identifier of the sitemap configuration item.
+            Example value: da570793-3539-4923-88ca-8314ddd193f7
+          example: da570793-3539-4923-88ca-8314ddd193f7
+        enabled:
+          type: boolean
+          description: |-
+            Indicates whether sitemap generation is enabled.
+            Example value: True
+          nullable: true
+          example: true
+        maxNumberOfPages:
+          type: integer
+          description: |-
+            Maximum number of pages to include in a single sitemap file.
+            Example value: 1000
+          format: int32
+          nullable: true
+          example: 1000
+        alternateLinksOptions:
+          $ref: "#/components/schemas/SitemapAlternateLinksOptions"
+        urlOptions:
+          $ref: "#/components/schemas/SitemapUrlOptions"
+        cacheOptions:
+          $ref: "#/components/schemas/SitemapCacheOptions"
+      additionalProperties: false
+      description: A sitemap configuration update request
+    UploadMediaOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            The thumbnail image ID.
+            Example value: {5AAE1EEA-EA24-40BF-96F1-1F43DA82C77B}
+          nullable: true
+          example: "{5AAE1EEA-EA24-40BF-96F1-1F43DA82C77B}"
+        name:
+          type: string
+          description: |-
+            Name of the uploaded image.
+            Example value: skate-park-screenshot
+          nullable: true
+          example: skate-park-screenshot
+        itemPath:
+          type: string
+          description: >-
+            The path to the media folder where thumbnail images are stored.
+
+            Example value: sitecore/media
+            library/Project/sample-collection/sample-site
+          nullable: true
+          example: sitecore/media library/Project/sample-collection/sample-site
+        url:
+          type: string
+          description: >-
+            URL of the image to be used as the thumbnail.
+
+            Example value:
+            https://xmc-customer-tenant.sitecorecloud.io/-/media/Project/sample-collection/sample-site/System/7/0/B/C/thumbnail_70BC64BDE257400E82BFDB3344797DB7.png
+          nullable: true
+          example: >-
+            https://xmc-customer-tenant.sitecorecloud.io/-/media/Project/sample-collection/sample-site/System/7/0/B/C/thumbnail_70BC64BDE257400E82BFDB3344797DB7.png
+      additionalProperties: false
+    ValidateCollectionNameInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the site collection to validate.
+          nullable: true
+      additionalProperties: false
+    ValidateSiteNameInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |-
+            The name of the site to validate.
+            Example value: skate-park
+          nullable: true
+          example: skate-park
+      additionalProperties: false
+      description: A site name validation request.
+    WorkflowStateStatistics:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |-
+            The name of the workflow state.
+            Example value: Draft
+          nullable: true
+          example: Draft
+        pageCount:
+          type: integer
+          description: |-
+            The number of site pages that are currently in this workflow state.
+            Example value: 60
+          format: int32
+          example: 60
+      additionalProperties: false
+      description: Represents the statistics for a workflow state.
+    WorkflowStatistics:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |-
+            The name of the workflow.
+            Example value: Sample Workflow
+          nullable: true
+          example: Sample Workflow
+        states:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkflowStateStatistics"
+          description: >-
+            A collection of states defined for the workflow, and the number of
+            pages in each state.
+          nullable: true
+      additionalProperties: false
+      description: Represents the workflow statistics.
+    WorkflowsStatistics:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkflowStatistics"
+          description: Collection of workflow statistics for the site.
+          nullable: true
+      additionalProperties: false
+      description: Represents the workflows statistics for a site.
+  securitySchemes:
+    # Bearer:
+    #   type: http
+    #   description: Enter your bearer token in the text input below.
+    #   scheme: Bearer
+security:
+  # - Bearer: []
+tags:
+  - name: Sites
+    description: "The Sites API lets you create and manage sites for an environment.\r\nLearn more about [Sites](https://doc.sitecore.com/xmc/en/users/xm-cloud/sites.html)."
+  - name: Collections
+    description: >-
+      Site collections are used to group related sites together. The Collections
+      API enables authorized developers to manage site collections.
+  - name: Favorites
+    description: The Favorites API allows you to manage your list of favorite sites.
+  - name: Jobs
+    description: The Jobs API allows callers to manage running background jobs.
+  - name: Languages
+    description: "XM Cloud supports creating content and websites in multiple languages.\r\nThe default language is English, but you can [add](https://doc.sitecore.com/xmc/en/users/xm-cloud/manage-languages-and-locales.html) any number of languages to your environment, languages that you can select amongst the predefined languages that are supported by Sitecore XM Cloud.\r\nSitecore supports all the languages available in the .NET CultureInfo class.\r\nA predefined language in XM Cloud follows the ISO code and combines both language and country or region, for example, en-AU or English(Australia)."
+  - name: Aggregation
+    description: The Aggregation API lets you fetch aggregated page data.
+  - name: Pages
+    description: The Pages API lets you create and manage site pages.

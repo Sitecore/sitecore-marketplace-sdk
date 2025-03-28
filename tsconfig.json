@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "declaration": true,
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sitecore-marketplace-sdk/*": ["packages/*/src"]
+    },
+    "resolveJsonModule": true
+  },
+  "references": [
+    { "path": "packages/core" },
+    { "path": "packages/client" },
+  ],
+  "files": [],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+} 

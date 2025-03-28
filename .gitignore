@@ -1,0 +1,17 @@
+node_modules
+
+# Ignore distribution files in SDK packages
+packages/*/dist/
+
+# Ignore all files in the .idea directory
+.idea/*
+
+# Ignore all files in the .vscode directory
+.vscode/*
+
+*.tsbuildinfo
+*.DS_Store
+*.tgz
+*.npmrc
+.rollup.cache
+coverage

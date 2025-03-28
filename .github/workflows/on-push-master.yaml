@@ -1,0 +1,13 @@
+name: on-push-master
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  unit-test:
+    uses: ./.github/workflows/unit-test.yaml
+    secrets: inherit
+
+  pnpm-dependencies-scan:
+    uses: ./.github/workflows/pnpm-dependencies-scan.yaml

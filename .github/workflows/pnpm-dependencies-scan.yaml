@@ -1,0 +1,36 @@
+name: pnpm-dependencies-scan
+
+on:
+  workflow_call:
+
+jobs:
+  pnpm-dependencies-scan:
+    runs-on: ubuntu-latest
+    name: pnpm-dependencies-scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Scan dependencies
+        run: |
+          {
+            audit=$(pnpm audit --json)
+          } || {
+            vulnerabilities=$(echo "$audit" | jq ".metadata.vulnerabilities")
+            high_severity=$(echo "$vulnerabilities" | jq ".high")
+            critical_severity=$(echo "$vulnerabilities" | jq ".critical")
+          
+            echo "## PNPM Audit" >> $GITHUB_STEP_SUMMARY
+
+            if [ $high_severity -gt 0 ] || [ $critical_severity -gt 0 ]; then
+              err_msg="High / Critical vulerabilites found. run 'pnpm audit' for more details."
+              echo "$err_msg"
+              echo "$err_msg" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+            msg="No High / Critical vulerabilites found."
+            echo "$msg"
+            echo "$msg" >> $GITHUB_STEP_SUMMARY
+          }

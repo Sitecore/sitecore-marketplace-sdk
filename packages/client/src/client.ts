@@ -220,12 +220,20 @@ export class ClientSDK {
     const { request, operation } = this.resolveOperation(key as string);
 
     const { subscribe, onSuccess, onError, params, timeoutMs } = queryOptions || {};
-    const hashedKey = await this.generateKeyWithHash(key, queryOptions);
+    // At the moment, we limit the subscription to queryless operations only such as pages.context, host.state, etc where QueryOption is null/Undefined
+    // By design, we cannot support subscription for queries with parameters.
+    // So for the limitation, we can use event key as hashedKey
+    const hashedKey = subscribe ? key : await this.generateKeyWithHash(key, queryOptions);
     logger.debug(`Query (${key}) initiated with params:`, params, `timeoutMs: ${timeoutMs}`);
 
-    this.stateManager.updateQueryState(hashedKey, { status: 'loading' });
-
+    let unsubscribe: (() => void) | undefined;
     try {
+      if (subscribe) {
+        unsubscribe = this.handleSubscription(hashedKey, onSuccess, onError);
+      }
+
+      this.stateManager.updateQueryState(hashedKey, { status: 'loading' });
+
       const data = (await request(operation, params)) as QueryMap[K]['response'];
       logger.info(`Query (${key}) success:`, data);
 
@@ -234,30 +242,8 @@ export class ClientSDK {
         data,
       });
 
-      if (subscribe) {
-        this.stateManager.subscribe(key, (state) => {
-          if (state.data) {
-            onSuccess?.(state.data as QueryMap[K]['response']);
-          }
-          if (state.error) {
-            onError?.(state.error);
-          }
-        });
-
-        this.stateManager.incrementSubscriptionCount(hashedKey);
-        if (this.stateManager.getSubscriptionCount(hashedKey) === 1) {
-          const unsubscribe = this.coreSdk.on(key, (updatedData) => {
-            this.stateManager.updateQueryState(hashedKey, {
-              status: 'success',
-              data: updatedData,
-            });
-          });
-          this.stateManager.updateQueryState(hashedKey, { unsubscribe });
-        }
-      }
-
-      onSuccess?.(data);
       const state = this.stateManager.getQueryState(hashedKey);
+
       return {
         data: state.data as QueryMap[K]['response'] | undefined,
         error: undefined,
@@ -266,7 +252,7 @@ export class ClientSDK {
         isError: false,
         isSuccess: true,
         refetch: () => this.query(key, queryOptions),
-        unsubscribe: subscribe ? () => this.unsubscribe(hashedKey) : undefined,
+        unsubscribe: subscribe ? unsubscribe : undefined,
       };
     } catch (error) {
       logger.error(`Query (${key}) error:`, error);
@@ -285,9 +271,40 @@ export class ClientSDK {
         isError: true,
         isSuccess: false,
         refetch: () => this.query(key, queryOptions),
-        unsubscribe: subscribe ? () => this.unsubscribe(hashedKey) : undefined,
+        unsubscribe: subscribe ? unsubscribe : undefined,
       };
     }
+  }
+
+  private handleSubscription<K extends QueryKey>(
+    hashedKey: string,
+    onSuccess?: (data: QueryMap[K]['response']) => void,
+    onError?: (error: Error) => void,
+  ): () => void {
+    let stateChangeUnsubscribe = this.stateManager.subscribe(hashedKey, (state) => {
+      if (state.data) {
+        onSuccess?.(state.data as QueryMap[K]['response']);
+      }
+      if (state.error) {
+        onError?.(state.error);
+      }
+    });
+
+    this.stateManager.incrementSubscriptionCount(hashedKey);
+    if (this.stateManager.getSubscriptionCount(hashedKey) === 1) {
+      const coreUnsubscribe = this.coreSdk.on(hashedKey, (updatedData) => {
+        this.stateManager.updateQueryState(hashedKey, {
+          status: 'success',
+          data: updatedData,
+        });
+      });
+      this.stateManager.updateQueryState(hashedKey, { unsubscribe: coreUnsubscribe });
+    }
+
+    return () => {
+      stateChangeUnsubscribe?.();
+      this.coreUnsubscribe(hashedKey);
+    };
   }
 
   private async generateKeyWithHash<K extends QueryKey>(
@@ -395,7 +412,7 @@ export class ClientSDK {
     }
   }
 
-  private unsubscribe(key: string): void {
+  private coreUnsubscribe(key: string): void {
     const state = this.stateManager.getQueryState(key);
     this.stateManager.decrementSubscriptionCount(key);
     if (this.stateManager.getSubscriptionCount(key) === 0) {
@@ -412,7 +429,7 @@ export class ClientSDK {
     // Clean up all queries
     const keys = this.stateManager.getQueryKeys();
     for (const key of keys) {
-      this.unsubscribe(key);
+      this.coreUnsubscribe(key);
     }
   }
 }

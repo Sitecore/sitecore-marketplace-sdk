@@ -113,7 +113,9 @@ export class StateManager {
    */
   decrementSubscriptionCount(key: string): void {
     const state = this.getQueryState(key);
-    state.subscriptionCount--;
-    this.queryStates.set(key, state);
+    if (state.subscriptionCount > 0) {
+      state.subscriptionCount--;
+      this.queryStates.set(key, state);
+    }
   }
 }

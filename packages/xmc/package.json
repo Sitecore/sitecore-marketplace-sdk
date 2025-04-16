@@ -25,18 +25,18 @@
     "type": "git",
     "url": "https://github.com/Sitecore/sitecore-marketplace-sdk"
   },
-    "keywords": [
-        "sitecore",
-        "marketplace",
-        "sdk",
-        "xmc",
-        "xmcloud"
-    ],
+  "keywords": [
+    "sitecore",
+    "marketplace",
+    "sdk",
+    "xmc",
+    "xmcloud"
+  ],
   "dependencies": {
     "@hey-api/client-fetch": "0.8.3"
   },
   "peerDependencies": {
-    "@sitecore-marketplace-sdk/client": "0.1.1"
+    "@sitecore-marketplace-sdk/client": "workspace:*"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "0.64.12",

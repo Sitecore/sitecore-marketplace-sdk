@@ -220,9 +220,6 @@ export class ClientSDK {
     const { request, operation } = this.resolveOperation(key as string);
 
     const { subscribe, onSuccess, onError, params, timeoutMs } = queryOptions || {};
-    // At the moment, we limit the subscription to queryless operations only such as pages.context, host.state, etc where QueryOption is null/Undefined
-    // By design, we cannot support subscription for queries with parameters.
-    // So for the limitation, we can use event key as hashedKey
     const hashedKey = subscribe ? key : await this.generateKeyWithHash(key, queryOptions);
     logger.debug(`Query (${key}) initiated with params:`, params, `timeoutMs: ${timeoutMs}`);
 
@@ -303,7 +300,7 @@ export class ClientSDK {
 
     return () => {
       stateChangeUnsubscribe?.();
-      this.coreUnsubscribe(hashedKey);
+      this._unsubscribe(hashedKey);
     };
   }
 
@@ -412,7 +409,7 @@ export class ClientSDK {
     }
   }
 
-  private coreUnsubscribe(key: string): void {
+  private _unsubscribe(key: string): void {
     const state = this.stateManager.getQueryState(key);
     this.stateManager.decrementSubscriptionCount(key);
     if (this.stateManager.getSubscriptionCount(key) === 0) {
@@ -429,7 +426,7 @@ export class ClientSDK {
     // Clean up all queries
     const keys = this.stateManager.getQueryKeys();
     for (const key of keys) {
-      this.coreUnsubscribe(key);
+      this._unsubscribe(key);
     }
   }
 }

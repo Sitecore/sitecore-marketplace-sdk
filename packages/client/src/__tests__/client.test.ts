@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { ClientSDK } from '../client';
-import {CoreSDK, GenericRequestData} from '@sitecore-marketplace-sdk/core';
+import { CoreSDK, GenericRequestData } from '@sitecore-marketplace-sdk/core';
 import { StateManager } from '../state';
 import { logger } from '../logger';
 
@@ -15,7 +15,7 @@ describe('ClientSDK', () => {
     origin: 'https://host.app',
     target: window.parent,
     targetOrigin: 'https://target.app',
-    selfOrigin: 'https://self.app'
+    selfOrigin: 'https://self.app',
   };
 
   const mockData = {
@@ -59,7 +59,7 @@ describe('ClientSDK', () => {
       target: window.parent,
       targetOrigin: 'https://target.app',
       selfOrigin: 'https://self.app',
-      modules : [{ namespace: 'testModule', invokeOperation: vi.fn() }]
+      modules: [{ namespace: 'testModule', invokeOperation: vi.fn() }],
     };
 
     client = await ClientSDK.init(clientConfig);
@@ -111,7 +111,7 @@ describe('ClientSDK', () => {
   it('should call registerHandlers if config.events is defined', async () => {
     const clientConfig = {
       ...config,
-      events: { onPageContextUpdate: vi.fn() }
+      events: { onPageContextUpdate: vi.fn() },
     };
     const registerHandlersSpy = vi.spyOn(ClientSDK.prototype as any, 'registerHandlers');
     client = await ClientSDK.init(clientConfig);
@@ -130,7 +130,7 @@ describe('ClientSDK', () => {
     const payload = { some: 'data' };
     const clientConfig = {
       ...config,
-      events: { onPageContextUpdate: vi.fn() }
+      events: { onPageContextUpdate: vi.fn() },
     };
     (CoreSDK as any).mockImplementation(() => ({
       connect: vi.fn(),
@@ -171,6 +171,36 @@ describe('ClientSDK', () => {
     expect(logger.debug).toHaveBeenCalledWith('onPageContextUpdate event listener is not set.');
   });
 
+  it('should use key as hashedKey and call handleSubscription when subscribe is true', async () => {
+    client = await ClientSDK.init(config);
+    const key = 'host.state';
+    const options = { subscribe: true };
+    const handleSubscriptionSpy = vi
+      .spyOn(client as any, 'handleSubscription')
+      .mockReturnValue(() => {});
+    const generateKeyWithHashSpy = vi.spyOn(client as any, 'generateKeyWithHash');
+
+    await client.query(key, options);
+
+    expect(handleSubscriptionSpy).toHaveBeenCalledWith(key, undefined, undefined);
+    expect(generateKeyWithHashSpy).not.toHaveBeenCalled();
+  });
+
+  it('should generate hashedKey and NOT call handleSubscription when subscribe is false', async () => {
+    client = await ClientSDK.init(config);
+    const key = 'host.state';
+    const options = { subscribe: false };
+    const handleSubscriptionSpy = vi.spyOn(client as any, 'handleSubscription');
+    const generateKeyWithHashSpy = vi
+      .spyOn(client as any, 'generateKeyWithHash')
+      .mockResolvedValue('hashed-key');
+
+    await client.query(key, options);
+
+    expect(generateKeyWithHashSpy).toHaveBeenCalledWith(key, options);
+    expect(handleSubscriptionSpy).not.toHaveBeenCalled();
+  });
+
   it('should generate unique keys for different query options', async () => {
     const key = 'host.user';
     const options1 = { subscribe: true };
@@ -183,8 +213,8 @@ describe('ClientSDK', () => {
   });
 
   it('should update query state with unique keys', async () => {
-    const key = 'host.user';
-    const options = { subscribe: true };
+    const key = 'xmc.request';
+    const options = { subscribe: false };
     const hashedKey = await client['generateKeyWithHash'](key, options);
 
     await client.query(key, options);
@@ -194,17 +224,52 @@ describe('ClientSDK', () => {
     });
   });
 
-  it('should handle query success with unique keys', async () => {
+  it('should handle query success with unique keys when subscribe is false', async () => {
     client = await ClientSDK.init(config);
-    const key = 'host.request';
-    const options = { subscribe: true, params: {
+    const key = 'xmc.request';
+    const options = {
+      subscribe: false,
+      params: {
         path: '/api/resource',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         query: { id: '123' },
-        requiresAuth: true
-      }  };
+        requiresAuth: true,
+      },
+    };
     const hashedKey = await client['generateKeyWithHash'](key, options);
+    const responseData = { id: 1, name: 'User' };
+
+    (CoreSDK.prototype.request as vi.Mock).mockResolvedValue(responseData);
+    (StateManager.prototype.getQueryState as vi.Mock).mockReturnValue({
+      status: 'success',
+      data: responseData,
+    });
+
+    const result = await client.query(key, options);
+
+    expect(StateManager.prototype.updateQueryState).toHaveBeenCalledWith(hashedKey, {
+      status: 'success',
+      data: responseData,
+    });
+    expect(StateManager.prototype.getQueryState).toHaveBeenCalledWith(hashedKey);
+    expect(result.data).toEqual(responseData);
+  });
+
+  it('should handle query success with event key when subscribe is true', async () => {
+    client = await ClientSDK.init(config);
+    const key = 'host.request';
+    const options = {
+      subscribe: true,
+      params: {
+        path: '/api/resource',
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        query: { id: '123' },
+        requiresAuth: true,
+      },
+    };
+    const hashedKey = key;
     const responseData = { id: 1, name: 'User' };
 
     (CoreSDK.prototype.request as vi.Mock).mockResolvedValue(responseData);
@@ -251,8 +316,8 @@ describe('ClientSDK', () => {
 
   it('should handle query success', async () => {
     StateManager.prototype.getQueryState = vi
-        .fn()
-        .mockReturnValue({ status: 'idle', subscriptionCount: 0, data: mockData });
+      .fn()
+      .mockReturnValue({ status: 'idle', subscriptionCount: 0, data: mockData });
     CoreSDK.prototype.request = vi.fn().mockReturnValue(mockData);
     client = await ClientSDK.init(config);
 
@@ -274,7 +339,7 @@ describe('ClientSDK', () => {
   });
 
   it('should handle mutation success', async () => {
-    const mutationKey='host.request';
+    const mutationKey = 'host.request';
     const params: GenericRequestData = { path: '/some-path', requiresAuth: true };
     const timeout = 5000;
     CoreSDK.prototype.request = vi.fn().mockReturnValue(mockData);
@@ -284,9 +349,9 @@ describe('ClientSDK', () => {
 
     expect(result).toEqual(mockData);
     expect(logger.debug).toHaveBeenCalledWith(
-        `Mutation (${mutationKey}) initiated with params:`,
-        params,
-        `timeoutMs: ${timeout}`,
+      `Mutation (${mutationKey}) initiated with params:`,
+      params,
+      `timeoutMs: ${timeout}`,
     );
     expect(logger.info).toHaveBeenCalledWith(`Mutation (${mutationKey}) success:`, mockData);
   });
@@ -305,7 +370,7 @@ describe('ClientSDK', () => {
   it('should clean up all queries on destroy', () => {
     StateManager.prototype.getQueryKeys = vi.fn().mockReturnValue(['query1', 'query2']);
     const clientSDK = new ClientSDK(config);
-    const unsubscribeSpy = vi.spyOn(clientSDK as any, 'unsubscribe');
+    const unsubscribeSpy = vi.spyOn(clientSDK as any, '_unsubscribe');
 
     clientSDK.destroy();
 
@@ -355,7 +420,9 @@ describe('ClientSDK', () => {
     });
 
     // Test with missing URL
-    await expect(client.navigateToExternalUrl('')).rejects.toThrow('URL is required for navigateToExternalUrl');
+    await expect(client.navigateToExternalUrl('')).rejects.toThrow(
+      'URL is required for navigateToExternalUrl',
+    );
   });
 
   it('should unsubscribe correctly', async () => {
@@ -371,9 +438,176 @@ describe('ClientSDK', () => {
     StateManager.prototype.removeQuery = vi.fn();
 
     client = await ClientSDK.init(config);
-    client['unsubscribe'](hashedKey);
+    client['_unsubscribe'](hashedKey);
 
     expect(StateManager.prototype.decrementSubscriptionCount).toHaveBeenCalledWith(hashedKey);
     expect(StateManager.prototype.removeQuery).toHaveBeenCalledWith(hashedKey);
+  });
+
+  it('should handle subscription: call onSuccess and onError, manage subscription count', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    const mockOnSuccess = vi.fn();
+    const mockOnError = vi.fn();
+    // Mock stateManager methods
+    const subscribeMock = vi.fn((_, cb) => {
+      // Simulate state change with data
+      cb({ data: 'test-data', error: undefined });
+      // Simulate state change with error
+      cb({ data: undefined, error: new Error('test-error') });
+      return vi.fn(); // unsubscribe function
+    });
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(1);
+    const updateQueryStateMock = vi.fn();
+    // Mock coreSdk.on to return an unsubscribe function
+    clientSDK['coreSdk'] = {
+      on: vi.fn().mockReturnValue(vi.fn()),
+    } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+    } as any;
+    // Call handleSubscription
+    const unsubscribe = (clientSDK as any).handleSubscription(
+      hashedKey,
+      mockOnSuccess,
+      mockOnError,
+    );
+    // Should call subscribe and increment
+    expect(subscribeMock).toHaveBeenCalledWith(hashedKey, expect.any(Function));
+    expect(incrementMock).toHaveBeenCalledWith(hashedKey);
+    expect(getCountMock).toHaveBeenCalledWith(hashedKey);
+    // Should call onSuccess and onError
+    expect(mockOnSuccess).toHaveBeenCalledWith('test-data');
+    expect(mockOnError).toHaveBeenCalledWith(new Error('test-error'));
+    // Should return an unsubscribe function
+    expect(typeof unsubscribe).toBe('function');
+  });
+
+  it('should not call coreSdk.on if subscription count > 1', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    const mockOnSuccess = vi.fn();
+    const mockOnError = vi.fn();
+    // Mock stateManager methods
+    const subscribeMock = vi.fn();
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(2); // > 1
+    const updateQueryStateMock = vi.fn();
+    clientSDK['coreSdk'] = {
+      on: vi.fn(),
+    } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+    } as any;
+    (clientSDK as any).handleSubscription(hashedKey, mockOnSuccess, mockOnError);
+    expect(clientSDK['coreSdk'].on).not.toHaveBeenCalled();
+  });
+
+  it('should call only onSuccess if state has data, only onError if state has error, and neither if state is empty', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    const mockOnSuccess = vi.fn();
+    const mockOnError = vi.fn();
+    let stateCallback: any;
+    const subscribeMock = vi.fn((_, cb) => {
+      stateCallback = cb;
+      return vi.fn();
+    });
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(2);
+    const updateQueryStateMock = vi.fn();
+    clientSDK['coreSdk'] = { on: vi.fn() } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+    } as any;
+    (clientSDK as any).handleSubscription(hashedKey, mockOnSuccess, mockOnError);
+    // Only data
+    stateCallback({ data: 'data', error: undefined });
+    expect(mockOnSuccess).toHaveBeenCalledWith('data');
+    // Only error
+    stateCallback({ data: undefined, error: new Error('err') });
+    expect(mockOnError).toHaveBeenCalledWith(new Error('err'));
+    // Neither
+    stateCallback({ data: undefined, error: undefined });
+    // Should not throw
+  });
+
+  it('should not throw if onSuccess/onError are not provided', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    let stateCallback: any;
+    const subscribeMock = vi.fn((_, cb) => {
+      stateCallback = cb;
+      return vi.fn();
+    });
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(2);
+    const updateQueryStateMock = vi.fn();
+    clientSDK['coreSdk'] = { on: vi.fn() } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+    } as any;
+    (clientSDK as any).handleSubscription(hashedKey);
+    expect(() => stateCallback({ data: 'data', error: undefined })).not.toThrow();
+    expect(() => stateCallback({ data: undefined, error: new Error('err') })).not.toThrow();
+  });
+
+  it('should call both stateChangeUnsubscribe and _unsubscribe on returned unsubscribe', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    const stateChangeUnsubscribe = vi.fn();
+    const subscribeMock = vi.fn(() => stateChangeUnsubscribe);
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(2);
+    const updateQueryStateMock = vi.fn();
+    const _unsubscribeMock = vi.spyOn(clientSDK as any, '_unsubscribe');
+    clientSDK['coreSdk'] = { on: vi.fn() } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+      getQueryState: vi.fn().mockReturnValue({}),
+      decrementSubscriptionCount: vi.fn(),
+    } as any;
+    const unsub = (clientSDK as any).handleSubscription(hashedKey);
+    unsub();
+    expect(stateChangeUnsubscribe).toHaveBeenCalled();
+    expect(_unsubscribeMock).toHaveBeenCalledWith(hashedKey);
+  });
+
+  it('should store and call coreSdk.on unsubscribe when subscription count is 1', () => {
+    const clientSDK = new ClientSDK(config);
+    const hashedKey = 'test.key';
+    const subscribeMock = vi.fn(() => vi.fn());
+    const incrementMock = vi.fn();
+    const getCountMock = vi.fn().mockReturnValue(1);
+    const updateQueryStateMock = vi.fn();
+    const coreUnsubscribe = vi.fn();
+    clientSDK['coreSdk'] = {
+      on: vi.fn().mockReturnValue(coreUnsubscribe),
+    } as any;
+    clientSDK['stateManager'] = {
+      subscribe: subscribeMock,
+      incrementSubscriptionCount: incrementMock,
+      getSubscriptionCount: getCountMock,
+      updateQueryState: updateQueryStateMock,
+    } as any;
+    (clientSDK as any).handleSubscription(hashedKey);
+    expect(clientSDK['coreSdk'].on).toHaveBeenCalledWith(hashedKey, expect.any(Function));
+    expect(updateQueryStateMock).toHaveBeenCalledWith(hashedKey, { unsubscribe: coreUnsubscribe });
   });
 });

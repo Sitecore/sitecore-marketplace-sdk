@@ -2,7 +2,7 @@ name: on-push-master
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   unit-test:

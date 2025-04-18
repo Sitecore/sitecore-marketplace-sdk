@@ -89,15 +89,13 @@ export const saveChunk = <ThrowOnError extends boolean = false>(
   options: Options<SaveChunkData, ThrowOnError>,
 ) => {
   return (options.client ?? _heyApiClient).put<unknown, unknown, ThrowOnError>({
+    bodySerializer: null,
     url: '/content/v1/transfers/{transferId}/chunksets/{chunksetId}/chunks/{chunkId}',
     ...options,
     headers: {
       'Content-Type': 'application/octet-stream',
       ...options?.headers,
     },
-    // This is manaully added to the generated code
-    // It's a bug in the generator https://github.com/hey-api/openapi-ts/issues/1855
-    bodySerializer: null,
   });
 };
 

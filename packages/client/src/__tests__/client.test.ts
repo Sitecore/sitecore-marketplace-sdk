@@ -376,4 +376,34 @@ describe('ClientSDK', () => {
     expect(StateManager.prototype.decrementSubscriptionCount).toHaveBeenCalledWith(hashedKey);
     expect(StateManager.prototype.removeQuery).toHaveBeenCalledWith(hashedKey);
   });
+
+  it('should emit route event with correct payload', async () => {
+    // Setup
+    CoreSDK.prototype.emit = vi.fn();
+    client = await ClientSDK.init(config);
+
+    // Test with route only
+    const route = '/products/123';
+    await client.emitRouteEvent(route);
+
+    // Verify
+    expect(CoreSDK.prototype.emit).toHaveBeenCalledWith('client.route', {
+      route,
+      data: undefined
+    });
+    expect(logger.debug).toHaveBeenCalledWith(`Sending route event: ${route}`);
+  });
+
+  it('should throw error when route is empty', async () => {
+    // Setup
+    client = await ClientSDK.init(config);
+
+    // Test with empty route
+    await expect(client.emitRouteEvent('')).rejects
+      .toThrow('Route is required for sendRouteEvent');
+
+    // Test with undefined route
+    await expect(client.emitRouteEvent(undefined as unknown as string)).rejects
+      .toThrow('Route is required for sendRouteEvent');
+  });
 });

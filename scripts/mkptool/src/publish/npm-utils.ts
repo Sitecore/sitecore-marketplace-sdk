@@ -1,6 +1,6 @@
 import { ExitError } from "@changesets/errors";
 import { error, info, warn } from "@changesets/logger";
-import { PackageJSON } from "@changesets/types";
+
 import pc from "picocolors";
 import { exec } from "child_process";
 import { promisify } from "util";

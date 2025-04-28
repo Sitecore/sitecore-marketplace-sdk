@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  id-token: write
+  issues: write
+  packages: write
+  pull-requests: write
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - uses: pnpm/action-setup@v4.1.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1.4.10
+        with:
+          publish: pnpm run mkptool publish
+          version: pnpm changeset version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+          DISPATCH_REPO_OWNER: ${{ vars.DISPATCH_REPO_OWNER }}
+          DISPATCH_REPO_NAME: ${{ vars.DISPATCH_REPO_NAME }}
+          DISPATCH_APP_ID: ${{ secrets.DISPATCH_APP_ID }}
+          DISPATCH_APP_PRIVATE_KEY: ${{ secrets.DISPATCH_APP_PRIVATE_KEY }}

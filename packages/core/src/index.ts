@@ -4,7 +4,6 @@ export * from './errors';
 
 import { PostMessageBridge } from './post-message';
 import { CoreSDKConfig, HandshakeConfig } from './types';
-import { CoreError, ErrorCode } from './errors';
 
 /**
  * Core SDK for managing communication between host and client applications.
@@ -35,9 +34,9 @@ export class CoreSDK {
 
   /**
    * Initializes the SDK with basic configuration. This method sets up event listeners
-   * but doesn't perform the handshake yet. For the host, this allows listening for 
+   * but doesn't perform the handshake yet. For the host, this allows listening for
    * handshake messages before the iframe is fully loaded.
-   * 
+   *
    * @param config - Handshake configuration
    * @throws {CoreError} If already initialized or handshake fails
    */
@@ -49,7 +48,7 @@ export class CoreSDK {
    * Sets or updates the target window for communication.
    * This is useful for host applications that need to establish the iframe
    * target after the SDK is already initialized.
-   * 
+   *
    * @param target - The target window to communicate with (typically iframe.contentWindow)
    */
   setTarget(target: Window): void {
@@ -60,7 +59,7 @@ export class CoreSDK {
    * Connects the SDK by performing the handshake with the other side.
    * For the client, this sends the handshake init message.
    * For the host, this completes the connection once a handshake init message is received and responded to.
-   * 
+   *
    * @returns Promise that resolves when the connection is established
    * @throws {CoreError} If already initialized
    */
@@ -72,9 +71,9 @@ export class CoreSDK {
    * Checks if the SDK is connected.
    * @returns True if connected, false otherwise
    */
-    isConnected(): boolean {
-      return this.bridge.isConnected();
-    }
+  isConnected(): boolean {
+    return this.bridge.isConnected();
+  }
 
   /**
    * Checks if the SDK is in listener mode (no target set yet).

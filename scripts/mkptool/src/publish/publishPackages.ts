@@ -1,14 +1,14 @@
-import { Package } from "@manypkg/get-packages";
-import { info, warn } from "@changesets/logger";
-import * as npmUtils from "./npm-utils";
-import { exec } from "child_process";
-import { promisify } from "util";
-import { Octokit } from "@octokit/rest";
-import { createAppAuth } from "@octokit/auth-app";
+import { Package } from '@manypkg/get-packages';
+import { info, warn } from '@changesets/logger';
+import * as npmUtils from './npm-utils';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import { Octokit } from '@octokit/rest';
+import { createAppAuth } from '@octokit/auth-app';
 
 const execAsync = promisify(exec);
 
-type PublishedState = "never" | "published" | "only-pre";
+type PublishedState = 'never' | 'published' | 'only-pre';
 
 type PkgInfo = {
   name: string;
@@ -25,31 +25,29 @@ export type PublishedResult = {
 };
 
 async function getInstallationToken() {
-  console.log("Starting getInstallationToken");
+  console.log('Starting getInstallationToken');
   const appId = process.env.GITHUB_APP_ID;
   const privateKey = process.env.GITHUB_APP_PRIVATE_KEY;
   const dispatchRepoOwner = process.env.DISPATCH_REPO_OWNER;
 
   if (!appId || !privateKey || !dispatchRepoOwner) {
-    console.log("Missing required environment variables");
+    console.log('Missing required environment variables');
     throw new Error(
-      "GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY, or DISPATCH_REPO_OWNER is not set in the environment variables"
+      'GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY, or DISPATCH_REPO_OWNER is not set in the environment variables'
     );
   }
 
-  console.log("Creating app authentication");
+  console.log('Creating app authentication');
   const auth = createAppAuth({
     appId,
     privateKey,
   });
 
-  console.log("Fetching installations");
-  const appAuthentication = await auth({ type: "app" });
+  console.log('Fetching installations');
+  const appAuthentication = await auth({ type: 'app' });
   const octokit = new Octokit({ auth: appAuthentication.token });
   const { data: installations } = await octokit.apps.listInstallations();
-  const installation = installations.find(
-    (inst) => inst.account?.login === dispatchRepoOwner
-  );
+  const installation = installations.find((inst) => inst.account?.login === dispatchRepoOwner);
 
   if (!installation) {
     console.log(`No installation found for owner: ${dispatchRepoOwner}`);
@@ -57,29 +55,25 @@ async function getInstallationToken() {
   }
 
   console.log(`Installation ID: ${installation.id}`);
-  console.log(
-    "Generating installation token using createInstallationAccessToken"
-  );
+  console.log('Generating installation token using createInstallationAccessToken');
   const { data: tokenData } = await octokit.apps.createInstallationAccessToken({
     installation_id: installation.id,
   });
 
-  console.log("Installation token generated");
-  console.log("Token Permissions:", tokenData.permissions);
+  console.log('Installation token generated');
+  console.log('Token Permissions:', tokenData.permissions);
   return tokenData.token;
 }
 
 async function triggerRepositoryDispatch(packagesInfo: PkgInfo[]) {
-  console.log("Starting triggerRepositoryDispatch");
-  const branch = (
-    await execAsync("git rev-parse --abbrev-ref HEAD")
-  ).stdout.trim();
-  const commit = (await execAsync("git rev-parse HEAD")).stdout.trim();
+  console.log('Starting triggerRepositoryDispatch');
+  const branch = (await execAsync('git rev-parse --abbrev-ref HEAD')).stdout.trim();
+  const commit = (await execAsync('git rev-parse HEAD')).stdout.trim();
 
   console.log(`Branch: ${branch}, Commit: ${commit}`);
 
   const payload = {
-    event_type: "publish_packages",
+    event_type: 'publish_packages',
     client_payload: {
       packages: packagesInfo.map((pkgInfo) => ({
         packageName: pkgInfo.name,
@@ -95,21 +89,21 @@ async function triggerRepositoryDispatch(packagesInfo: PkgInfo[]) {
   const dispatchRepoName = process.env.DISPATCH_REPO_NAME;
 
   if (!dispatchRepoOwner || !dispatchRepoName) {
-    console.log("Missing required repository environment variables");
+    console.log('Missing required repository environment variables');
     throw new Error(
-      "DISPATCH_REPO_OWNER or DISPATCH_REPO_NAME is not set in the environment variables"
+      'DISPATCH_REPO_OWNER or DISPATCH_REPO_NAME is not set in the environment variables'
     );
   }
 
-  console.log("Fetching installation token");
+  console.log('Fetching installation token');
   const installationToken = await getInstallationToken();
 
-  console.log("Creating Octokit instance");
+  console.log('Creating Octokit instance');
   const octokit = new Octokit({
     auth: installationToken,
   });
 
-  console.log("Triggering repository dispatch event");
+  console.log('Triggering repository dispatch event');
   const response = await octokit.repos.createDispatchEvent({
     owner: dispatchRepoOwner,
     repo: dispatchRepoName,
@@ -119,21 +113,17 @@ async function triggerRepositoryDispatch(packagesInfo: PkgInfo[]) {
 
   if (response.status !== 204) {
     console.log(`Failed to trigger repository dispatch: ${response.status}`);
-    throw new Error(
-      `Failed to trigger repository dispatch: ${response.status}`
-    );
+    throw new Error(`Failed to trigger repository dispatch: ${response.status}`);
   }
 
-  console.log(
-    `Triggered repository dispatch for ${packagesInfo.length} packages`
-  );
+  console.log(`Triggered repository dispatch for ${packagesInfo.length} packages`);
 }
 
 async function waitForPackagesToBePublished(packagesInfo: PkgInfo[]) {
-  const maxRetries = parseInt(process.env.PUBLISH_MAX_RETRIES || "10", 10);
-  const delayMs = parseInt(process.env.PUBLISH_RETRY_DELAY_MS || "15000", 10);
+  const maxRetries = parseInt(process.env.PUBLISH_MAX_RETRIES || '30', 10);
+  const delayMs = parseInt(process.env.PUBLISH_RETRY_DELAY_MS || '30000', 10);
 
-  console.log("Waiting for packages to be published...");
+  console.log('Waiting for packages to be published...');
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     console.log(`Attempt ${attempt} of ${maxRetries}`);
@@ -142,27 +132,20 @@ async function waitForPackagesToBePublished(packagesInfo: PkgInfo[]) {
 
     for (const pkgInfo of packagesInfo) {
       const { name, localVersion } = pkgInfo;
-      console.log(
-        `Checking if package ${name} version ${localVersion} is published...`
-      );
+      console.log(`Checking if package ${name} version ${localVersion} is published...`);
 
       const response = await npmUtils.infoAllow404(pkgInfo.name);
 
-      if (
-        !response.published ||
-        !response.pkgInfo.versions.includes(localVersion)
-      ) {
+      if (!response.published || !response.pkgInfo.versions.includes(localVersion)) {
         unpublishedPackages.push(pkgInfo);
-        console.log(
-          `Package ${name} version ${localVersion} is not yet published.`
-        );
+        console.log(`Package ${name} version ${localVersion} is not yet published.`);
       } else {
         console.log(`Package ${name} version ${localVersion} is published.`);
       }
     }
 
     if (unpublishedPackages.length === 0) {
-      console.log("All packages are published.");
+      console.log('All packages are published.');
       return;
     }
 
@@ -170,20 +153,14 @@ async function waitForPackagesToBePublished(packagesInfo: PkgInfo[]) {
       console.log(`Waiting for ${delayMs}ms before retrying...`);
       await new Promise((resolve) => setTimeout(resolve, delayMs));
     } else {
-      throw new Error(
-        "Some packages were not published within the allowed retries."
-      );
+      throw new Error('Some packages were not published within the allowed retries.');
     }
   }
 }
 
-export default async function publishPackages({
-  packages,
-}: {
-  packages: Package[];
-}) {
+export default async function publishPackages({ packages }: { packages: Package[] }) {
   if (!process.env.GITHUB_WORKSPACE) {
-    throw new Error("GITHUB_WORKSPACE environment variable is not set.");
+    throw new Error('GITHUB_WORKSPACE environment variable is not set.');
   }
 
   const packagesByName = new Map(packages.map((x) => [x.packageJson.name, x]));
@@ -198,9 +175,7 @@ export default async function publishPackages({
 
   const packagesInfo = unpublishedPackagesInfo.map((pkgInfo) => {
     const pkg = packagesByName.get(pkgInfo.name)!;
-    const relativePackageDir = pkg.dir
-      .replace(repoRoot, "")
-      .replace(/^\\|\//, "");
+    const relativePackageDir = pkg.dir.replace(repoRoot, '').replace(/^\\|\//, '');
     return {
       ...pkgInfo,
       packageDir: relativePackageDir,
@@ -222,9 +197,9 @@ async function getUnpublishedPackages(packages: Array<Package>) {
   const results: Array<PkgInfo> = await Promise.all(
     packages.map(async ({ packageJson }) => {
       const response = await npmUtils.infoAllow404(packageJson.name);
-      let publishedState: PublishedState = "never";
+      let publishedState: PublishedState = 'never';
       if (response.published) {
-        publishedState = "published";
+        publishedState = 'published';
       }
 
       return {

@@ -273,33 +273,48 @@ describe('ClientSDK', () => {
     expect(logger.error).toHaveBeenCalled();
   });
 
-  it('should handle mutation success', async () => {
-    const mutationKey='host.request';
-    const params: GenericRequestData = { path: '/some-path', requiresAuth: true };
-    const timeout = 5000;
-    CoreSDK.prototype.request = vi.fn().mockReturnValue(mockData);
-
+  it('should handle pages.reloadCanvas mutation successfully', async () => {
+    // Mock the CoreSDK request method
+    CoreSDK.prototype.request = vi.fn().mockResolvedValue(undefined);
     client = await ClientSDK.init(config);
-    const result = await client.mutate('host.request', { params: params, timeoutMs: timeout });
 
-    expect(result).toEqual(mockData);
-    expect(logger.debug).toHaveBeenCalledWith(
-        `Mutation (${mutationKey}) initiated with params:`,
-        params,
-        `timeoutMs: ${timeout}`,
-    );
-    expect(logger.info).toHaveBeenCalledWith(`Mutation (${mutationKey}) success:`, mockData);
+    // Test mutation of pages.reloadCanvas
+    const mutationKey = 'pages.reloadCanvas';
+    const onSuccessMock = vi.fn();
+    const onErrorMock = vi.fn();
+
+    await client.mutate(mutationKey, {
+      onSuccess: onSuccessMock,
+      onError: onErrorMock
+    });
+
+    // Verify the request was made with correct endpoint and parameters
+    expect(CoreSDK.prototype.request).toHaveBeenCalledWith('pages.reloadCanvas', undefined);
+    expect(logger.info).toHaveBeenCalledWith(`Mutation (${mutationKey}) success:`, undefined);
+    expect(onSuccessMock).toHaveBeenCalledWith(undefined);
+    expect(onErrorMock).not.toHaveBeenCalled();
   });
 
-  it('should handle mutation error', async () => {
+  it('should handle pages.reloadCanvas mutation error', async () => {
+    // Mock the CoreSDK request method to throw an error
     const mockError = new Error('Mutation failed');
-    const params: GenericRequestData = { path: '/some-path', requiresAuth: true };
     CoreSDK.prototype.request = vi.fn().mockRejectedValue(mockError);
-
     client = await ClientSDK.init(config);
 
-    await expect(client.mutate('host.request', { params: params })).rejects.toThrow(mockError);
-    expect(logger.error).toHaveBeenCalled();
+    // Test mutation of pages.reloadCanvas with error
+    const mutationKey = 'pages.reloadCanvas';
+    const onSuccessMock = vi.fn();
+    const onErrorMock = vi.fn();
+
+    await expect(client.mutate(mutationKey, {
+      onSuccess: onSuccessMock,
+      onError: onErrorMock
+    })).rejects.toThrow(mockError);
+
+    // Verify error handling
+    expect(logger.error).toHaveBeenCalledWith(`Mutation (${mutationKey}) error:`, mockError);
+    expect(onSuccessMock).not.toHaveBeenCalled();
+    expect(onErrorMock).toHaveBeenCalledWith(mockError);
   });
 
   it('should clean up all queries on destroy', () => {

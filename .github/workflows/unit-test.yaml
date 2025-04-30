@@ -17,6 +17,8 @@ jobs:
         run: npm i -g pnpm
       - name: Install dependencies
         run: pnpm i
+      - name: Ensure changesets included
+        run: pnpm changeset status --since=main
       - name: Setup bc
         run: |
           sudo apt-get update

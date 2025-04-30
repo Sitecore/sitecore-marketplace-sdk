@@ -1,5 +1,12 @@
 import { CoreSDKConfig } from '@sitecore-marketplace-sdk/core';
-import { MutationKey, MutationMap, NavbarItemsProps, QueryKey, QueryMap } from './sdk-types';
+import {
+  MutationKey,
+  MutationMap,
+  NavbarItemsProps,
+  QueryKey,
+  QueryMap,
+  SDKModule,
+} from './sdk-types';
 
 export type QueryStatus = 'idle' | 'loading' | 'error' | 'success';
 
@@ -75,3 +82,14 @@ export interface ClientSDKConfig extends CoreSDKConfig {
   };
   navbarItems?: NavbarItemsProps;
 }
+
+export type ClientSDKInitConfig = {
+  origin: string;
+  target: Window;
+  timeout?: number;
+  modules?: SDKModule[];
+  events?: ClientSDKConfig['events'];
+  navbarItems?: NavbarItemsProps;
+};
+
+export { UserInfo, ApplicationContext } from '@sitecore-marketplace-sdk/core';

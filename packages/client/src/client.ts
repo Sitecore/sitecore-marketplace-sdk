@@ -20,7 +20,13 @@ import {
   GenericRequestData,
   GenericResponseData,
 } from '@sitecore-marketplace-sdk/core';
-import { ClientSDKConfig, MutationOptions, QueryOptions, QueryResult } from './types'; // This might be adjusted if you merge config changes
+import {
+  ClientSDKConfig,
+  ClientSDKInitConfig,
+  MutationOptions,
+  QueryOptions,
+  QueryResult,
+} from './types'; // This might be adjusted if you merge config changes
 import { StateManager } from './state';
 import { logger } from './logger';
 import type {
@@ -64,17 +70,10 @@ export class ClientSDK {
    * });
    * ```
    */
-  static async init(config: {
-    origin: string;
-    target: Window;
-    timeout?: number;
-    modules?: SDKModule[];
-    events?: ClientSDKConfig['events'];
-    navbarItems?: NavbarItemsProps;
-  }): Promise<ClientSDK> {
+  static async init(config: ClientSDKInitConfig): Promise<ClientSDK> {
     // Build core configuration based on the provided parameters.
     const coreConfig: ClientSDKConfig = {
-      target: config.target,
+      target: config.target || window.parent, // Default to window.parent if not provided
       targetOrigin: config.origin, // Host's origin
       selfOrigin: window.location.origin, // Automatically derived client SDK origin
       timeout: config.timeout,

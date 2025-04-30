@@ -1,10 +1,5 @@
 // Import shared types (e.g. User and ApplicationMetadata)
-import {
-  ApplicationContext,
-  GenericRequestData,
-  GenericResponseData,
-  UserInfo,
-} from '@sitecore-marketplace-sdk/core';
+import { ApplicationContext, UserInfo } from '@sitecore-marketplace-sdk/core';
 
 // --- Host state types ---
 

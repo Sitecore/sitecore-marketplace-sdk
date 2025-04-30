@@ -19,7 +19,10 @@
     "pack:core": "turbo exec --scope @sitecore-marketplace-sdk/core -- pnpm pack",
     "pack:xmc": "turbo exec --scope @sitecore-marketplace-sdk/xmc -- pnpm pack",
     "pack:all": "turbo exec -- pnpm pack",
-    "postinstall": "pnpm build:serial"
+    "postinstall": "pnpm build:serial",
+    "changeset": "changeset",
+    "empty-changeset": "pnpm changeset --empty",
+    "mkptool": "node scripts/mkptool/dist/index.js"
   },
   "author": {
     "name": "Sitecore Corporation"
@@ -27,6 +30,7 @@
   "license": "Apache-2.0",
   "description": "Marketplace SDK",
   "devDependencies": {
+    "@changesets/cli": "2.29.2",
     "jest-environment-jsdom": "^29.0.0",
     "turbo": "^2.5.0",
     "typescript": "^5.0.0"

@@ -25,3 +25,11 @@ jobs:
         run: pnpm build
       - name: Run unit tests
         run: pnpm coverage
+
+      - name: Make publish-preview-packages.sh executable
+        run: chmod +x ./scripts/publish-preview-packages.sh
+
+      - name: Publish preview packages
+        run: ./scripts/publish-preview-packages.sh
+        env:
+          LERNA_SINCE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}

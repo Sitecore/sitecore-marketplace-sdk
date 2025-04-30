@@ -4,3 +4,4 @@ packages:
   - "packages/client"
   - "packages/xmc"
   - "packages/*"
+  - "scripts/mkptool"

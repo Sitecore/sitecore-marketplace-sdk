@@ -379,8 +379,6 @@ export class ClientSDK {
           status: response.status || 200,
           statusText: response.statusText || '',
         };
-
-        // Use the ArrayBuffer directly as the body
         return new Response(response.body, init);
       });
   }
@@ -400,6 +398,29 @@ export class ClientSDK {
 
     const payload: ExternalUrlPayload = { url, newTab };
     await this.coreSdk.request('host.navigateTo.externalUrl', payload);
+  }
+
+  /**
+   * Sends a route event to consumers without triggering navigation.
+   * This method broadcasts route information that can be received by listeners
+   * registered to the 'host.route' event.
+   *
+   * @param route - The route path or identifier to broadcast
+   * @returns A Promise that resolves when the event has been sent
+   *
+   * @example
+   * ```typescript
+   * // Send a route event with additional context data
+   * await client.emitRouteEvent('/products/123');
+   */
+  async emitRouteEvent(route: string): Promise<void> {
+    if (!route) {
+      throw new Error('Route is required for sendRouteEvent');
+    }
+    logger.debug(`Sending route event: ${route}`);
+
+    const payload = { route };
+    this.coreSdk.emit('client.route', payload);
   }
 
   private async setNavbarItems(navbarItems?: NavbarItemsProps): Promise<void> {

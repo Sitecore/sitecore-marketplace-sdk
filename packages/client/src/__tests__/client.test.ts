@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { ClientSDK } from '../client';
-import { CoreSDK, GenericRequestData } from '@sitecore-marketplace-sdk/core';
+import { CoreSDK } from '@sitecore-marketplace-sdk/core';
 import { StateManager } from '../state';
 import { logger } from '../logger';
 
@@ -338,33 +338,48 @@ describe('ClientSDK', () => {
     expect(logger.error).toHaveBeenCalled();
   });
 
-  it('should handle mutation success', async () => {
-    const mutationKey = 'host.request';
-    const params: GenericRequestData = { path: '/some-path', requiresAuth: true };
-    const timeout = 5000;
-    CoreSDK.prototype.request = vi.fn().mockReturnValue(mockData);
-
+  it('should handle pages.reloadCanvas mutation successfully', async () => {
+    // Mock the CoreSDK request method
+    CoreSDK.prototype.request = vi.fn().mockResolvedValue(undefined);
     client = await ClientSDK.init(config);
-    const result = await client.mutate('host.request', { params: params, timeoutMs: timeout });
 
-    expect(result).toEqual(mockData);
-    expect(logger.debug).toHaveBeenCalledWith(
-      `Mutation (${mutationKey}) initiated with params:`,
-      params,
-      `timeoutMs: ${timeout}`,
-    );
-    expect(logger.info).toHaveBeenCalledWith(`Mutation (${mutationKey}) success:`, mockData);
+    // Test mutation of pages.reloadCanvas
+    const mutationKey = 'pages.reloadCanvas';
+    const onSuccessMock = vi.fn();
+    const onErrorMock = vi.fn();
+
+    await client.mutate(mutationKey, {
+      onSuccess: onSuccessMock,
+      onError: onErrorMock
+    });
+
+    // Verify the request was made with correct endpoint and parameters
+    expect(CoreSDK.prototype.request).toHaveBeenCalledWith('pages.reloadCanvas', undefined);
+    expect(logger.info).toHaveBeenCalledWith(`Mutation (${mutationKey}) success:`, undefined);
+    expect(onSuccessMock).toHaveBeenCalledWith(undefined);
+    expect(onErrorMock).not.toHaveBeenCalled();
   });
 
-  it('should handle mutation error', async () => {
+  it('should handle pages.reloadCanvas mutation error', async () => {
+    // Mock the CoreSDK request method to throw an error
     const mockError = new Error('Mutation failed');
-    const params: GenericRequestData = { path: '/some-path', requiresAuth: true };
     CoreSDK.prototype.request = vi.fn().mockRejectedValue(mockError);
-
     client = await ClientSDK.init(config);
 
-    await expect(client.mutate('host.request', { params: params })).rejects.toThrow(mockError);
-    expect(logger.error).toHaveBeenCalled();
+    // Test mutation of pages.reloadCanvas with error
+    const mutationKey = 'pages.reloadCanvas';
+    const onSuccessMock = vi.fn();
+    const onErrorMock = vi.fn();
+
+    await expect(client.mutate(mutationKey, {
+      onSuccess: onSuccessMock,
+      onError: onErrorMock
+    })).rejects.toThrow(mockError);
+
+    // Verify error handling
+    expect(logger.error).toHaveBeenCalledWith(`Mutation (${mutationKey}) error:`, mockError);
+    expect(onSuccessMock).not.toHaveBeenCalled();
+    expect(onErrorMock).toHaveBeenCalledWith(mockError);
   });
 
   it('should clean up all queries on destroy', () => {
@@ -609,5 +624,35 @@ describe('ClientSDK', () => {
     (clientSDK as any).handleSubscription(hashedKey);
     expect(clientSDK['coreSdk'].on).toHaveBeenCalledWith(hashedKey, expect.any(Function));
     expect(updateQueryStateMock).toHaveBeenCalledWith(hashedKey, { unsubscribe: coreUnsubscribe });
+  });
+
+  it('should emit route event with correct payload', async () => {
+    // Setup
+    CoreSDK.prototype.emit = vi.fn();
+    client = await ClientSDK.init(config);
+
+    // Test with route only
+    const route = '/products/123';
+    await client.emitRouteEvent(route);
+
+    // Verify
+    expect(CoreSDK.prototype.emit).toHaveBeenCalledWith('client.route', {
+      route,
+      data: undefined
+    });
+    expect(logger.debug).toHaveBeenCalledWith(`Sending route event: ${route}`);
+  });
+
+  it('should throw error when route is empty', async () => {
+    // Setup
+    client = await ClientSDK.init(config);
+
+    // Test with empty route
+    await expect(client.emitRouteEvent('')).rejects
+      .toThrow('Route is required for sendRouteEvent');
+
+    // Test with undefined route
+    await expect(client.emitRouteEvent(undefined as unknown as string)).rejects
+      .toThrow('Route is required for sendRouteEvent');
   });
 });

@@ -218,7 +218,13 @@ export interface QueryMap {
   };
 }
 
-export interface MutationMap {}
+export interface MutationMap {
+  'pages.reloadCanvas': {
+    params: void;
+    response: void;
+    subscribe: false;
+  };
+}
 
 // Utility types for keys
 export type QueryKey = keyof QueryMap;

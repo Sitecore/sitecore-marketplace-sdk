@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { ClientSDK } from '../client';
-import {CoreSDK, GenericRequestData} from '@sitecore-marketplace-sdk/core';
+import { CoreSDK } from '@sitecore-marketplace-sdk/core';
 import { StateManager } from '../state';
 import { logger } from '../logger';
 

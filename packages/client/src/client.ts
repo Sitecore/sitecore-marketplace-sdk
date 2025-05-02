@@ -366,10 +366,6 @@ export class ClientSDK {
           status: response.status || 200,
           statusText: response.statusText || '',
         };
-        // Log the JSON stringified headers
-        console.log('Response Headers:', JSON.stringify(response.headers));
-
-        // Use the ArrayBuffer directly as the body
         return new Response(response.body, init);
       });
   }

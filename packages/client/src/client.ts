@@ -20,7 +20,13 @@ import {
   GenericRequestData,
   GenericResponseData,
 } from '@sitecore-marketplace-sdk/core';
-import { ClientSDKConfig, MutationOptions, QueryOptions, QueryResult } from './types'; // This might be adjusted if you merge config changes
+import {
+  ClientSDKConfig,
+  ClientSDKInitConfig,
+  MutationOptions,
+  QueryOptions,
+  QueryResult,
+} from './types'; // This might be adjusted if you merge config changes
 import { StateManager } from './state';
 import { logger } from './logger';
 import type {
@@ -64,17 +70,10 @@ export class ClientSDK {
    * });
    * ```
    */
-  static async init(config: {
-    origin: string;
-    target: Window;
-    timeout?: number;
-    modules?: SDKModule[];
-    events?: ClientSDKConfig['events'];
-    navbarItems?: NavbarItemsProps;
-  }): Promise<ClientSDK> {
+  static async init(config: ClientSDKInitConfig): Promise<ClientSDK> {
     // Build core configuration based on the provided parameters.
     const coreConfig: ClientSDKConfig = {
-      target: config.target,
+      target: config.target || window.parent, // Default to window.parent if not provided
       targetOrigin: config.origin, // Host's origin
       selfOrigin: window.location.origin, // Automatically derived client SDK origin
       timeout: config.timeout,
@@ -220,12 +219,17 @@ export class ClientSDK {
     const { request, operation } = this.resolveOperation(key as string);
 
     const { subscribe, onSuccess, onError, params, timeoutMs } = queryOptions || {};
-    const hashedKey = await this.generateKeyWithHash(key, queryOptions);
+    const hashedKey = subscribe ? key : await this.generateKeyWithHash(key, queryOptions);
     logger.debug(`Query (${key}) initiated with params:`, params, `timeoutMs: ${timeoutMs}`);
 
-    this.stateManager.updateQueryState(hashedKey, { status: 'loading' });
-
+    let unsubscribe: (() => void) | undefined;
     try {
+      if (subscribe) {
+        unsubscribe = this.handleSubscription(hashedKey, onSuccess, onError);
+      }
+
+      this.stateManager.updateQueryState(hashedKey, { status: 'loading' });
+
       const data = (await request(operation, params)) as QueryMap[K]['response'];
       logger.info(`Query (${key}) success:`, data);
 
@@ -234,30 +238,8 @@ export class ClientSDK {
         data,
       });
 
-      if (subscribe) {
-        this.stateManager.subscribe(key, (state) => {
-          if (state.data) {
-            onSuccess?.(state.data as QueryMap[K]['response']);
-          }
-          if (state.error) {
-            onError?.(state.error);
-          }
-        });
-
-        this.stateManager.incrementSubscriptionCount(hashedKey);
-        if (this.stateManager.getSubscriptionCount(hashedKey) === 1) {
-          const unsubscribe = this.coreSdk.on(key, (updatedData) => {
-            this.stateManager.updateQueryState(hashedKey, {
-              status: 'success',
-              data: updatedData,
-            });
-          });
-          this.stateManager.updateQueryState(hashedKey, { unsubscribe });
-        }
-      }
-
-      onSuccess?.(data);
       const state = this.stateManager.getQueryState(hashedKey);
+
       return {
         data: state.data as QueryMap[K]['response'] | undefined,
         error: undefined,
@@ -266,7 +248,7 @@ export class ClientSDK {
         isError: false,
         isSuccess: true,
         refetch: () => this.query(key, queryOptions),
-        unsubscribe: subscribe ? () => this.unsubscribe(hashedKey) : undefined,
+        unsubscribe: subscribe ? unsubscribe : undefined,
       };
     } catch (error) {
       logger.error(`Query (${key}) error:`, error);
@@ -285,9 +267,40 @@ export class ClientSDK {
         isError: true,
         isSuccess: false,
         refetch: () => this.query(key, queryOptions),
-        unsubscribe: subscribe ? () => this.unsubscribe(hashedKey) : undefined,
+        unsubscribe: subscribe ? unsubscribe : undefined,
       };
     }
+  }
+
+  private handleSubscription<K extends QueryKey>(
+    hashedKey: string,
+    onSuccess?: (data: QueryMap[K]['response']) => void,
+    onError?: (error: Error) => void,
+  ): () => void {
+    let stateChangeUnsubscribe = this.stateManager.subscribe(hashedKey, (state) => {
+      if (state.data) {
+        onSuccess?.(state.data as QueryMap[K]['response']);
+      }
+      if (state.error) {
+        onError?.(state.error);
+      }
+    });
+
+    this.stateManager.incrementSubscriptionCount(hashedKey);
+    if (this.stateManager.getSubscriptionCount(hashedKey) === 1) {
+      const coreUnsubscribe = this.coreSdk.on(hashedKey, (updatedData) => {
+        this.stateManager.updateQueryState(hashedKey, {
+          status: 'success',
+          data: updatedData,
+        });
+      });
+      this.stateManager.updateQueryState(hashedKey, { unsubscribe: coreUnsubscribe });
+    }
+
+    return () => {
+      stateChangeUnsubscribe?.();
+      this._unsubscribe(hashedKey);
+    };
   }
 
   private async generateKeyWithHash<K extends QueryKey>(
@@ -393,7 +406,7 @@ export class ClientSDK {
     }
   }
 
-  private unsubscribe(key: string): void {
+  private _unsubscribe(key: string): void {
     const state = this.stateManager.getQueryState(key);
     this.stateManager.decrementSubscriptionCount(key);
     if (this.stateManager.getSubscriptionCount(key) === 0) {
@@ -410,7 +423,7 @@ export class ClientSDK {
     // Clean up all queries
     const keys = this.stateManager.getQueryKeys();
     for (const key of keys) {
-      this.unsubscribe(key);
+      this._unsubscribe(key);
     }
   }
 }

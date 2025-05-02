@@ -9,6 +9,8 @@ jobs:
     name: run-unit-tests
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -17,6 +19,8 @@ jobs:
         run: npm i -g pnpm
       - name: Install dependencies
         run: pnpm i
+      - name: Ensure changesets included
+        run: pnpm changeset status --since=origin/main
       - name: Setup bc
         run: |
           sudo apt-get update
@@ -25,3 +29,11 @@ jobs:
         run: pnpm build
       - name: Run unit tests
         run: pnpm coverage
+
+      - name: Make publish-preview-packages.sh executable
+        run: chmod +x ./scripts/publish-preview-packages.sh
+
+      - name: Publish preview packages
+        run: ./scripts/publish-preview-packages.sh
+        env:
+          LERNA_SINCE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}

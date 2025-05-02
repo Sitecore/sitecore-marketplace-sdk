@@ -1,4 +1,6 @@
 node_modules
+dist/
+*.tsbuildinfo
 
 # Ignore distribution files in SDK packages
 packages/*/dist/
@@ -8,6 +10,9 @@ packages/*/dist/
 
 # Ignore all files in the .vscode directory
 .vscode/*
+
+# Turbo
+.turbo/
 
 *.tsbuildinfo
 *.DS_Store

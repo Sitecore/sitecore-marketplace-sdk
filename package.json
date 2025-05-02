@@ -3,22 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "scripts/mkptool"
   ],
   "scripts": {
-    "test": "lerna run test",
-    "build": "lerna run build",
+    "test": "turbo run test",
+    "build": "turbo run build",
     "build:serial": "pnpm -r --stream build",
-    "clean": "lerna run clean",
-    "lint": "lerna run lint",
-    "test:all": "lerna run test",
-    "coverage": "lerna run coverage",
-    "generate:module": "lerna run generate:module",
-    "pack:client": "lerna exec --scope @sitecore-marketplace-sdk/client -- pnpm pack",
-    "pack:core": "lerna exec --scope @sitecore-marketplace-sdk/core -- pnpm pack",
-    "pack:xmc": "lerna exec --scope @sitecore-marketplace-sdk/xmc -- pnpm pack",
-    "pack:all": "lerna exec -- pnpm pack",
-    "postinstall": "pnpm build:serial"
+    "clean": "turbo run clean",
+    "lint": "turbo run lint",
+    "test:all": "turbo run test",
+    "coverage": "turbo run coverage",
+    "generate:module": "turbo run generate:module",
+    "pack:client": "turbo exec --scope @sitecore-marketplace-sdk/client -- pnpm pack",
+    "pack:core": "turbo exec --scope @sitecore-marketplace-sdk/core -- pnpm pack",
+    "pack:xmc": "turbo exec --scope @sitecore-marketplace-sdk/xmc -- pnpm pack",
+    "pack:all": "turbo exec -- pnpm pack",
+    "postinstall": "pnpm build:serial",
+    "changeset": "changeset",
+    "empty-changeset": "pnpm changeset --empty",
+    "mkptool": "node scripts/mkptool/dist/index.js"
   },
   "author": {
     "name": "Sitecore Corporation"
@@ -26,13 +30,15 @@
   "license": "Apache-2.0",
   "description": "Marketplace SDK",
   "devDependencies": {
+    "@changesets/cli": "2.29.2",
     "jest-environment-jsdom": "^29.0.0",
-    "lerna": "^8.1.9",
+    "turbo": "^2.5.0",
     "typescript": "^5.0.0"
   },
   "pnpm": {
     "overrides": {
       "esbuild@<=0.24.2": ">=0.25.0"
     }
-  }
+  },
+  "packageManager": "pnpm@10.6.3"
 }

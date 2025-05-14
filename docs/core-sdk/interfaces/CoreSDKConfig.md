@@ -6,7 +6,7 @@
 
 # Interface: CoreSDKConfig
 
-Defined in: [packages/core/src/types.ts:7](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L7)
+Defined in: [packages/core/src/types.ts:7](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L7)
 
 Configuration for the Core SDK.
 
@@ -16,7 +16,7 @@ Configuration for the Core SDK.
 
 > **selfOrigin**: `string`
 
-Defined in: [packages/core/src/types.ts:13](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L13)
+Defined in: [packages/core/src/types.ts:13](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L13)
 
 The origin of the current window (usually window.location.origin)
 
@@ -26,7 +26,7 @@ The origin of the current window (usually window.location.origin)
 
 > `optional` **target**: `Window`
 
-Defined in: [packages/core/src/types.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L9)
+Defined in: [packages/core/src/types.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L9)
 
 The target window to communicate with (e.g., iframe.contentWindow)
 
@@ -36,7 +36,7 @@ The target window to communicate with (e.g., iframe.contentWindow)
 
 > **targetOrigin**: `string`
 
-Defined in: [packages/core/src/types.ts:11](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L11)
+Defined in: [packages/core/src/types.ts:11](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L11)
 
 The origin of the target (e.g., "https://example.com")
 
@@ -46,6 +46,6 @@ The origin of the target (e.g., "https://example.com")
 
 > `optional` **timeout**: `number`
 
-Defined in: [packages/core/src/types.ts:15](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L15)
+Defined in: [packages/core/src/types.ts:15](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L15)
 
 Optional timeout for requests in milliseconds (default: 30000)

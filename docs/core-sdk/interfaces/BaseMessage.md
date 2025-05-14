@@ -6,7 +6,7 @@
 
 # Interface: BaseMessage
 
-Defined in: [packages/core/src/types.ts:35](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L35)
+Defined in: [packages/core/src/types.ts:35](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L35)
 
 Base message interface for all message types.
 
@@ -23,7 +23,7 @@ Base message interface for all message types.
 
 > **id**: `string`
 
-Defined in: [packages/core/src/types.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L37)
+Defined in: [packages/core/src/types.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L37)
 
 Unique identifier for the message
 
@@ -33,7 +33,7 @@ Unique identifier for the message
 
 > `optional` **source**: `string`
 
-Defined in: [packages/core/src/types.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L43)
+Defined in: [packages/core/src/types.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L43)
 
 Source identifier for the message
 
@@ -43,7 +43,7 @@ Source identifier for the message
 
 > **timestamp**: `number`
 
-Defined in: [packages/core/src/types.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L41)
+Defined in: [packages/core/src/types.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L41)
 
 Timestamp when the message was created
 
@@ -53,6 +53,6 @@ Timestamp when the message was created
 
 > **type**: `"request"` \| `"response"` \| `"event"` \| `"handshake"`
 
-Defined in: [packages/core/src/types.ts:39](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L39)
+Defined in: [packages/core/src/types.ts:39](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L39)
 
 Message type ("request", "response", "event", or "handshake")

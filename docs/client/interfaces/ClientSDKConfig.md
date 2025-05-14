@@ -6,7 +6,7 @@
 
 # Interface: ClientSDKConfig
 
-Defined in: [client/src/types.ts:73](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/types.ts#L73)
+Defined in: [client/src/types.ts:73](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/types.ts#L73)
 
 ClientSDKConfig is the configuration used by the Client SDK.
 Instead of exposing a CoreSDK instance, users should provide the
@@ -22,7 +22,7 @@ configuration needed to initialize CoreSDK internally.
 
 > `optional` **events**: `object`
 
-Defined in: [client/src/types.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/types.ts#L79)
+Defined in: [client/src/types.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/types.ts#L79)
 
 Events that the SDK can listen for
 
@@ -60,7 +60,7 @@ Events that the SDK can listen for
 
 > `optional` **navbarItems**: [`NavbarItemsProps`](NavbarItemsProps.md)
 
-Defined in: [client/src/types.ts:83](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/types.ts#L83)
+Defined in: [client/src/types.ts:83](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/types.ts#L83)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [client/src/types.ts:83](https://github.com/Sitecore/sitecore-market
 
 > **selfOrigin**: `string`
 
-Defined in: [client/src/types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/types.ts#L77)
+Defined in: [client/src/types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/types.ts#L77)
 
 Our own origin – this defaults to the value of window.location.origin
 
@@ -96,7 +96,7 @@ The target window to communicate with (e.g., iframe.contentWindow)
 
 > **targetOrigin**: `string`
 
-Defined in: [client/src/types.ts:75](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/types.ts#L75)
+Defined in: [client/src/types.ts:75](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/types.ts#L75)
 
 The origin of the remote endpoint (e.g. client for the host, or host for the client)
 

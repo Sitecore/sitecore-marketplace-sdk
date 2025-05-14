@@ -6,7 +6,7 @@
 
 # Interface: QueryMap
 
-Defined in: [client/src/sdk-types.ts:191](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L191)
+Defined in: [client/src/sdk-types.ts:191](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L191)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [client/src/sdk-types.ts:191](https://github.com/Sitecore/sitecore-m
 
 > **context**: `object`
 
-Defined in: [client/src/sdk-types.ts:209](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L209)
+Defined in: [client/src/sdk-types.ts:209](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L209)
 
 #### params
 
@@ -34,7 +34,7 @@ Defined in: [client/src/sdk-types.ts:209](https://github.com/Sitecore/sitecore-m
 
 > **route**: `object`
 
-Defined in: [client/src/sdk-types.ts:214](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L214)
+Defined in: [client/src/sdk-types.ts:214](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L214)
 
 #### params
 
@@ -54,7 +54,7 @@ Defined in: [client/src/sdk-types.ts:214](https://github.com/Sitecore/sitecore-m
 
 > **state**: `object`
 
-Defined in: [client/src/sdk-types.ts:197](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L197)
+Defined in: [client/src/sdk-types.ts:197](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L197)
 
 #### params
 
@@ -74,7 +74,7 @@ Defined in: [client/src/sdk-types.ts:197](https://github.com/Sitecore/sitecore-m
 
 > **user**: `object`
 
-Defined in: [client/src/sdk-types.ts:192](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L192)
+Defined in: [client/src/sdk-types.ts:192](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L192)
 
 #### params
 
@@ -94,7 +94,7 @@ Defined in: [client/src/sdk-types.ts:192](https://github.com/Sitecore/sitecore-m
 
 > **context**: `object`
 
-Defined in: [client/src/sdk-types.ts:204](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L204)
+Defined in: [client/src/sdk-types.ts:204](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L204)
 
 #### params
 

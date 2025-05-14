@@ -6,7 +6,7 @@
 
 # Interface: BaseHostSchema
 
-Defined in: [packages/core/src/types.ts:147](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/core/src/types.ts#L147)
+Defined in: [packages/core/src/types.ts:147](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L147)
 
 ## Extended by
 
@@ -18,7 +18,7 @@ Defined in: [packages/core/src/types.ts:147](https://github.com/Sitecore/sitecor
 
 > **iframeMetadata**: [`IframeMetadata`](IframeMetadata.md)
 
-Defined in: [packages/core/src/types.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/core/src/types.ts#L149)
+Defined in: [packages/core/src/types.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L149)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/core/src/types.ts:149](https://github.com/Sitecore/sitecor
 
 > **methods**: `object`
 
-Defined in: [packages/core/src/types.ts:150](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/core/src/types.ts#L150)
+Defined in: [packages/core/src/types.ts:150](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L150)
 
 #### getUserInfo()
 
@@ -42,4 +42,4 @@ Defined in: [packages/core/src/types.ts:150](https://github.com/Sitecore/sitecor
 
 > **version**: `string`
 
-Defined in: [packages/core/src/types.ts:148](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/core/src/types.ts#L148)
+Defined in: [packages/core/src/types.ts:148](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/core/src/types.ts#L148)

@@ -6,7 +6,7 @@
 
 # Interface: SDKModule
 
-Defined in: [client/src/sdk-types.ts:233](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/client/src/sdk-types.ts#L233)
+Defined in: [client/src/sdk-types.ts:233](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L233)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [client/src/sdk-types.ts:233](https://github.com/Sitecore/sitecore-m
 
 > **invokeOperation**: (`operationName`, ...`args`) => `any`
 
-Defined in: [client/src/sdk-types.ts:235](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/client/src/sdk-types.ts#L235)
+Defined in: [client/src/sdk-types.ts:235](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L235)
 
 #### Parameters
 
@@ -33,4 +33,4 @@ Defined in: [client/src/sdk-types.ts:235](https://github.com/Sitecore/sitecore-m
 
 > **namespace**: `string`
 
-Defined in: [client/src/sdk-types.ts:234](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a90ac03b493793ea5a7d42ef9fc0d2eccdf4f1fb/packages/client/src/sdk-types.ts#L234)
+Defined in: [client/src/sdk-types.ts:234](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/688f537c0b6c422cf8b1a4f05e879f688e51e92b/packages/client/src/sdk-types.ts#L234)

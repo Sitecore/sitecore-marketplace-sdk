@@ -6,7 +6,7 @@
 
 # Interface: ApplicationMetadata
 
-Defined in: [client/src/sdk-types.ts:71](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L71)
+Defined in: [client/src/sdk-types.ts:71](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L71)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [client/src/sdk-types.ts:71](https://github.com/Sitecore/sitecore-ma
 
 > **appId**: `string`
 
-Defined in: [client/src/sdk-types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L77)
+Defined in: [client/src/sdk-types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L77)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [client/src/sdk-types.ts:77](https://github.com/Sitecore/sitecore-ma
 
 > **appType**: [`AppType`](../type-aliases/AppType.md)
 
-Defined in: [client/src/sdk-types.ts:78](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L78)
+Defined in: [client/src/sdk-types.ts:78](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L78)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [client/src/sdk-types.ts:78](https://github.com/Sitecore/sitecore-ma
 
 > **resources**: `object`[]
 
-Defined in: [client/src/sdk-types.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L72)
+Defined in: [client/src/sdk-types.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L72)
 
 #### contextId
 

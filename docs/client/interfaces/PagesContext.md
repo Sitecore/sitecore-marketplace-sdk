@@ -6,7 +6,7 @@
 
 # Interface: PagesContext
 
-Defined in: [client/src/sdk-types.ts:99](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L99)
+Defined in: [client/src/sdk-types.ts:99](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L99)
 
 ## Indexable
 
@@ -18,7 +18,7 @@ Defined in: [client/src/sdk-types.ts:99](https://github.com/Sitecore/sitecore-ma
 
 > `optional` **pageInfo**: `PagesContextPageInfo`
 
-Defined in: [client/src/sdk-types.ts:101](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L101)
+Defined in: [client/src/sdk-types.ts:101](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L101)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [client/src/sdk-types.ts:101](https://github.com/Sitecore/sitecore-m
 
 > `optional` **siteInfo**: [`PagesContextSiteInfo`](PagesContextSiteInfo.md)
 
-Defined in: [client/src/sdk-types.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/client/src/sdk-types.ts#L100)
+Defined in: [client/src/sdk-types.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/client/src/sdk-types.ts#L100)

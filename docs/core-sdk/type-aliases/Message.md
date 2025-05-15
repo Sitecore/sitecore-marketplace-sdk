@@ -8,6 +8,6 @@
 
 > **Message** = [`RequestMessage`](../interfaces/RequestMessage.md) \| [`ResponseMessage`](../interfaces/ResponseMessage.md) \| [`EventMessage`](../interfaces/EventMessage.md) \| [`HandshakeMessage`](../interfaces/HandshakeMessage.md)
 
-Defined in: [packages/core/src/types.ts:127](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L127)
+Defined in: [packages/core/src/types.ts:127](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/types.ts#L127)
 
 Union type of all possible message types.

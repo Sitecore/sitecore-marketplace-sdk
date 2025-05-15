@@ -6,7 +6,7 @@
 
 # Interface: AdditionalData
 
-Defined in: [packages/core/src/types.ts:168](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L168)
+Defined in: [packages/core/src/types.ts:168](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/types.ts#L168)
 
 ## Indexable
 
@@ -18,4 +18,4 @@ Defined in: [packages/core/src/types.ts:168](https://github.com/Sitecore/sitecor
 
 > **featureFlag**: `boolean`
 
-Defined in: [packages/core/src/types.ts:169](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/types.ts#L169)
+Defined in: [packages/core/src/types.ts:169](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/types.ts#L169)

@@ -6,7 +6,7 @@
 
 # Class: GenericResponseData
 
-Defined in: [packages/core/src/shared-types.ts:47](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L47)
+Defined in: [packages/core/src/shared-types.ts:47](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L47)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/shared-types.ts:47](https://github.com/Sitecore/s
 
 > **new GenericResponseData**(`status`, `statusText`, `headers`, `body`): `GenericResponseData`
 
-Defined in: [packages/core/src/shared-types.ts:53](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L53)
+Defined in: [packages/core/src/shared-types.ts:53](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L53)
 
 #### Parameters
 
@@ -35,7 +35,7 @@ Defined in: [packages/core/src/shared-types.ts:53](https://github.com/Sitecore/s
 
 > **body**: `ArrayBuffer`
 
-Defined in: [packages/core/src/shared-types.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L51)
+Defined in: [packages/core/src/shared-types.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L51)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [packages/core/src/shared-types.ts:51](https://github.com/Sitecore/s
 
 > **headers**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/core/src/shared-types.ts:50](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L50)
+Defined in: [packages/core/src/shared-types.ts:50](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L50)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [packages/core/src/shared-types.ts:50](https://github.com/Sitecore/s
 
 > **status**: `number`
 
-Defined in: [packages/core/src/shared-types.ts:48](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L48)
+Defined in: [packages/core/src/shared-types.ts:48](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L48)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [packages/core/src/shared-types.ts:48](https://github.com/Sitecore/s
 
 > **statusText**: `string`
 
-Defined in: [packages/core/src/shared-types.ts:49](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L49)
+Defined in: [packages/core/src/shared-types.ts:49](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L49)
 
 ## Methods
 
@@ -67,7 +67,7 @@ Defined in: [packages/core/src/shared-types.ts:49](https://github.com/Sitecore/s
 
 > **arrayBuffer**(): `Promise`\<`ArrayBuffer`\>
 
-Defined in: [packages/core/src/shared-types.ts:85](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L85)
+Defined in: [packages/core/src/shared-types.ts:85](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L85)
 
 Returns the body as an ArrayBuffer.
 
@@ -83,7 +83,7 @@ The raw binary data.
 
 > **blob**(): `Promise`\<`Blob`\>
 
-Defined in: [packages/core/src/shared-types.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L93)
+Defined in: [packages/core/src/shared-types.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L93)
 
 Returns the body as a Blob.
 
@@ -99,7 +99,7 @@ The Blob representation of the response body.
 
 > **json**(): `Promise`\<`any`\>
 
-Defined in: [packages/core/src/shared-types.ts:69](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L69)
+Defined in: [packages/core/src/shared-types.ts:69](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L69)
 
 Parses the body of the response as JSON.
 
@@ -115,7 +115,7 @@ The parsed JSON object.
 
 > **text**(): `Promise`\<`string`\>
 
-Defined in: [packages/core/src/shared-types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/6eefa0cb44bc75b48823aba6055436af2e57f6bd/packages/core/src/shared-types.ts#L77)
+Defined in: [packages/core/src/shared-types.ts:77](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/shared-types.ts#L77)
 
 Parses the body of the response as a string.
 

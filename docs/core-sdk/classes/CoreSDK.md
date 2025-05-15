@@ -6,7 +6,7 @@
 
 # Class: CoreSDK
 
-Defined in: [packages/core/src/index.ts:20](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L20)
+Defined in: [packages/core/src/index.ts:20](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L20)
 
 Core SDK for managing communication between host and client applications.
 Provides a high-level API for bidirectional communication through postMessage.
@@ -25,7 +25,7 @@ Features:
 
 > **new CoreSDK**(`config`): `CoreSDK`
 
-Defined in: [packages/core/src/index.ts:31](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L31)
+Defined in: [packages/core/src/index.ts:31](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L31)
 
 Creates a new instance of the Core SDK.
 
@@ -45,7 +45,7 @@ Creates a new instance of the Core SDK.
 
 > **connect**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/index.ts:66](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L66)
+Defined in: [packages/core/src/index.ts:66](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L66)
 
 Connects the SDK by performing the handshake with the other side.
 For the client, this sends the handshake init message.
@@ -67,7 +67,7 @@ If already initialized
 
 > **destroy**(): `void`
 
-Defined in: [packages/core/src/index.ts:130](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L130)
+Defined in: [packages/core/src/index.ts:130](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L130)
 
 Cleans up resources and removes event listeners.
 The SDK instance cannot be used after calling this method.
@@ -82,7 +82,7 @@ The SDK instance cannot be used after calling this method.
 
 > **emit**\<`T`\>(`event`, `payload`): `void`
 
-Defined in: [packages/core/src/index.ts:103](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L103)
+Defined in: [packages/core/src/index.ts:103](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L103)
 
 Emits an event to the other side.
 
@@ -113,7 +113,7 @@ If not initialized
 
 > **initialize**(`config`): `void`
 
-Defined in: [packages/core/src/index.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L43)
+Defined in: [packages/core/src/index.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L43)
 
 Initializes the SDK with basic configuration. This method sets up event listeners
 but doesn't perform the handshake yet. For the host, this allows listening for
@@ -139,7 +139,7 @@ If already initialized or handshake fails
 
 > **isConnected**(): `boolean`
 
-Defined in: [packages/core/src/index.ts:74](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L74)
+Defined in: [packages/core/src/index.ts:74](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L74)
 
 Checks if the SDK is connected.
 
@@ -155,7 +155,7 @@ True if connected, false otherwise
 
 > **isInListenerMode**(): `boolean`
 
-Defined in: [packages/core/src/index.ts:82](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L82)
+Defined in: [packages/core/src/index.ts:82](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L82)
 
 Checks if the SDK is in listener mode (no target set yet).
 
@@ -171,7 +171,7 @@ True if in listener mode, false otherwise
 
 > **on**\<`T`\>(`event`, `handler`): () => `void`
 
-Defined in: [packages/core/src/index.ts:113](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L113)
+Defined in: [packages/core/src/index.ts:113](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L113)
 
 Subscribes to events from the other side.
 
@@ -204,7 +204,7 @@ Function to unsubscribe from the event
 
 > **onRequest**\<`T`, `R`\>(`action`, `handler`): `void`
 
-Defined in: [packages/core/src/index.ts:122](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L122)
+Defined in: [packages/core/src/index.ts:122](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L122)
 
 Registers a request handler for incoming requests.
 
@@ -232,7 +232,7 @@ Registers a request handler for incoming requests.
 
 > **request**\<`T`, `R`\>(`action`, `payload?`): `Promise`\<`R`\>
 
-Defined in: [packages/core/src/index.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L93)
+Defined in: [packages/core/src/index.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L93)
 
 Sends a request to the other side and waits for a response.
 
@@ -266,7 +266,7 @@ If not initialized or request fails
 
 > **setTarget**(`target`): `void`
 
-Defined in: [packages/core/src/index.ts:54](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/4fddef1575854206bbf02ee3cfbdeb66bb2ec8a6/packages/core/src/index.ts#L54)
+Defined in: [packages/core/src/index.ts:54](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/index.ts#L54)
 
 Sets or updates the target window for communication.
 This is useful for host applications that need to establish the iframe

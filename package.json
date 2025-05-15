@@ -23,8 +23,7 @@
     "changeset": "changeset",
     "empty-changeset": "pnpm changeset --empty",
     "mkptool": "node scripts/mkptool/dist/index.js",
-    "generate:docs": "turbo run generate:docs",
-    "prepare": "husky"
+    "generate:docs": "turbo run generate:docs"
   },
   "author": {
     "name": "Sitecore Corporation"
@@ -33,7 +32,6 @@
   "description": "Marketplace SDK",
   "devDependencies": {
     "@changesets/cli": "2.29.2",
-    "husky": "^9.1.7",
     "jest-environment-jsdom": "^29.0.0",
     "turbo": "^2.5.0",
     "typedoc": "^0.28.1",

@@ -5,8 +5,8 @@ The `client` package provides secure, bidirectional communication between a Mark
 This package lets you make queries and perform mutations:
 - Queries support one-off data requests and subscriptions for live updates.
 - Mutations trigger state changes or HTTP requests in Sitecore.
-  > [!TIP]
-  > Inspired by React Query, the query/mutation API manages internal state, loading status, and error handling.
+> [!TIP]
+> Inspired by React Query, the query/mutation API manages internal state, loading status, and error handling.
 
 The `client` package is required for all Marketplace apps.
 

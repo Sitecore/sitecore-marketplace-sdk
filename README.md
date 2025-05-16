@@ -1,34 +1,53 @@
-# MKP SDK Communication System Monorepo
+# Sitecore Marketplace SDK
 
-This monorepo hosts the three main packages, client applications (running inside iframes), core SDK, and XMC module, which extend the functionality of the system. The project consists of:
+The open-source Sitecore Marketplace SDK lets JavaScript/TypeScript developers build apps that extend and customize Sitecore products. 
 
-- **Core SDK** – A lightweight, type-safe communication layer that uses the browser’s `postMessage` API to facilitate secure messaging between different window contexts. It handles low-level details such as secure handshakes, request/response patterns, event pub/sub, and origin validation. Consumed by Host SDK and Client SDK to abstract the communication layer.
-- **Client SDK** – This high-level SDK is designed to be used within client applications (typically in an iframe). Inspired by React Query, it offers a query/mutation API that manages internal state, loading status, and error handling while leveraging the Core SDK for communication.
-- **XMC Module** – A lightweight, type-safe extension that builds on top of the Client SDK to provide seamless integration with XMCloud APIs. It simplifies querying and mutating data related to Sitecore Marketplace.
+This mono-repository manages the following Marketplace SDK packages:
+- `core` – an internal package that sets up secure communication between a Marketplace application (the client) and Sitecore (the host), using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). For more information, refer to the package [README](packages/core/README.md).
+- `client` – required for all Marketplace applications. This package provides secure, bidirectional communication between the Marketplace app and Sitecore. It lets you make queries and perform mutations. Queries support one-off data requests and subscriptions for live updates. Mutations trigger state changes or HTTP requests in Sitecore. For more information, refer to the package [README](packages/client/README.md).
+- `xmc` – extends the Client SDK and provides type-safe interfaces for interacting with Sitecore XM Cloud APIs. For more information, refer to the package [README](packages/xmc/README.md).
 
-## Monorepo Structure
+The packages expose uniform, type-safe, and developer-friendly APIs to speed up your Marketplace app development work.
 
-The repository is organized as follows:
+## Getting started
+
+### Use the SDK in your app
+To use the Marketplace SDK in your app, start by installing the `client` package, which is required for all Marketplace apps:
+```bash
+npm install @sitecore-marketplace-sdk/client
+```
+If your app needs to interact with XM Cloud APIs, install the `xmc` package, as well:
+```bash
+npm install @sitecore-marketplace-sdk/xmc
+```
+
+Then, refer to the READMEs of the installed packages and the reference documentation in the `/docs` folder.
+
+
+### Contribute to the SDK 
+This section describes how to work with the monorepo so you can contribute to the SDK development.
+
+#### Monorepo structure
+
+The repository is structured as follows:
 
 ```
 /root
-├── package.json          // Root configuration, workspaces, and monorepo scripts
-├── lerna.json            // Lerna configuration for multi-package management
+├── package.json  // Root configuration, workspaces, and monorepo scripts
+├── lerna.json    // Lerna configuration for multi-package management
 ├── packages
-│     ├── core        // Core SDK (communication layer)
-│     ├── client      // Client SDK (client application integration)
-│     └── xmc         // XMC module (integration with XMCloud APIs)
-└── docs                  // Additional documentation and project guides
+│     ├── core    // Core SDK (communication layer)
+│     ├── client  // Client SDK (client application integration)
+│     └── xmc     // XMC module (integration with Sitecore XM Cloud APIs)
+└── docs          // Reference documentation and project guides
 ```
 
-## Getting Started
+#### Prerequisites
 
-### Prerequisites
+- Node.js 16 or later. Check your installed version by using the node --version command.
+- pnpm 10 or later. Check your installed version by using the pnpm --version command.
 
-- Node.js
-- pnpm
-
-### Installation
+#### Installation
 
 Install dependencies from the root:
 
@@ -38,67 +57,57 @@ pnpm install
 
 This installs all dependencies across the packages and sets up the workspaces.
 
-## Monorepo Commands
+#### Monorepo commands
 
-Below are the main monorepo commands defined in the root `package.json`:
+Here are the main monorepo commands defined in the root `package.json`:
 
-- **Build All Packages**  
-  Build every package (transpiling TypeScript, etc.):
+- **Build all packages**  
+  Build every package (for example, transpiling TypeScript):
 
   ```bash
   pnpm build
   ```
 
-- **Clean All Packages**  
-  Remove build artifacts (e.g., `dist` directories):
+- **Clean all packages**  
+  Remove build artifacts (such as the `dist` directories):
 
   ```bash
   pnpm clean
   ```
 
-- **Lint All Packages**  
+- **Lint all packages**  
   Run ESLint checks across all packages:
 
   ```bash
   pnpm lint
   ```
 
-- **Run All Tests**  
+- **Run all tests**  
   Execute test suites for each package:
 
   ```bash
   pnpm test:all
   ```
 
-- **Generate Client SDK Types - Under Development**  
+- **Generate Client SDK types - Under development**  
   Automatically generate static TypeScript types for the Client SDK based on the defined schema:
 
   ```bash
   pnpm generate:client
   ```
 
-## Working with Individual Packages
+#### Working with individual packages
 
-Each package lives under the `packages/` directory. For example, to work on the Core SDK:
+Each package is inside the `packages/` directory. For example, to work with the Core SDK:
 
 1. Navigate into the package folder:
    ```bash
    cd packages/core
    ```
-2. Use package-specific scripts (e.g., build, test, lint) as defined in its own `package.json`.
+2. Use package-specific scripts (e.g., `build`, `lint`, `test`) as defined in its own `package.json`.
+  
+## License 
+The Sitecore Marketplace SDK is licensed under the Apache 2.0 License. Refer to the [LICENSE](./LICENSE.md) file in the repository root.
 
-Repeat the same for the Client SDK and XMC module.
-
-## High-Level SDK Overview
-
-### Core SDK
-- **Purpose:** Acts as the backbone for secure communication. It abstracts all low-level postMessage handling and exposes a uniform, type-safe API.
-- **Key Features:** Secure handshake, request/response pattern, event pub/sub system, and origin validation.
-
-### Client SDK
-- **Purpose:** Provides client applications (typically running in an iframe) with a developer-friendly API to interact with the host application.
-- **Key Features:** Query/mutation API inspired by React Query, automatic state management (data, status, isLoading), and seamless integration with the Core SDK.
-
-### XMC Module
-- **Purpose:** Extends the Client SDK to provide direct access to XMCloud APIs for Sitecore Marketplace applications.
-- **Key Features:** Easy initialization, type-safe query/mutation system, and seamless integration with the Client SDK.
+## Status
+The Sitecore Marketplace SDK is actively maintained.

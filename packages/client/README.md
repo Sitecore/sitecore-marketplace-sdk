@@ -1,10 +1,19 @@
-# SITECORE MARKETPLACE CLIENT SDK
+# Sitecore Marketplace SDK - `client` package
 
-The Marketplace Client SDK provides a secure, bidirectional communication between a client 
-application (running inside an iframe) and the host application. Inspired by React Query, the SDK implements a query/mutation API where:
+The `client` package provides secure, bidirectional communication between a Marketplace application (the client) and Sitecore (the host). It loads the Marketplace app in Sitecore inside a sandboxed [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). The iframe and its parent window securely communicate using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
-- **Queries** support one-off data requests as well as subscriptions for live updates.
-- **Mutations** trigger state changes or HTTP requests on the host side (with user tokens attached by the Host SDK).
+This package lets you make queries and perform mutations:
+- Queries support one-off data requests and subscriptions for live updates.
+- Mutations trigger state changes or HTTP requests in Sitecore.
+  > [!TIP]
+  > Inspired by React Query, the query/mutation API manages internal state, loading status, and error handling.
+
+The `client` package is required for all Marketplace apps.
+
+## Prerequisites
+- Node.js 16 or later. Check your installed version by using the node --version command.
+- npm 10 or later. Check your installed version by using the npm --version command.
+- Access to the Sitecore Cloud Portal.
 
 ## Installation
 
@@ -14,31 +23,29 @@ npm install @sitecore-marketplace-sdk/client
 
 ## Initialization
 
-Before you use queries or mutations, you must initialize the Client SDK.
-
-Example initialization code:
+Before you use queries or mutations, you must initialize the Client SDK:
 
 ```typescript
 import { ClientSDK } from '@sitecore-marketplace-sdk/client';
 
-// Create a configuration object.
+// Create a configuration object:
 const config = {
-  origin: 'https://pages.sitecorecloud.io',
-  target: window.parent,
-  modules: []
+  origin: 'https://pages.sitecorecloud.io', // Where in Sitecore to display the app
+  target: window.parent, // To iframe the app
+  modules: [] // Extend Client SDK with other modules, such as `XMC`
 };
 
-// Create a Client SDK instance using the configuration.
-// The returned SDK provides a type-safe API based on your resource schema.
+// Create a Client SDK instance using the configuration. The returned SDK provides a type-safe API based on your resource schema:
 const client = await ClientSDK.init(config);
 ```
 
 ## Usage
 
-### Query Example
+### Make a query
 
-The `query` method supports one-off data requests and live subscriptions. The keys follow a dot-notated format derived from your
-static JSON schema (for example, `"application.context"`).
+Use the `query` method to make one-off data requests and live subscriptions. Pass a value to the method depending on the data you want to retrieve.
+
+For example, pass `'host.state'` to retrieve the status of the host application:
 
 ```typescript
 (async () => {
@@ -49,20 +56,18 @@ static JSON schema (for example, `"application.context"`).
   console.log(queryResult.isLoading); // false once the request is complete
 ```
 
-### Mutation Example
+For an overview of all the possible values, refer to the `QueryMap` interface in the `sdk-types.ts` file of the package.
 
-Use the `mutate` method to trigger changes on the host side. The Host SDK (integrated via the internal Core SDK) will attach the required
-user token and perform the HTTP request on behalf of the client application.
+### Perform a mutation
+
+Use the `mutate` method to trigger changes in Sitecore (the host). Pass a value to the method depending on the change you want to make. 
+
+For example, pass `'pages.reloadCanvas'` to reload the XM Cloud page builder canvas:
 
 ```typescript
 (async () => {
   try {
-    const mutationResponse = await client.mutate(
-      'host.state',
-      { params: {
-            newState: 'active'
-      }}
-    );
+    const mutationResponse = await client.mutate('pages.reloadCanvas');
     console.log('Mutation response:', mutationResponse);
   } catch (error) {
     console.error('Error during mutation:', error);
@@ -70,11 +75,14 @@ user token and perform the HTTP request on behalf of the client application.
 })();
 ```
 
-### Application Context
+For an overview of all the possible values, refer to the `MutationMap` interface in the `sdk-types.ts` file of the package.
 
-This application context provides information about the application, such as its ID, URL, name, type, icon URL, installation ID, and associated resources.
+> [!NOTE]
+> Behind the scenes, the Host SDK (integrated via the internal `core` package) attaches the required user token and performs the HTTP request on behalf of the Marketplace app (the client).
 
-Here is the ApplicationContext data example:
+### Query the application context
+
+The application context provides information about your Marketplace app, such as its ID, URL, name, type, icon URL, installation ID, and associated resources:
 
 ```javascript
 {
@@ -98,7 +106,7 @@ Here is the ApplicationContext data example:
 }
 ```
 
-To request the application context, you can use the query method with the key 'application.context'. This will return data of type ApplicationContext.
+To retrieve the application context, use the `query` method and pass `'application.context'` to it:
 
 ```typescript
 (async () => {
@@ -107,32 +115,12 @@ To request the application context, you can use the query method with the key 'a
 })();
 ```
 
-## Generated Types & Namespace Mapping
+## Documentation
 
-The Client SDK heavily relies on a generated static contract (based on a JSON schema such as `resources.schema.json`) that defines
-available resource namespaces and methods. For example, with a schema structured like:
+For more information, refer to the reference documentation in the `/docs` folder.
 
-```json
-{
-  "resources": {
-    "xmc": {
-      "publishing": {
-        "status": { "type": "query", ... },
-        "publish": { "type": "mutation", ... }
-      }
-    }
-  }
-}
-```
+## License 
+This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.md) file in the repository root.
 
-The generated client types provide a type-safe interface:
-
-- `xmc.publishing.status(params)` returns a `Promise<QueryResult<...>>`
-- `xmc.publishing.publish(params)` returns a `Promise<MutationResult<...>>`
-
-The keys passed to `query` and `mutate` are dot-notated (e.g., `"xmc.publishing.status"`), ensuring that they map directly
-to the generated methods and resource definitions.
-
-## Additional Information
-
-For more details, please refer to the full documentation in the `/docs` folder or the project documentation.
+## Status
+The `client` package is actively maintained as part of the Sitecore Marketplace SDK.

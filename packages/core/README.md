@@ -1,25 +1,22 @@
-# SITECORE MARKETPLACE CORE SDK
+# Sitecore Marketplace SDK - `core` package
 
-**Disclaimer: This package is not intended for direct use by developers. It is a core library that is used by other packages in the Sitecore Marketplace ecosystem.**
+`core` is an internal package used by other Sitecore Marketplace SDK packages. Developers typically do not need to directly interact with it.
 
-- **Core SDK** – A lightweight, type-safe communication layer that uses the browser’s `postMessage` API to facilitate
-  secure messaging between different window contexts. It handles low-level details such as secure handshakes,
-  request/response patterns, event pub/sub, and origin validation. Consumed by Host and Client modules to abstract the
-  communication layer
+The `core` package sets up secure communication between a Marketplace application and Sitecore, using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). It handles low-level details, such as:
+- secure handshake
+- request-response pattern
+- event publish-subscribe system
+- origin validation
 
-## Getting Started
+## Prerequisites
+- Node.js 16 or later. Check your installed version by using the node --version command.
+- npm 10 or later. Check your installed version by using the npm --version command.
 
-### Prerequisites
+## Installation
+`core` is automatically installed when you install other Marketplace SDK packages, such as `client`.
 
-- Node.js
-- npm
+## License 
+This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.md) file in the repository root.
 
-### Installation
-
-Install dependencies from the root:
-
-```bash
-npm install
-```
-
-This installs all dependencies across the packages and sets up the workspaces.
+## Status
+The `core` package is actively maintained as part of the Sitecore Marketplace SDK.

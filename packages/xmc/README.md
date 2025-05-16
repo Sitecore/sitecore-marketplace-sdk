@@ -7,8 +7,8 @@ The `xmc` package extends the Client SDK and provides type-safe interfaces for i
 -   [Experience Edge Admin API](https://doc.sitecore.com/xmc/en/developers/xm-cloud/experience-edge-for-xm-apis.html) - to administer your Edge tenant.
 
 ## Prerequisites
-- Node.js 16 or later. Check your installed version by using the node --version command.
-- npm 10 or later. Check your installed version by using the npm --version command.
+- Node.js 16 or later. Check your installed version by using the `node --version` command.
+- npm 10 or later. Check your installed version by using the `npm --version` command.
 - An XM Cloud subscription.
 
 ## Installation

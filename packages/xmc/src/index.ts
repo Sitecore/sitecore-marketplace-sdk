@@ -55,3 +55,5 @@ export const XMC: SDKModule = {
     return sdk[operationName](...args);
   },
 };
+
+export { QueryMap, MutationMap } from '@sitecore-marketplace-sdk/client';

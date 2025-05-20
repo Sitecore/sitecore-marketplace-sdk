@@ -8,4 +8,4 @@
 
 > **QueryKey** = keyof [`QueryMap`](../interfaces/QueryMap.md)
 
-Defined in: [client/src/sdk-types.ts:230](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/client/src/sdk-types.ts#L230)
+Defined in: [client/src/sdk-types.ts:230](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/sdk-types.ts#L230)

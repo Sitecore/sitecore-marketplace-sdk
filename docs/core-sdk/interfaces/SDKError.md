@@ -6,7 +6,7 @@
 
 # Interface: SDKError
 
-Defined in: [packages/core/src/errors.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/errors.ts#L41)
+Defined in: [packages/core/src/errors.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/errors.ts#L41)
 
 Interface for SDK errors that includes an error code and optional details.
 All errors thrown by the SDK will implement this interface.
@@ -33,7 +33,7 @@ Defined in: node\_modules/.pnpm/typescript@5.8.2/node\_modules/typescript/lib/li
 
 > **code**: [`ErrorCode`](../enumerations/ErrorCode.md)
 
-Defined in: [packages/core/src/errors.ts:42](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/errors.ts#L42)
+Defined in: [packages/core/src/errors.ts:42](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/errors.ts#L42)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [packages/core/src/errors.ts:42](https://github.com/Sitecore/sitecor
 
 > `optional` **details**: `unknown`
 
-Defined in: [packages/core/src/errors.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/errors.ts#L43)
+Defined in: [packages/core/src/errors.ts:43](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/errors.ts#L43)
 
 ***
 

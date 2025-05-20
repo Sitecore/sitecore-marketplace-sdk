@@ -6,7 +6,7 @@
 
 # Interface: MessageHandler
 
-Defined in: [packages/core/src/types.ts:129](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/types.ts#L129)
+Defined in: [packages/core/src/types.ts:129](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L129)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types.ts:129](https://github.com/Sitecore/sitecor
 
 > **onEvent**: (`message`) => `void`
 
-Defined in: [packages/core/src/types.ts:131](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/types.ts#L131)
+Defined in: [packages/core/src/types.ts:131](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L131)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [packages/core/src/types.ts:131](https://github.com/Sitecore/sitecor
 
 > **onRequest**: (`message`) => `Promise`\<`unknown`\>
 
-Defined in: [packages/core/src/types.ts:130](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/core/src/types.ts#L130)
+Defined in: [packages/core/src/types.ts:130](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L130)
 
 #### Parameters
 

@@ -8,4 +8,4 @@
 
 > `const` **XMC**: `SDKModule`
 
-Defined in: [index.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a15dca7cb666bfc995f5b0ffe9b11bcaff15c96c/packages/xmc/src/index.ts#L30)
+Defined in: [packages/xmc/src/index.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/index.ts#L30)

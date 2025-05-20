@@ -2,9 +2,37 @@ import type { Plugin } from '@hey-api/openapi-ts';
 import type { Config } from './types';
 import ts from 'typescript';
 
+const clientOptions = 'ClientOptions';
 export const handler: Plugin.Handler<Config> = ({ context, plugin }) => {
+  // type.gen file
+  const clientOptionName = plugin.typePrefix + clientOptions;
+  context.subscribe('after', () => {
+    const typeFile = context.files['types'];
+    // Find the clientOptions type by name
+    const clientOptionNode = typeFile['_items'].find(
+      (item) =>
+        item.name && (item.name.escapedText === clientOptions || item.name.text === clientOptions),
+    );
+    if (clientOptionNode) {
+      clientOptionNode.name.escapedText = clientOptionName;
+    } else {
+      throw new Error(`${clientOptions} node not found`);
+    }
+  });
+
   // client.gen file
   const file = context.files[plugin.output];
+
+  // Remove the old import
+  file['_imports'].get('./types.gen').delete(clientOptions);
+
+  // Add the new import
+  file.import({
+    asType: true,
+    module: './types.gen',
+    name: clientOptionName,
+    alias: clientOptions,
+  });
 
   file.import({
     module: '../client-sdk-fetch',

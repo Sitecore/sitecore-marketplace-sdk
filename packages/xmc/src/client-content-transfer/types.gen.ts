@@ -403,6 +403,6 @@ export type GetBlobStateResponses = {
 
 export type GetBlobStateResponse = GetBlobStateResponses[keyof GetBlobStateResponses];
 
-export type ClientOptions = {
+export type ContentTransferClientOptions = {
   baseUrl: 'https://example.com/authoring/transfer' | (string & {});
 };

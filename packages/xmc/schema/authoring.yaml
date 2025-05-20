@@ -9,7 +9,7 @@ paths:
     post:
       summary: Execute a GraphQL query or mutation
       description: Send a GraphQL query or mutation request to the Sitecore Authoring API. Both queries and mutations are supported.
-      operationId: graphql
+      operationId: authoringGraphql
       requestBody:
         required: true
         content:
@@ -37,14 +37,14 @@ paths:
                   type: object
                   additionalProperties: {}
                   description: Optional variables for the GraphQL query or mutation
-                  example: { "id": "12345" }
+                  example: { 'id': '12345' }
                 operationName:
                   type: string
                   nullable: true
                   description: Name of the operation if multiple operations are provided
-                  example: "UpdateItem"
+                  example: 'UpdateItem'
       responses:
-        "200":
+        '200':
           description: Successful GraphQL response
           content:
             application/json:
@@ -74,9 +74,9 @@ paths:
                           type: array
                           items:
                             type: string
-        "400":
+        '400':
           description: Bad request (e.g., syntax error in query)
-        "401":
+        '401':
           description: Unauthorized request (missing or invalid authentication)
-        "500":
+        '500':
           description: Internal server error

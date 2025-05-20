@@ -6,7 +6,7 @@
 
 # Interface: XmcPagesContextViewHostState
 
-Defined in: [client/src/sdk-types.ts:25](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/sdk-types.ts#L25)
+Defined in: [client/src/sdk-types.ts:25](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/sdk-types.ts#L25)
 
 ## Indexable
 
@@ -18,7 +18,7 @@ Defined in: [client/src/sdk-types.ts:25](https://github.com/Sitecore/sitecore-ma
 
 > `optional` **organizationId**: `string`
 
-Defined in: [client/src/sdk-types.ts:26](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/sdk-types.ts#L26)
+Defined in: [client/src/sdk-types.ts:26](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/sdk-types.ts#L26)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [client/src/sdk-types.ts:26](https://github.com/Sitecore/sitecore-ma
 
 > `optional` **userInfo**: [`XmcPagesContextViewUserInfo`](XmcPagesContextViewUserInfo.md)
 
-Defined in: [client/src/sdk-types.ts:28](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/sdk-types.ts#L28)
+Defined in: [client/src/sdk-types.ts:28](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/sdk-types.ts#L28)
 
 ***
 
@@ -34,4 +34,4 @@ Defined in: [client/src/sdk-types.ts:28](https://github.com/Sitecore/sitecore-ma
 
 > `optional` **xmCloudTenantInfo**: [`XmcPagesContextViewTenantInfo`](XmcPagesContextViewTenantInfo.md)
 
-Defined in: [client/src/sdk-types.ts:27](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/sdk-types.ts#L27)
+Defined in: [client/src/sdk-types.ts:27](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/sdk-types.ts#L27)

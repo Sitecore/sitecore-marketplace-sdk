@@ -6,7 +6,7 @@
 
 # Class: ClientSDK
 
-Defined in: [client/src/client.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L41)
+Defined in: [client/src/client.ts:41](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L41)
 
 ## Constructors
 
@@ -14,7 +14,7 @@ Defined in: [client/src/client.ts:41](https://github.com/Sitecore/sitecore-marke
 
 > **new ClientSDK**(`config`): `ClientSDK`
 
-Defined in: [client/src/client.ts:46](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L46)
+Defined in: [client/src/client.ts:46](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L46)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [client/src/client.ts:46](https://github.com/Sitecore/sitecore-marke
 
 > **destroy**(): `void`
 
-Defined in: [client/src/client.ts:445](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L445)
+Defined in: [client/src/client.ts:445](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L445)
 
 Cleans up all active subscriptions and resources.
 Call this when the SDK instance is no longer needed.
@@ -47,7 +47,7 @@ Call this when the SDK instance is no longer needed.
 
 > **emitRouteEvent**(`route`): `Promise`\<`void`\>
 
-Defined in: [client/src/client.ts:416](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L416)
+Defined in: [client/src/client.ts:416](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L416)
 
 Sends a route event to consumers without triggering navigation.
 This method broadcasts route information that can be received by listeners
@@ -77,7 +77,7 @@ await client.emitRouteEvent('/products/123');
 
 > **initialize**(): `Promise`\<`void`\>
 
-Defined in: [client/src/client.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L114)
+Defined in: [client/src/client.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L114)
 
 Initializes the client SDK by performing a handshake with the host application.
 Must be called after the client script loads (when running inside an iframe).
@@ -94,7 +94,7 @@ A Promise that resolves once the handshake is successfully completed.
 
 > **logout**(): `Promise`\<`void`\>
 
-Defined in: [client/src/client.ts:386](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L386)
+Defined in: [client/src/client.ts:386](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L386)
 
 #### Returns
 
@@ -106,7 +106,7 @@ Defined in: [client/src/client.ts:386](https://github.com/Sitecore/sitecore-mark
 
 > **mutate**\<`K`\>(`key`, `mutationOptions?`): `Promise`\<[`MutationMap`](../interfaces/MutationMap.md)\[`K`\]\[`"response"`\]\>
 
-Defined in: [client/src/client.ts:338](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L338)
+Defined in: [client/src/client.ts:338](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L338)
 
 Executes a mutation against the host application. Mutations trigger host-side state changes or HTTP requests.
 
@@ -144,7 +144,7 @@ const response = await client.mutate('host.update', {
 
 > **navigateToExternalUrl**(`url`, `newTab`): `Promise`\<`void`\>
 
-Defined in: [client/src/client.ts:394](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L394)
+Defined in: [client/src/client.ts:394](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L394)
 
 #### Parameters
 
@@ -163,7 +163,7 @@ Defined in: [client/src/client.ts:394](https://github.com/Sitecore/sitecore-mark
 
 > **openProfile**(): `Promise`\<`void`\>
 
-Defined in: [client/src/client.ts:390](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L390)
+Defined in: [client/src/client.ts:390](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L390)
 
 #### Returns
 
@@ -175,7 +175,7 @@ Defined in: [client/src/client.ts:390](https://github.com/Sitecore/sitecore-mark
 
 > **query**\<`K`\>(`key`, `queryOptions?`): `Promise`\<[`QueryResult`](../interfaces/QueryResult.md)\<`K`\>\>
 
-Defined in: [client/src/client.ts:218](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L218)
+Defined in: [client/src/client.ts:218](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L218)
 
 Executes a query against the host application. Queries can be one-off requests
 or subscriptions that receive live updates.
@@ -219,7 +219,7 @@ unsubscribe?.();
 
 > `static` **init**(`config`): `Promise`\<`ClientSDK`\>
 
-Defined in: [client/src/client.ts:73](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/client.ts#L73)
+Defined in: [client/src/client.ts:73](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/client.ts#L73)
 
 Creates and initializes a ClientSDK instance.
 

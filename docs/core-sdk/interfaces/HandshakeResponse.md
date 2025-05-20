@@ -6,7 +6,7 @@
 
 # Interface: HandshakeResponse
 
-Defined in: [packages/core/src/types.ts:134](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L134)
+Defined in: [packages/core/src/types.ts:134](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/core/src/types.ts#L134)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types.ts:134](https://github.com/Sitecore/sitecor
 
 > `optional` **error**: `Error`
 
-Defined in: [packages/core/src/types.ts:136](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L136)
+Defined in: [packages/core/src/types.ts:136](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/core/src/types.ts#L136)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types.ts:136](https://github.com/Sitecore/sitecor
 
 > `optional` **sessionId**: `string`
 
-Defined in: [packages/core/src/types.ts:137](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L137)
+Defined in: [packages/core/src/types.ts:137](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/core/src/types.ts#L137)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/types.ts:137](https://github.com/Sitecore/sitecor
 
 > **success**: `boolean`
 
-Defined in: [packages/core/src/types.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/core/src/types.ts#L135)
+Defined in: [packages/core/src/types.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/core/src/types.ts#L135)

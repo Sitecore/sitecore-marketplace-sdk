@@ -6,7 +6,7 @@
 
 # Interface: MutationOptions\<K\>
 
-Defined in: [client/src/types.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/types.ts#L65)
+Defined in: [client/src/types.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/types.ts#L65)
 
 ## Extends
 
@@ -24,7 +24,7 @@ Defined in: [client/src/types.ts:65](https://github.com/Sitecore/sitecore-market
 
 > `optional` **onError**: (`error`) => `void`
 
-Defined in: [client/src/types.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/types.ts#L58)
+Defined in: [client/src/types.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/types.ts#L58)
 
 Called when the mutation encounters an error
 
@@ -48,7 +48,7 @@ Called when the mutation encounters an error
 
 > `optional` **onSuccess**: (`data`) => `void`
 
-Defined in: [client/src/types.ts:56](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/types.ts#L56)
+Defined in: [client/src/types.ts:56](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/types.ts#L56)
 
 Called when the mutation successfully completes
 
@@ -72,7 +72,7 @@ Called when the mutation successfully completes
 
 > `optional` **params**: [`MutationMap`](MutationMap.md)\[`K`\]\[`"params"`\]
 
-Defined in: [client/src/types.ts:60](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/types.ts#L60)
+Defined in: [client/src/types.ts:60](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/types.ts#L60)
 
 Additional parameters for the mutation
 
@@ -86,7 +86,7 @@ Additional parameters for the mutation
 
 > `optional` **timeoutMs**: `number`
 
-Defined in: [client/src/types.ts:62](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/client/src/types.ts#L62)
+Defined in: [client/src/types.ts:62](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/client/src/types.ts#L62)
 
 Custom timeout in milliseconds
 

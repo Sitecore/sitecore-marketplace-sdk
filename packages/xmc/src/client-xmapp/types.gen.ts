@@ -3399,6 +3399,6 @@ export type RetrieveWorkflowStatisticsResponses = {
 export type RetrieveWorkflowStatisticsResponse =
   RetrieveWorkflowStatisticsResponses[keyof RetrieveWorkflowStatisticsResponses];
 
-export type ClientOptions = {
+export type XmappClientOptions = {
   baseUrl: 'https://example.com/authoring' | (string & {});
 };

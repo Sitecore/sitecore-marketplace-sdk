@@ -114,13 +114,13 @@ Defined in: packages/client/dist/sdk-types.d.ts:170
 
 > **consumeFile**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L23)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L23)
 
 Starts consuming a `.raif` file in the specified database.
 
 #### params
 
-> **params**: `Options`\<`ConsumeFileData`, `boolean`\>
+> **params**: `Options`\<[`ConsumeFileData`](../type-aliases/ConsumeFileData.md), `boolean`\>
 
 #### response
 
@@ -136,13 +136,13 @@ Starts consuming a `.raif` file in the specified database.
 
 > **getBlobState**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L30)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L30)
 
 Retrieves the status of a consumed `.raif` file.
 
 #### params
 
-> **params**: `Options`\<`GetBlobStateData`, `boolean`\>
+> **params**: `Options`\<[`GetBlobStateData`](../type-aliases/GetBlobStateData.md), `boolean`\>
 
 #### response
 
@@ -158,13 +158,13 @@ Retrieves the status of a consumed `.raif` file.
 
 > **getChunk**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L16)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L16)
 
 Retrieves the specified chunk from the specified chunk set in the Source environment.
 
 #### params
 
-> **params**: `Options`\<`GetChunkData`, `boolean`\>
+> **params**: `Options`\<[`GetChunkData`](../type-aliases/GetChunkData.md), `boolean`\>
 
 #### response
 
@@ -180,13 +180,13 @@ Retrieves the specified chunk from the specified chunk set in the Source environ
 
 > **getContentTransferStatus**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L9)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L9)
 
 Gets the status of the created content transfer by transfer ID.
 
 #### params
 
-> **params**: `Options`\<`GetContentTransferStatusData`, `boolean`\>
+> **params**: `Options`\<[`GetContentTransferStatusData`](../type-aliases/GetContentTransferStatusData.md), `boolean`\>
 
 #### response
 
@@ -202,17 +202,17 @@ Gets the status of the created content transfer by transfer ID.
 
 > **getFavoriteSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L51)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L51)
 
 Fetches a list of your favorite sites
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`GetFavoriteSitesData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`GetFavoriteSitesData`](../type-aliases/GetFavoriteSitesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Site`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Site`](../type-aliases/Site.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -224,13 +224,13 @@ Fetches a list of your favorite sites
 
 > **getLivePageState**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L30)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L30)
 
 Checks if the requested page is active.
 
 #### params
 
-> **params**: `Options`\<`GetLivePageStateData`, `boolean`\>
+> **params**: `Options`\<[`GetLivePageStateData`](../type-aliases/GetLivePageStateData.md), `boolean`\>
 
 #### response
 
@@ -246,17 +246,17 @@ Checks if the requested page is active.
 
 > **getRenderingHosts**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L142)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L142)
 
 Fetches a list of rendering hosts for a site.
 
 #### params
 
-> **params**: `Options`\<`GetRenderingHostsData`, `boolean`\>
+> **params**: `Options`\<[`GetRenderingHostsData`](../type-aliases/GetRenderingHostsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `RenderingHost`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: RenderingHost\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`RenderingHost`](../type-aliases/RenderingHost.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: RenderingHost\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -268,17 +268,17 @@ Fetches a list of rendering hosts for a site.
 
 > **listCollections**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L37)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L37)
 
 Fetches the list of site collections in the environment, with associated details.
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListCollectionsData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListCollectionsData`](../type-aliases/ListCollectionsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `SiteCollection`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteCollection\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`SiteCollection`](../type-aliases/SiteCollection.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteCollection\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -290,17 +290,17 @@ Fetches the list of site collections in the environment, with associated details
 
 > **listCollectionSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L93)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L93)
 
 Fetches a list of sites in a site collection.
 
 #### params
 
-> **params**: `Options`\<`ListCollectionSitesData`, `boolean`\>
+> **params**: `Options`\<[`ListCollectionSitesData`](../type-aliases/ListCollectionSitesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Site`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Site`](../type-aliases/Site.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -312,17 +312,17 @@ Fetches a list of sites in a site collection.
 
 > **listHosts**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:128](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L128)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:128](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L128)
 
 Retrieves the list of hosts for a site.
 
 #### params
 
-> **params**: `Options`\<`ListHostsData`, `boolean`\>
+> **params**: `Options`\<[`ListHostsData`](../type-aliases/ListHostsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Host`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Host\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Host`](../type-aliases/Host.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Host\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -334,17 +334,17 @@ Retrieves the list of hosts for a site.
 
 > **listJobs**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L58)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L58)
 
 Fetches information about background jobs. Returns empty array if no jobs are running.
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListJobsData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListJobsData`](../type-aliases/ListJobsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Job`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Job\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Job`](../type-aliases/Job.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Job\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -356,17 +356,17 @@ Fetches information about background jobs. Returns empty array if no jobs are ru
 
 > **listLanguages**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L9)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L9)
 
 Retrieves the list of languages added to the environment.
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListLanguagesData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListLanguagesData`](../type-aliases/ListLanguagesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Language`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: Language\[\]; error: undefined; \} \| \{ data: undefined; error: ProblemDetails; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Language`](../type-aliases/Language.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: Language\[\]; error: undefined; \} \| \{ data: undefined; error: ProblemDetails; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -378,17 +378,17 @@ Retrieves the list of languages added to the environment.
 
 > **listPageAncestors**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L114)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L114)
 
 Fetches information about the ancestors of a page.
 
 #### params
 
-> **params**: `Options`\<`ListPageAncestorsData`, `boolean`\>
+> **params**: `Options`\<[`ListPageAncestorsData`](../type-aliases/ListPageAncestorsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `PageResponse`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageResponse\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`PageResponse`](../type-aliases/PageResponse.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageResponse\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -400,17 +400,17 @@ Fetches information about the ancestors of a page.
 
 > **listPageChildren**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:121](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L121)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:121](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L121)
 
 Fetches information about the children of a page.
 
 #### params
 
-> **params**: `Options`\<`ListPageChildrenData`, `boolean`\>
+> **params**: `Options`\<[`ListPageChildrenData`](../type-aliases/ListPageChildrenData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `PageResponse`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageResponse\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`PageResponse`](../type-aliases/PageResponse.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageResponse\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -422,13 +422,13 @@ Fetches information about the children of a page.
 
 > **listPageVariants**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L23)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L23)
 
 Fetches the identifiers of currently active personalization variants for a page.
 
 #### params
 
-> **params**: `Options`\<`ListPageVariantsData`, `boolean`\>
+> **params**: `Options`\<[`ListPageVariantsData`](../type-aliases/ListPageVariantsData.md), `boolean`\>
 
 #### response
 
@@ -444,17 +444,17 @@ Fetches the identifiers of currently active personalization variants for a page.
 
 > **listSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L72)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L72)
 
 Fetches the list of sites in the environment, with associated details.
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListSitesData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListSitesData`](../type-aliases/ListSitesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Site`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Site`](../type-aliases/Site.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -466,17 +466,17 @@ Fetches the list of sites in the environment, with associated details.
 
 > **listSiteTemplates**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L149)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L149)
 
 Gets the site templates available in the environment that can be used for creating sites. Learn more about [site templates](https://doc.sitecore.com/xmc/en/developers/xm-cloud/create-a-site-template-for-the-xm-cloud-dashboard.html).
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListSiteTemplatesData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListSiteTemplatesData`](../type-aliases/ListSiteTemplatesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `SiteTemplate`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteTemplate\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`SiteTemplate`](../type-aliases/SiteTemplate.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteTemplate\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -488,17 +488,17 @@ Gets the site templates available in the environment that can be used for creati
 
 > **listSupportedLanguages**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L16)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L16)
 
 Retrieves the list of languages supported by Sitecore XM Cloud, and associated data.
 
 #### params
 
-> **params**: `undefined` \| `Options`\<`ListSupportedLanguagesData`, `boolean`\>
+> **params**: `undefined` \| `Options`\<[`ListSupportedLanguagesData`](../type-aliases/ListSupportedLanguagesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `SupportedLanguage`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SupportedLanguage\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`SupportedLanguage`](../type-aliases/SupportedLanguage.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SupportedLanguage\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -510,17 +510,17 @@ Retrieves the list of languages supported by Sitecore XM Cloud, and associated d
 
 > **listTrackedSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:86](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L86)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:86](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L86)
 
 Fetches a list of sites that use an [analytics identifier](https://doc.sitecore.com/xmc/en/users/xm-cloud/manage-personalization-and-analytics-for-sites.html).
 
 #### params
 
-> **params**: `Options`\<`ListTrackedSitesData`, `boolean`\>
+> **params**: `Options`\<[`ListTrackedSitesData`](../type-aliases/ListTrackedSitesData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Site`[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Site`](../type-aliases/Site.md)[]; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site\[\]; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -532,17 +532,17 @@ Fetches a list of sites that use an [analytics identifier](https://doc.sitecore.
 
 > **retrieveCollection**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:44](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L44)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:44](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L44)
 
 Fetches information about a site collection.
 
 #### params
 
-> **params**: `Options`\<`RetrieveCollectionData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveCollectionData`](../type-aliases/RetrieveCollectionData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `SiteCollection`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteCollection; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`SiteCollection`](../type-aliases/SiteCollection.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SiteCollection; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -554,17 +554,17 @@ Fetches information about a site collection.
 
 > **retrieveHost**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L135)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L135)
 
 Fetches details about a site host.
 
 #### params
 
-> **params**: `Options`\<`RetrieveHostData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveHostData`](../type-aliases/RetrieveHostData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Host`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Host; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Host`](../type-aliases/Host.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Host; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -576,17 +576,17 @@ Fetches details about a site host.
 
 > **retrieveJob**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L65)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L65)
 
 Fetches information about a background job.
 
 #### params
 
-> **params**: `Options`\<`RetrieveJobData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveJobData`](../type-aliases/RetrieveJobData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Job`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Job; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Job`](../type-aliases/Job.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Job; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -598,17 +598,17 @@ Fetches information about a background job.
 
 > **retrieveLocalizationStatistics**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L156)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L156)
 
 Fetches localization statistics for a site, including the number of pages in each locale.
 
 #### params
 
-> **params**: `Options`\<`RetrieveLocalizationStatisticsData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveLocalizationStatisticsData`](../type-aliases/RetrieveLocalizationStatisticsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `LocalizationStatistics`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: LocalizationStatistics; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`LocalizationStatistics`](../type-aliases/LocalizationStatistics.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: LocalizationStatistics; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -620,17 +620,17 @@ Fetches localization statistics for a site, including the number of pages in eac
 
 > **retrievePageHierarchy**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:107](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L107)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:107](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L107)
 
 Fetches hierarchy information about a page, including its children, ancestors, and siblings.
 
 #### params
 
-> **params**: `Options`\<`RetrievePageHierarchyData`, `boolean`\>
+> **params**: `Options`\<[`RetrievePageHierarchyData`](../type-aliases/RetrievePageHierarchyData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `PageHierarchy`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageHierarchy; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`PageHierarchy`](../type-aliases/PageHierarchy.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageHierarchy; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -642,17 +642,17 @@ Fetches hierarchy information about a page, including its children, ancestors, a
 
 > **retrieveSite**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L79)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L79)
 
 Fetches information about a site.
 
 #### params
 
-> **params**: `Options`\<`RetrieveSiteData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveSiteData`](../type-aliases/RetrieveSiteData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `Site`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`Site`](../type-aliases/Site.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: Site; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -664,17 +664,17 @@ Fetches information about a site.
 
 > **retrieveSiteHierarchy**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L100)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L100)
 
 Fetches hierarchy information about the main page of a site, including its children, ancestors, and siblings.
 
 #### params
 
-> **params**: `Options`\<`RetrieveSiteHierarchyData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveSiteHierarchyData`](../type-aliases/RetrieveSiteHierarchyData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `PageHierarchy`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageHierarchy; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`PageHierarchy`](../type-aliases/PageHierarchy.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: PageHierarchy; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -686,17 +686,17 @@ Fetches hierarchy information about the main page of a site, including its child
 
 > **retrieveSitemapConfiguration**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:163](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L163)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:163](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L163)
 
 Fetches a [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configure-a-sitemap.html) configuration.
 
 #### params
 
-> **params**: `Options`\<`RetrieveSitemapConfigurationData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveSitemapConfigurationData`](../type-aliases/RetrieveSitemapConfigurationData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `SitemapConfiguration`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SitemapConfiguration; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`SitemapConfiguration`](../type-aliases/SitemapConfiguration.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: SitemapConfiguration; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 
@@ -708,17 +708,17 @@ Fetches a [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configur
 
 > **retrieveWorkflowStatistics**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:170](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/52ce51a9eb68c659f71f11d434c89a18a730796e/packages/xmc/src/client-xmapp/augmentation.gen.ts#L170)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:170](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/af886e6134b8d1079ef5b8ef70b7eb2f1d9c8aeb/packages/xmc/src/client-xmapp/augmentation.gen.ts#L170)
 
 Fetches the workflows defined for a site, their states, and the number of pages in each state.
 
 #### params
 
-> **params**: `Options`\<`RetrieveWorkflowStatisticsData`, `boolean`\>
+> **params**: `Options`\<[`RetrieveWorkflowStatisticsData`](../type-aliases/RetrieveWorkflowStatisticsData.md), `boolean`\>
 
 #### response
 
-> **response**: \{ `data`: `WorkflowsStatistics`; `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: WorkflowsStatistics; error: undefined; \}) & \{ request: Request; response: Response; \}
+> **response**: \{ `data`: [`WorkflowsStatistics`](../type-aliases/WorkflowsStatistics.md); `request`: `Request`; `response`: `Response`; \} \| (\{ data: undefined; error: ProblemDetails; \} \| \{ data: WorkflowsStatistics; error: undefined; \}) & \{ request: Request; response: Response; \}
 
 #### subscribe
 

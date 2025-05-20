@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "scripts/mkptool"
+    "packages/*"
   ],
   "scripts": {
     "test": "turbo run test",
@@ -22,7 +21,6 @@
     "postinstall": "pnpm build:serial",
     "changeset": "changeset",
     "empty-changeset": "pnpm changeset --empty",
-    "mkptool": "node scripts/mkptool/dist/index.js",
     "generate:docs": "turbo run generate:docs"
   },
   "author": {

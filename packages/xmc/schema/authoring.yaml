@@ -9,7 +9,7 @@ paths:
     post:
       summary: Execute a GraphQL query or mutation
       description: Send a GraphQL query or mutation request to the Sitecore Authoring API. Both queries and mutations are supported.
-      operationId: authoringGraphql
+      operationId: graphql
       requestBody:
         required: true
         content:

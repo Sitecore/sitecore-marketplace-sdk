@@ -9,7 +9,7 @@ paths:
     post:
       summary: Execute a GraphQL query
       description: Send a GraphQL query request to the Sitecore GraphQL API. Mutations are not supported by the Preview API and Delivery API.
-      operationId: contentGraphql
+      operationId: graphql
       requestBody:
         required: true
         content:

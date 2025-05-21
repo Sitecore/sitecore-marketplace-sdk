@@ -10,9 +10,9 @@ declare module '@sitecore-marketplace-sdk/client' {
   interface MutationMap {
     /**
      * Send a GraphQL query or mutation request to the Sitecore Authoring API. Both queries and mutations are supported.*/
-    'xmc.authoring.authoringGraphql': {
-      params: Parameters<typeof sdk.authoringGraphql>[0];
-      response: Awaited<ReturnType<typeof sdk.authoringGraphql>>;
+    'xmc.authoring.graphql': {
+      params: Parameters<typeof sdk.graphql>[0];
+      response: Awaited<ReturnType<typeof sdk.graphql>>;
     };
   }
 }

@@ -64,6 +64,6 @@ export type GraphqlResponses = {
 
 export type GraphqlResponse = GraphqlResponses[keyof GraphqlResponses];
 
-export type ClientOptions = {
+export type AuthoringClientOptions = {
   baseUrl: 'https://example.com/v1/authoring' | (string & {});
 };

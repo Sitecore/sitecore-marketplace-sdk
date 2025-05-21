@@ -20,11 +20,10 @@ createClient({
       name: '@hey-api/typescript',
     },
     defineAugmentationConfig({
-      name: '@sitecore-marketplace/augmentation',
       namespaces: ['xmc.xmapp'],
     }),
     defineClientTransformerConfig({
-      name: '@sitecore-marketplace/client-transformer',
+      typePrefix: 'Xmapp',
     }),
   ],
 });
@@ -46,11 +45,10 @@ createClient({
       name: '@hey-api/typescript',
     },
     defineAugmentationConfig({
-      name: '@sitecore-marketplace/augmentation',
       namespaces: ['xmc.authoring'],
     }),
     defineClientTransformerConfig({
-      name: '@sitecore-marketplace/client-transformer',
+      typePrefix: 'Authoring',
     }),
   ],
 });
@@ -72,11 +70,10 @@ createClient({
       name: '@hey-api/typescript',
     },
     defineAugmentationConfig({
-      name: '@sitecore-marketplace/augmentation',
       namespaces: ['xmc.contentTransfer'],
     }),
     defineClientTransformerConfig({
-      name: '@sitecore-marketplace/client-transformer',
+      typePrefix: 'ContentTransfer',
     }),
   ],
 });
@@ -98,11 +95,10 @@ createClient({
       name: '@hey-api/typescript',
     },
     defineAugmentationConfig({
-      name: '@sitecore-marketplace/augmentation',
       namespaces: ['xmc.preview', 'xmc.live'],
     }),
     defineClientTransformerConfig({
-      name: '@sitecore-marketplace/client-transformer',
+      typePrefix: 'Content',
     }),
   ],
 });

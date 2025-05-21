@@ -64,6 +64,6 @@ export type GraphqlResponses = {
 
 export type GraphqlResponse = GraphqlResponses[keyof GraphqlResponses];
 
-export type ClientOptions = {
+export type ContentClientOptions = {
   baseUrl: 'https://example.com/content/api' | (string & {});
 };

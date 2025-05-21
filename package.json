@@ -20,7 +20,8 @@
     "pack:all": "turbo exec -- pnpm pack",
     "postinstall": "pnpm build:serial",
     "changeset": "changeset",
-    "empty-changeset": "pnpm changeset --empty"
+    "empty-changeset": "pnpm changeset --empty",
+    "generate:docs": "turbo run generate:docs"
   },
   "author": {
     "name": "Sitecore Corporation"
@@ -31,6 +32,8 @@
     "@changesets/cli": "2.29.2",
     "jest-environment-jsdom": "^29.0.0",
     "turbo": "^2.5.0",
+    "typedoc": "^0.28.1",
+    "typedoc-plugin-markdown": "^4.6.0",
     "typescript": "^5.0.0"
   },
   "pnpm": {

@@ -9,10 +9,10 @@ import * as xmapp from './client-xmapp/sdk.gen';
 // export * from './client-authoring/types.gen';
 export * from './client-authoring/augmentation.gen';
 
-// export * from './client-content/types.gen';
+//export * from './client-content/types.gen';
 export * from './client-content/augmentation.gen';
 
-// export *  from './client-content-transfer/types.gen';
+// export * from './client-content-transfer/types.gen';
 export * from './client-content-transfer/augmentation.gen';
 
 // export * from './client-xmapp/types.gen';
@@ -55,3 +55,5 @@ export const XMC: SDKModule = {
     return sdk[operationName](...args);
   },
 };
+
+export { QueryMap, MutationMap } from '@sitecore-marketplace-sdk/client';

@@ -9,4 +9,10 @@ export interface Config {
    * @default 'client'
    */
   output?: string;
+  /**
+   * Type prefix.
+   *
+   * @default false
+   */
+  typePrefix: string;
 }

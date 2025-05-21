@@ -9,8 +9,8 @@ The `core` package sets up secure communication between a Marketplace applicatio
 - origin validation
 
 ## Prerequisites
-- Node.js 16 or later. Check your installed version by using the node --version command.
-- npm 10 or later. Check your installed version by using the npm --version command.
+- Node.js 16 or later. Check your installed version by using the `node --version` command.
+- npm 10 or later. Check your installed version by using the `npm --version` command.
 
 ## Installation
 `core` is automatically installed when you install other Marketplace SDK packages, such as `client`.

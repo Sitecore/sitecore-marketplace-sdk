@@ -11,8 +11,8 @@ This package lets you make queries and perform mutations:
 The `client` package is required for all Marketplace apps.
 
 ## Prerequisites
-- Node.js 16 or later. Check your installed version by using the node --version command.
-- npm 10 or later. Check your installed version by using the npm --version command.
+- Node.js 16 or later. Check your installed version by using the `node --version` command.
+- npm 10 or later. Check your installed version by using the `npm --version` command.
 - Access to the Sitecore Cloud Portal.
 
 ## Installation

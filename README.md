@@ -16,7 +16,7 @@ To use the Marketplace SDK in your app, start by installing the `client` package
 ```bash
 npm install @sitecore-marketplace-sdk/client
 ```
-If your app needs to interact with XM Cloud APIs, install the `xmc` package, as well:
+If your app needs to interact with XM Cloud APIs, you also need to install the `xmc` package:
 ```bash
 npm install @sitecore-marketplace-sdk/xmc
 ```
@@ -44,8 +44,8 @@ The repository is structured as follows:
 
 #### Prerequisites
 
-- Node.js 16 or later. Check your installed version by using the node --version command.
-- pnpm 10 or later. Check your installed version by using the pnpm --version command.
+- Node.js 16 or later. Check your installed version by using the `node --version` command.
+- pnpm 10 or later. Check your installed version by using the `pnpm --version` command.
 
 #### Installation
 

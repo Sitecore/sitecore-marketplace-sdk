@@ -44,7 +44,7 @@ const sites = await client.query('xmc.xmapp.listSites')
 console.log(sites.data); // Displays the list of sites
 ```
 
-For an overview of all the possible values, refer to the `QueryMap` interfaces in the `augmentation.gen.ts` files of the package.
+For an overview of all the possible values, refer to the [`QueryMap` interface](../../docs/xmc/interfaces/QueryMap.md).
 
 ### Perform a mutation
 Use the `mutate` method to trigger changes in Sitecore (the host). Pass a value to the method depending on the change you want to make.
@@ -60,7 +60,7 @@ const mutationResult = await client.mutate('xmc.xmapp.updateSite', {
 console.log(mutationResult.data); // Displays the updated host state data
 ```
 
-For an overview of all the possible values, refer to the `MutationMap` interfaces in the `augmentation.gen.ts` files of the package.
+For an overview of all the possible values, refer to the [`MutationMap` interface](../../docs/xmc/interfaces/MutationMap.md).
 
 > [!NOTE]
 > Behind the scenes, the Host SDK (integrated via the internal `core` package) attaches the required user token and performs the HTTP request on behalf of the Marketplace app (the client).

@@ -6,7 +6,7 @@ This package lets you make queries and perform mutations:
 - Queries support one-off data requests and subscriptions for live updates.
 - Mutations trigger state changes or HTTP requests in Sitecore.
   > [!TIP]
-  > Inspired by React Query, the query/mutation API manages internal state, loading status, and error handling.
+  > Inspired by GraphQL and React Query, the query/mutation API manages internal state, loading status, and error handling.
 
 The `client` package is required for all Marketplace apps.
 
@@ -56,7 +56,7 @@ For example, pass `'host.state'` to retrieve the status of the host application:
   console.log(queryResult.isLoading); // false once the request is complete
 ```
 
-For an overview of all the possible values, refer to the `QueryMap` interface in the `sdk-types.ts` file of the package.
+For an overview of all the possible values, refer to the [`QueryMap` interface](../../docs/client/interfaces/QueryMap.md).
 
 ### Perform a mutation
 
@@ -75,7 +75,7 @@ For example, pass `'pages.reloadCanvas'` to reload the XM Cloud page builder can
 })();
 ```
 
-For an overview of all the possible values, refer to the `MutationMap` interface in the `sdk-types.ts` file of the package.
+For an overview of all the possible values, refer to the [`MutationMap` interface](../../docs/client/interfaces/MutationMap.md).
 
 > [!NOTE]
 > Behind the scenes, the Host SDK (integrated via the internal `core` package) attaches the required user token and performs the HTTP request on behalf of the Marketplace app (the client).

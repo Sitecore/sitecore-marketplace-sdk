@@ -19,6 +19,9 @@ jobs:
         run: npm i -g pnpm
       - name: Install dependencies
         run: pnpm i
+      - name: Log PR Title
+        run: |
+          echo "PR Title: ${{ github.event.pull_request.title }}"
       - name: Ensure changesets included
         if: ${{ !(github.event.pull_request.title && contains(github.event.pull_request.title, 'Version Packages')) }}
         run: pnpm changeset status --since=origin/main

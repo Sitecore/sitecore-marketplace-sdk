@@ -1,0 +1,21 @@
+[**@sitecore-marketplace-sdk/xmc**](../README.md)
+
+***
+
+[@sitecore-marketplace-sdk/xmc](../README.md) / ValidateSiteNameResponses
+
+# Type Alias: ValidateSiteNameResponses
+
+> **ValidateSiteNameResponses** = `object`
+
+Defined in: [packages/xmc/src/client-xmapp/types.gen.ts:2591](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/e87783cce9f115393973a45e109d17b99bf1df7e/packages/xmc/src/client-xmapp/types.gen.ts#L2591)
+
+## Properties
+
+### 200
+
+> **200**: [`NameValidationResult`](NameValidationResult.md)
+
+Defined in: [packages/xmc/src/client-xmapp/types.gen.ts:2595](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/e87783cce9f115393973a45e109d17b99bf1df7e/packages/xmc/src/client-xmapp/types.gen.ts#L2595)
+
+Returns a NameValidationResult indicating the validation result.

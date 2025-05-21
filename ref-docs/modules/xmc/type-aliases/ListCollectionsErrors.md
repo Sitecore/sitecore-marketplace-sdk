@@ -1,0 +1,21 @@
+[**@sitecore-marketplace-sdk/xmc**](../README.md)
+
+***
+
+[@sitecore-marketplace-sdk/xmc](../README.md) / ListCollectionsErrors
+
+# Type Alias: ListCollectionsErrors
+
+> **ListCollectionsErrors** = `object`
+
+Defined in: [packages/xmc/src/client-xmapp/types.gen.ts:1658](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/e87783cce9f115393973a45e109d17b99bf1df7e/packages/xmc/src/client-xmapp/types.gen.ts#L1658)
+
+## Properties
+
+### 400
+
+> **400**: [`ProblemDetails`](ProblemDetails.md)
+
+Defined in: [packages/xmc/src/client-xmapp/types.gen.ts:1662](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/e87783cce9f115393973a45e109d17b99bf1df7e/packages/xmc/src/client-xmapp/types.gen.ts#L1662)
+
+Bad Request

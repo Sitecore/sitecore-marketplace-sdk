@@ -16,7 +16,7 @@
     "prepare": "npm run build",
     "generate:module": "tsx generate-xmc.ts",
     "coverage": "vitest --coverage",
-    "generate:docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../docs/modules/xmc src/index.ts --githubPages false"
+    "generate:docs": "npx typedoc --plugin typedoc-plugin-markdown --outputFileStrategy Members --parametersFormat table --readme none --out ../../ref-docs/modules/xmc src/index.ts --githubPages false"
   },
   "author": {
     "name": "Sitecore Corporation"

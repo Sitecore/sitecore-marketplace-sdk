@@ -24,7 +24,7 @@
     },
     "generate:docs": {
       "cache": false,
-      "dependsOn": ["generate:module", "build"],
+      "dependsOn": [],
       "outputs": []
     }
   }

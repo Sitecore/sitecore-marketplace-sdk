@@ -40,7 +40,7 @@ Thank you for your interest in contributing! We welcome contributions from the c
 ## Code of Conduct
 
 - Be respectful and inclusive.
-- Follow the [Sitecore Code of Conduct](https://github.com/Sitecore/.github/blob/main/CODE_OF_CONDUCT.md).
+- This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Questions?
 

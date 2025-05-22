@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing! We welcome contributions from the community to help improve this project.
 
-## How to Contribute
+## How to contribute
 
 1. **Fork the repository** and create your branch from `main`.
 2. **Install dependencies** using `pnpm install`.
@@ -10,7 +10,7 @@ Thank you for your interest in contributing! We welcome contributions from the c
 4. **Write and run tests** to ensure your changes are correct.
 5. **Submit a pull request** with a clear description of your changes.
 
-## Code Style
+## Code style
 
 - Follow the existing code style and conventions.
 - Use TypeScript for all new code.

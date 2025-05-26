@@ -6,6 +6,7 @@ This package lets you:
 - Make queries. Queries support one-off data requests and subscriptions for live updates. The `client` package lets you query the host's state and environment, and the [context](#query-the-application-context) of your Marketplace app.
 - Perform mutations. Mutations trigger state changes or HTTP requests in Sitecore.
 - Interact with Sitecore APIs to perform actions on behalf of the resources it was granted access to during installation.
+
   > [!TIP]
   > Inspired by GraphQL and React Query, the query/mutation API manages internal state, loading status, and error handling.
 

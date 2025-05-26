@@ -21,6 +21,9 @@ If your app needs to interact with XM Cloud APIs, you also need to install the `
 npm install @sitecore-marketplace-sdk/xmc
 ```
 
+  > [!NOTE]
+  > For Intellisense to work correctly with the SDK packages, make sure all peer dependencies are installed and their versions are compatible. Issues with peer dependencies are logged in your terminal.
+
 Then, refer to the READMEs of the installed packages and the reference documentation in the `/docs` folder.
 
 

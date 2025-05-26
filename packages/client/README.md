@@ -2,9 +2,10 @@
 
 The `client` package provides secure, bidirectional communication between a Marketplace application (the client) and Sitecore (the host). Sitecore loads the Marketplace app inside a sandboxed [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). The iframe and its parent window securely communicate using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
-This package lets you make queries and perform mutations:
-- Queries support one-off data requests and subscriptions for live updates.
-- Mutations trigger state changes or HTTP requests in Sitecore.
+This package lets you:
+- Make queries. Queries support one-off data requests and subscriptions for live updates. The `client` package lets you query the host's state and environment, and the [context](#query-the-application-context) of your Marketplace app.
+- Perform mutations. Mutations trigger state changes or HTTP requests in Sitecore.
+- Interact with Sitecore APIs to perform actions on behalf of the resources it was granted access to during installation.
   > [!TIP]
   > Inspired by GraphQL and React Query, the query/mutation API manages internal state, loading status, and error handling.
 

@@ -1,6 +1,6 @@
 # Sitecore Marketplace SDK - `client` package
 
-The `client` package provides secure, bidirectional communication between a Marketplace application (the client) and Sitecore (the host). It loads the Marketplace app in Sitecore inside a sandboxed [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). The iframe and its parent window securely communicate using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
+The `client` package provides secure, bidirectional communication between a Marketplace application (the client) and Sitecore (the host). Sitecore loads the Marketplace app inside a sandboxed [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). The iframe and its parent window securely communicate using the web browser's [PostMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 This package lets you make queries and perform mutations:
 - Queries support one-off data requests and subscriptions for live updates.

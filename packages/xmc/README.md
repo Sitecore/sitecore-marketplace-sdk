@@ -44,7 +44,7 @@ const sites = await client.query('xmc.xmapp.listSites')
 console.log(sites.data); // Displays the list of sites
 ```
 
-For an overview of all the possible values, refer to the [`QueryMap` interface](../../docs/xmc/interfaces/QueryMap.md).
+For an overview of all the possible values, refer to the [`QueryMap` interface](../../docs/modules/xmc/interfaces/QueryMap.md).
 
 ### Perform a mutation
 Use the `mutate` method to trigger changes in Sitecore (the host). Pass a value to the method depending on the change you want to make.
@@ -60,7 +60,7 @@ const mutationResult = await client.mutate('xmc.xmapp.updateSite', {
 console.log(mutationResult.data); // Displays the updated host state data
 ```
 
-For an overview of all the possible values, refer to the [`MutationMap` interface](../../docs/xmc/interfaces/MutationMap.md).
+For an overview of all the possible values, refer to the [`MutationMap` interface](../../docs/modules/xmc/interfaces/MutationMap.md).
 
 > [!NOTE]
 > Behind the scenes, the Host SDK (integrated via the internal `core` package) attaches the required user token and performs the HTTP request on behalf of the Marketplace app (the client).
@@ -70,7 +70,7 @@ For an overview of all the possible values, refer to the [`MutationMap` interfac
 For more information, refer to the reference documentation in the `/docs` folder.
 
 ## License 
-This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.md) file in the repository root.
+This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.MD) file in the repository root.
 
 ## Status
 The `client` package is actively maintained as part of the Sitecore Marketplace SDK.

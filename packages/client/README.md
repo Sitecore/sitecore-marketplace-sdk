@@ -6,8 +6,9 @@ This package lets you:
 - Make queries. Queries support one-off data requests and subscriptions for live updates. The `client` package lets you query the host's state and environment, and the [context](#query-the-application-context) of your Marketplace app.
 - Perform mutations. Mutations trigger state changes or HTTP requests in Sitecore.
 - Interact with Sitecore APIs to perform actions on behalf of the resources it was granted access to during installation.
-  > [!TIP]
-  > Inspired by GraphQL and React Query, the query/mutation API manages internal state, loading status, and error handling.
+
+> [!TIP]
+> Inspired by GraphQL and React Query, the query/mutation API manages internal state, loading status, and error handling.
 
 The `client` package is required for all Marketplace apps.
 
@@ -121,7 +122,7 @@ To retrieve the application context, use the `query` method and pass `'applicati
 For more information, refer to the reference documentation in the `/docs` folder.
 
 ## License 
-This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.md) file in the repository root.
+This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.MD) file in the repository root.
 
 ## Status
 The `client` package is actively maintained as part of the Sitecore Marketplace SDK.

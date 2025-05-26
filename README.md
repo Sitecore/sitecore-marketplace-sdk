@@ -110,7 +110,7 @@ Each package is inside the `packages/` directory. For example, to work with the 
 2. Use package-specific scripts (e.g., `build`, `lint`, `test`) as defined in its own `package.json`.
   
 ## License 
-The Sitecore Marketplace SDK is licensed under the Apache 2.0 License. Refer to the [LICENSE](./LICENSE.md) file in the repository root.
+The Sitecore Marketplace SDK is licensed under the Apache 2.0 License. Refer to the [LICENSE](./LICENSE.MD) file in the repository root.
 
 ## Status
 The Sitecore Marketplace SDK is actively maintained.

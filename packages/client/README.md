@@ -121,7 +121,7 @@ To retrieve the application context, use the `query` method and pass `'applicati
 For more information, refer to the reference documentation in the `/docs` folder.
 
 ## License 
-This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.md) file in the repository root.
+This package is part of the Sitecore Marketplace SDK, licensed under the Apache 2.0 License. Refer to the [LICENSE](../../LICENSE.MD) file in the repository root.
 
 ## Status
 The `client` package is actively maintained as part of the Sitecore Marketplace SDK.

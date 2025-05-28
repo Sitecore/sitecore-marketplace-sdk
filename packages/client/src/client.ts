@@ -423,6 +423,32 @@ export class ClientSDK {
     this.coreSdk.emit('client.route', payload);
   }
 
+  /**
+   * Requests the current value from the host application.
+   * @returns A Promise resolving to the value returned by the host.
+   */
+  async getValue(): Promise<any> {
+    return this.coreSdk.request('pages.getValue', {});
+  }
+
+  /**
+   * Sets a value in the host application.
+   * @param value - The value to set.
+   * @param canvasReload - Optional flag to trigger canvas reload in the host.
+   * @returns A Promise that resolves when the operation is complete.
+   */
+  async setValue(value: string, canvasReload?: boolean): Promise<void> {
+    await this.coreSdk.request('pages.setValue', { value, canvasReload });
+  }
+
+  /**
+   * Requests the host application to close the app.
+   * @returns A Promise that resolves when the operation is complete.
+   */
+  async closeApp(): Promise<void> {
+    await this.coreSdk.request('pages.closeApp', {});
+  }
+
   private async setNavbarItems(navbarItems?: NavbarItemsProps): Promise<void> {
     if (navbarItems) {
       await this.coreSdk.request('host.setNavbarItems', navbarItems);

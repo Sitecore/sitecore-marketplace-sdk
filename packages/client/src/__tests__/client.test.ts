@@ -655,4 +655,26 @@ describe('ClientSDK', () => {
     await expect(client.emitRouteEvent(undefined as unknown as string)).rejects
       .toThrow('Route is required for sendRouteEvent');
   });
+
+  it('should call coreSdk.request with pages.getValue in getValue()', async () => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue('mockedValue');
+    const result = await client.getValue();
+    expect(mockRequest).toHaveBeenCalledWith('pages.getValue', {});
+    expect(result).toBe('mockedValue');
+  });
+
+  it('should call coreSdk.request with pages.setValue in setValue()', async () => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
+    await client.setValue('testValue', true);
+    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', { value: 'testValue', canvasReload: true });
+  });
+
+  it('should call coreSdk.request with pages.closeApp in closeApp()', async () => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
+    await client.closeApp();
+    expect(mockRequest).toHaveBeenCalledWith('pages.closeApp', {});
+  });
 });

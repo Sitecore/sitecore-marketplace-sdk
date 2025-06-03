@@ -130,3 +130,11 @@ export interface ExternalUrlPayload {
   newTab?: boolean;
 }
 
+/**
+ * Parameters for Pages Context mutation.
+ */
+export interface PagesContextParams {
+  itemId?: string;
+  language?: string;
+  itemVersion?: string;
+}

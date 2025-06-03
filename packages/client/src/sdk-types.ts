@@ -1,5 +1,5 @@
 // Import shared types (e.g. User and ApplicationMetadata)
-import { ApplicationContext, UserInfo } from '@sitecore-marketplace-sdk/core';
+import { ApplicationContext, UserInfo, PagesContextParams } from '@sitecore-marketplace-sdk/core';
 
 // --- Host state types ---
 
@@ -221,6 +221,11 @@ export interface QueryMap {
 export interface MutationMap {
   'pages.reloadCanvas': {
     params: void;
+    response: void;
+    subscribe: false;
+  };
+  'pages.context': {
+    params: PagesContextParams;
     response: void;
     subscribe: false;
   };

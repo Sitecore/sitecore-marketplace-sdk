@@ -655,4 +655,29 @@ describe('ClientSDK', () => {
     await expect(client.emitRouteEvent(undefined as unknown as string)).rejects
       .toThrow('Route is required for sendRouteEvent');
   });
+
+  it('should call coreSdk.request with pages.getValue in getValue()', async () => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue('mockedValue');
+    const result = await client.getValue();
+    expect(mockRequest).toHaveBeenCalledWith('pages.getValue', {});
+    expect(result).toBe('mockedValue');
+  });
+
+  it.each([
+    [true, { value: 'testValue', canvasReload: true }],
+    [false, { value: 'testValue', canvasReload: false }],
+  ])('should call coreSdk.request with pages.setValue in setValue() when canvasReload is %s', async (canvasReload, expectedParams) => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
+    await client.setValue('testValue', canvasReload);
+    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', expectedParams);
+  });
+
+  it('should call coreSdk.request with pages.closeApp in closeApp()', async () => {
+    client = await ClientSDK.init(config);
+    const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
+    await client.closeApp();
+    expect(mockRequest).toHaveBeenCalledWith('pages.closeApp', {});
+  });
 });

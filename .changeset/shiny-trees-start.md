@@ -2,4 +2,4 @@
 '@sitecore-marketplace-sdk/client': minor
 ---
 
-Introduce custom field support in client
+Introduces custom field support in client

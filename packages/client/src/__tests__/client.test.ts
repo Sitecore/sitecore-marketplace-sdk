@@ -669,6 +669,8 @@ describe('ClientSDK', () => {
     const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
     await client.setValue('testValue', true);
     expect(mockRequest).toHaveBeenCalledWith('pages.setValue', { value: 'testValue', canvasReload: true });
+    await client.setValue('testValue', false);
+    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', { value: 'testValue', canvasReload: false });
   });
 
   it('should call coreSdk.request with pages.closeApp in closeApp()', async () => {

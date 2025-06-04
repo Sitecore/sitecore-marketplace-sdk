@@ -664,13 +664,14 @@ describe('ClientSDK', () => {
     expect(result).toBe('mockedValue');
   });
 
-  it('should call coreSdk.request with pages.setValue in setValue()', async () => {
+  it.each([
+    [true, { value: 'testValue', canvasReload: true }],
+    [false, { value: 'testValue', canvasReload: false }],
+  ])('should call coreSdk.request with pages.setValue in setValue() when canvasReload is %s', async (canvasReload, expectedParams) => {
     client = await ClientSDK.init(config);
     const mockRequest = vi.spyOn(client['coreSdk'], 'request').mockResolvedValue(undefined);
-    await client.setValue('testValue', true);
-    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', { value: 'testValue', canvasReload: true });
-    await client.setValue('testValue', false);
-    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', { value: 'testValue', canvasReload: false });
+    await client.setValue('testValue', canvasReload);
+    expect(mockRequest).toHaveBeenCalledWith('pages.setValue', expectedParams);
   });
 
   it('should call coreSdk.request with pages.closeApp in closeApp()', async () => {

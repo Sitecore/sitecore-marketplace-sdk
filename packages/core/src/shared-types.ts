@@ -105,6 +105,7 @@ export interface ApplicationContext {
   name?: string;
   type?: string;
   iconUrl?: string;
+  state?: string;
   installationId?: string;
   resources?: [
     {
@@ -117,7 +118,13 @@ export interface ApplicationContext {
       };
     }
   ];
-  [key: string]: any
+  touchpoints?: [
+    {
+      touchpointId: string;
+      route: string
+    }
+  ];
+  [key: string]: any;
 }
 
 /**

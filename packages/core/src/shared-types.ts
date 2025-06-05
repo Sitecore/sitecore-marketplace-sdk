@@ -115,9 +115,15 @@ export interface ApplicationContext {
         live?: string;
         preview?: string;
       };
-    }
+    },
   ];
-  [key: string]: any
+  touchpoints?: [
+    {
+      touchpointId: string;
+      route: string;
+    },
+  ];
+  [key: string]: any;
 }
 
 /**
@@ -129,4 +135,3 @@ export interface ExternalUrlPayload {
   /** Whether to open the URL in a new tab */
   newTab?: boolean;
 }
-

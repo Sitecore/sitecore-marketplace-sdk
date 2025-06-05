@@ -2,6 +2,7 @@ import { CoreError, ErrorCode } from './errors';
 import { EventEmitter } from './event-emitter';
 import { HandshakeManager } from './handshake-manager';
 import { v4 as uuidV4 } from 'uuid';
+import { type } from '../../xmc/plugins/client-transformer/index';
 import {
   Message,
   RequestMessage,
@@ -431,7 +432,9 @@ export class PostMessageBridge {
       message,
     );
 
-    const handler = this.requestHandlers.get(message.action);
+    const fullKey=message.action.split(':');
+    const actionWithoutPostfix=fullKey[0];
+    const handler = this.requestHandlers.get(message.action) ?? this.requestHandlers.get(actionWithoutPostfix);
     const catchAllHandler = this.requestHandlers.get('*');
     if (!handler && !catchAllHandler) {
       // No handler registered for this action, send an error response.

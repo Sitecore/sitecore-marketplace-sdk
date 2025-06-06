@@ -431,7 +431,9 @@ export class PostMessageBridge {
       message,
     );
 
-    const handler = this.requestHandlers.get(message.action);
+    const fullKey = message.action.split(':');
+    const actionWithoutPostfix = fullKey[0];
+    const handler = this.requestHandlers.get(message.action) ?? this.requestHandlers.get(actionWithoutPostfix);
     const catchAllHandler = this.requestHandlers.get('*');
     if (!handler && !catchAllHandler) {
       // No handler registered for this action, send an error response.

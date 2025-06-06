@@ -33,7 +33,7 @@ importers:
   packages/client:
     dependencies:
       '@sitecore-marketplace-sdk/core':
-        specifier: workspace:*
+        specifier: file:C://Users/asyr/source/repos/External/Sitecore/packages/core
         version: link:../core
       tslib:
         specifier: ^2.8.1

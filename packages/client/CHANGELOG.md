@@ -1,5 +1,15 @@
 # @sitecore-marketplace-sdk/client
 
+## 0.1.4
+
+### Patch Changes
+
+- b48590c: Added new mutation key to support update Pages context
+- da1106f: Introduces custom field support in client
+- Updated dependencies [b48590c]
+- Updated dependencies [894b467]
+  - @sitecore-marketplace-sdk/core@0.1.4
+
 ## 0.1.2
 
 ### Patch Changes

@@ -156,6 +156,38 @@ describe('PostMessageBridge', () => {
       expect(bridge['config'].targetOrigin).toBe('https://allowed-origin.com');
     });
 
+    test('fail validates origin when used not allowed origin', () => {
+      const mockEvent = {
+        origin: 'https://notallowed-origin.com',
+        data: {
+          type: 'handshake',
+          source: 'sitecore-marketplace-sdk',
+        },
+      } as MessageEvent;
+
+      const mockAllowOrigins = ['https://allowed-origin.com'];
+      vi.spyOn(AllowedOrigins, 'some').mockImplementation((callback) => mockAllowOrigins.some(callback));
+
+      const bridge = new PostMessageBridge({
+        target: mockTarget,
+        targetOrigin: null,
+        selfOrigin: testSelfOrigin,
+        timeout: 5000,
+      });
+
+      bridge.initialize({
+        type: 'client',
+        targetOrigin: null,
+        selfOrigin: testSelfOrigin,
+        version: '1.0.0'
+      });
+
+      const isValid = (bridge as any).isValidOrigin(mockEvent, mockEvent.data);
+
+      expect(isValid).toBe(false);
+      expect(bridge['config'].targetOrigin).toBe(null);
+    });
+
     // describe('request/response', () => {
     //   beforeEach(async () => {
     //     bridge.initialize({

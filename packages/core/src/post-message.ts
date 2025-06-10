@@ -12,7 +12,7 @@ import {
   CoreSDKConfig,
   HandshakeConfig,
 } from './types';
-import { AllowOrigins } from './allow-origins';
+import { AllowedOrigins } from './allowed-origins';
 
 const DEFAULT_TIMEOUT = 30000; // 30 seconds
 
@@ -333,7 +333,7 @@ export class PostMessageBridge {
 
     // For client SDK, we need to validate the origin during the handshake.
     if (this.sdkType === 'client' && message.type === 'handshake' && this.isNullOrEmpty(this.config.targetOrigin)) {
-      isValidOrigin = AllowOrigins.some(origin => event.origin.includes(origin));
+      isValidOrigin = AllowedOrigins.some(origin => event.origin.includes(origin));
       //Once origin is confirmed, targetOrigin will not be null
       if (isValidOrigin) {
         this.config.targetOrigin = event.origin;

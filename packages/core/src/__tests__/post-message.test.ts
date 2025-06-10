@@ -3,7 +3,7 @@ import { CoreError } from '../errors';
 import type { HandshakeMessage } from '../types';
 import { afterEach, beforeEach, describe, expect, test, vi, Mock } from 'vitest';
 import { source } from './shared';
-import { AllowOrigins } from '../allow-origins';
+import { AllowedOrigins } from '../allowed-origins';
 
 describe('PostMessageBridge', () => {
   const mockTarget = {
@@ -134,7 +134,7 @@ describe('PostMessageBridge', () => {
       } as MessageEvent;
 
       const mockAllowOrigins = ['https://allowed-origin.com'];
-      vi.spyOn(AllowOrigins, 'some').mockImplementation((callback) => mockAllowOrigins.some(callback));
+      vi.spyOn(AllowedOrigins, 'some').mockImplementation((callback) => mockAllowOrigins.some(callback));
 
       const bridge = new PostMessageBridge({
         target: mockTarget,

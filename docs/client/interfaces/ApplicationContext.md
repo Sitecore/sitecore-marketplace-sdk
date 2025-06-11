@@ -34,7 +34,7 @@ Defined in: core/dist/shared-types.d.ts:67
 
 > `optional` **installationId**: `string`
 
-Defined in: core/dist/shared-types.d.ts:72
+Defined in: core/dist/shared-types.d.ts:73
 
 ***
 
@@ -50,7 +50,23 @@ Defined in: core/dist/shared-types.d.ts:69
 
 > `optional` **resources**: \[\{ `context?`: \{ `live?`: `string`; `preview?`: `string`; \}; `resourceId?`: `string`; `tenantId?`: `string`; `tenantName?`: `string`; \}\]
 
-Defined in: core/dist/shared-types.d.ts:73
+Defined in: core/dist/shared-types.d.ts:74
+
+***
+
+### state?
+
+> `optional` **state**: `string`
+
+Defined in: core/dist/shared-types.d.ts:72
+
+***
+
+### touchpoints?
+
+> `optional` **touchpoints**: \[\{ `route`: `string`; `touchpointId`: `string`; \}\]
+
+Defined in: core/dist/shared-types.d.ts:85
 
 ***
 

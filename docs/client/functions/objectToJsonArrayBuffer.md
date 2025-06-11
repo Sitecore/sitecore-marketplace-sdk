@@ -8,7 +8,7 @@
 
 > **objectToJsonArrayBuffer**(`data`): `ArrayBuffer`
 
-Defined in: [client/src/utils.ts:6](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/utils.ts#L6)
+Defined in: [client/src/utils.ts:6](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/utils.ts#L6)
 
 Converts a JavaScript object into a JSON ArrayBuffer.
 

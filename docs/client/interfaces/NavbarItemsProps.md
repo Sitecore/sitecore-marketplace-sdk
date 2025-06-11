@@ -6,7 +6,7 @@
 
 # Interface: NavbarItemsProps
 
-Defined in: [client/src/sdk-types.ts:90](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L90)
+Defined in: [client/src/sdk-types.ts:90](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/sdk-types.ts#L90)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [client/src/sdk-types.ts:90](https://github.com/Sitecore/sitecore-ma
 
 > **appLogo**: `string`
 
-Defined in: [client/src/sdk-types.ts:91](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L91)
+Defined in: [client/src/sdk-types.ts:91](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/sdk-types.ts#L91)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [client/src/sdk-types.ts:91](https://github.com/Sitecore/sitecore-ma
 
 > **appName**: `string`
 
-Defined in: [client/src/sdk-types.ts:92](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L92)
+Defined in: [client/src/sdk-types.ts:92](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/sdk-types.ts#L92)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [client/src/sdk-types.ts:92](https://github.com/Sitecore/sitecore-ma
 
 > **helpLinks**: `NavBarItem`[]
 
-Defined in: [client/src/sdk-types.ts:94](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L94)
+Defined in: [client/src/sdk-types.ts:94](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/sdk-types.ts#L94)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [client/src/sdk-types.ts:94](https://github.com/Sitecore/sitecore-ma
 
 > **menu**: `NavBarItem`[]
 
-Defined in: [client/src/sdk-types.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L93)
+Defined in: [client/src/sdk-types.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/client/src/sdk-types.ts#L93)

@@ -6,7 +6,7 @@
 
 # Interface: UserInfo
 
-Defined in: [packages/core/src/shared-types.ts:2](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/shared-types.ts#L2)
+Defined in: [packages/core/src/shared-types.ts:2](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/shared-types.ts#L2)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/shared-types.ts:2](https://github.com/Sitecore/si
 
 > **email**: `string`
 
-Defined in: [packages/core/src/shared-types.ts:5](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/shared-types.ts#L5)
+Defined in: [packages/core/src/shared-types.ts:5](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/shared-types.ts#L5)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/shared-types.ts:5](https://github.com/Sitecore/si
 
 > **id**: `string`
 
-Defined in: [packages/core/src/shared-types.ts:3](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/shared-types.ts#L3)
+Defined in: [packages/core/src/shared-types.ts:3](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/shared-types.ts#L3)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/shared-types.ts:3](https://github.com/Sitecore/si
 
 > **name**: `string`
 
-Defined in: [packages/core/src/shared-types.ts:4](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/shared-types.ts#L4)
+Defined in: [packages/core/src/shared-types.ts:4](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/shared-types.ts#L4)

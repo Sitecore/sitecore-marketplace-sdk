@@ -145,9 +145,9 @@ export class ClientSDK {
     return Array.from(this.modules.keys());
   }
 
-  private resolveOperation(keyOrOperationKey: string): { request: Function; operation: string } {
+  private resolveOperation(keyOrOperationKey: string, type: 'query' | 'mutation'): { request: Function; operation: string } {
     let request = this.coreSdk.request.bind(this.coreSdk); // Bind to preserve context
-    let operation = keyOrOperationKey;
+    let operation = keyOrOperationKey + ':' + type; // Default operation name
 
     if (keyOrOperationKey.includes('.')) {
       const firstDotIndex = keyOrOperationKey.indexOf('.');
@@ -216,7 +216,7 @@ export class ClientSDK {
    */
 
   async query<K extends QueryKey>(key: K, queryOptions?: QueryOptions<K>): Promise<QueryResult<K>> {
-    const { request, operation } = this.resolveOperation(key as string);
+    const { request, operation } = this.resolveOperation(key as string, 'query');
 
     const { subscribe, onSuccess, onError, params, timeoutMs } = queryOptions || {};
     const hashedKey = subscribe ? key : await this.generateKeyWithHash(key, queryOptions);
@@ -339,7 +339,7 @@ export class ClientSDK {
     key: K,
     mutationOptions?: MutationOptions<K>,
   ): Promise<MutationMap[K]['response']> {
-    const { request, operation } = this.resolveOperation(key as string);
+    const { request, operation } = this.resolveOperation(key as string, 'mutation');
     const { onSuccess, onError, params, timeoutMs } = mutationOptions || {};
     logger.debug(`Mutation (${key}) initiated with params:`, params, `timeoutMs: ${timeoutMs}`);
 

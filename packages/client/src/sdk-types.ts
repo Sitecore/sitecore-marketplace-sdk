@@ -186,6 +186,26 @@ interface PagesContextPageInfo {
   [key: string]: any;
 }
 
+interface SiteContext {
+  siteInfo: {
+    siteId: string;
+    name: string;
+    displayName: string;
+    url: string;
+    hosts: {
+      id: string;
+      name: string;
+      languageSettings: {
+        defaultLanguage: string;
+        [key: string]: any;
+      };
+      [key: string]: any;
+    }[];
+    [key: string]: any;
+  } | null;
+  [key: string]: any;
+}
+
 // --- Static mappings for queries and mutations ---
 
 export interface QueryMap {
@@ -209,6 +229,11 @@ export interface QueryMap {
   'application.context': {
     params: void;
     response: ApplicationContext;
+    subscribe: false;
+  };
+  'site.context': {
+    params: void;
+    response: SiteContext;
     subscribe: false;
   };
   'host.route': {

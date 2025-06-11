@@ -6,7 +6,7 @@
 
 # Interface: IframeMetadata
 
-Defined in: [packages/core/src/types.ts:141](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/types.ts#L141)
+Defined in: [packages/core/src/types.ts:141](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L141)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types.ts:141](https://github.com/Sitecore/sitecor
 
 > **height**: `string`
 
-Defined in: [packages/core/src/types.ts:143](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/types.ts#L143)
+Defined in: [packages/core/src/types.ts:143](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L143)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [packages/core/src/types.ts:143](https://github.com/Sitecore/sitecor
 
 > **sandbox**: `string`
 
-Defined in: [packages/core/src/types.ts:144](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/types.ts#L144)
+Defined in: [packages/core/src/types.ts:144](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L144)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [packages/core/src/types.ts:144](https://github.com/Sitecore/sitecor
 
 > **width**: `string`
 
-Defined in: [packages/core/src/types.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/core/src/types.ts#L142)
+Defined in: [packages/core/src/types.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L142)

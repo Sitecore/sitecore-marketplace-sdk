@@ -6,7 +6,7 @@
 
 # Interface: XmcXmAppsHostState
 
-Defined in: [client/src/sdk-types.ts:19](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L19)
+Defined in: [client/src/sdk-types.ts:19](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/client/src/sdk-types.ts#L19)
 
 ## Indexable
 
@@ -18,7 +18,7 @@ Defined in: [client/src/sdk-types.ts:19](https://github.com/Sitecore/sitecore-ma
 
 > **environment**: `string`
 
-Defined in: [client/src/sdk-types.ts:20](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L20)
+Defined in: [client/src/sdk-types.ts:20](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/client/src/sdk-types.ts#L20)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [client/src/sdk-types.ts:20](https://github.com/Sitecore/sitecore-ma
 
 > **language**: `string`
 
-Defined in: [client/src/sdk-types.ts:21](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/client/src/sdk-types.ts#L21)
+Defined in: [client/src/sdk-types.ts:21](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/client/src/sdk-types.ts#L21)

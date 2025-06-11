@@ -114,7 +114,7 @@ Defined in: packages/client/dist/sdk-types.d.ts:170
 
 > **consumeFile**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L23)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L23)
 
 Starts consuming a `.raif` file in the specified database.
 
@@ -136,7 +136,7 @@ Starts consuming a `.raif` file in the specified database.
 
 > **getBlobState**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L30)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L30)
 
 Retrieves the status of a consumed `.raif` file.
 
@@ -158,7 +158,7 @@ Retrieves the status of a consumed `.raif` file.
 
 > **getChunk**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L16)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L16)
 
 Retrieves the specified chunk from the specified chunk set in the Source environment.
 
@@ -180,7 +180,7 @@ Retrieves the specified chunk from the specified chunk set in the Source environ
 
 > **getContentTransferStatus**: `object`
 
-Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L9)
+Defined in: [packages/xmc/src/client-content-transfer/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-content-transfer/augmentation.gen.ts#L9)
 
 Gets the status of the created content transfer by transfer ID.
 
@@ -202,7 +202,7 @@ Gets the status of the created content transfer by transfer ID.
 
 > **getFavoriteSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L51)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:51](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L51)
 
 Fetches a list of your favorite sites
 
@@ -224,7 +224,7 @@ Fetches a list of your favorite sites
 
 > **getLivePageState**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L30)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:30](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L30)
 
 Checks if the requested page is active.
 
@@ -246,7 +246,7 @@ Checks if the requested page is active.
 
 > **getRenderingHosts**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L142)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:142](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L142)
 
 Fetches a list of rendering hosts for a site.
 
@@ -268,7 +268,7 @@ Fetches a list of rendering hosts for a site.
 
 > **listCollections**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L37)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:37](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L37)
 
 Fetches the list of site collections in the environment, with associated details.
 
@@ -290,7 +290,7 @@ Fetches the list of site collections in the environment, with associated details
 
 > **listCollectionSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L93)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:93](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L93)
 
 Fetches a list of sites in a site collection.
 
@@ -312,7 +312,7 @@ Fetches a list of sites in a site collection.
 
 > **listHosts**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:128](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L128)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:128](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L128)
 
 Retrieves the list of hosts for a site.
 
@@ -334,7 +334,7 @@ Retrieves the list of hosts for a site.
 
 > **listJobs**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L58)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:58](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L58)
 
 Fetches information about background jobs. Returns empty array if no jobs are running.
 
@@ -356,7 +356,7 @@ Fetches information about background jobs. Returns empty array if no jobs are ru
 
 > **listLanguages**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L9)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:9](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L9)
 
 Retrieves the list of languages added to the environment.
 
@@ -378,7 +378,7 @@ Retrieves the list of languages added to the environment.
 
 > **listPageAncestors**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L114)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:114](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L114)
 
 Fetches information about the ancestors of a page.
 
@@ -400,7 +400,7 @@ Fetches information about the ancestors of a page.
 
 > **listPageChildren**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:121](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L121)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:121](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L121)
 
 Fetches information about the children of a page.
 
@@ -422,7 +422,7 @@ Fetches information about the children of a page.
 
 > **listPageVariants**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L23)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:23](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L23)
 
 Fetches the identifiers of currently active personalization variants for a page.
 
@@ -444,7 +444,7 @@ Fetches the identifiers of currently active personalization variants for a page.
 
 > **listSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L72)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:72](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L72)
 
 Fetches the list of sites in the environment, with associated details.
 
@@ -466,7 +466,7 @@ Fetches the list of sites in the environment, with associated details.
 
 > **listSiteTemplates**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L149)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:149](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L149)
 
 Gets the site templates available in the environment that can be used for creating sites. Learn more about [site templates](https://doc.sitecore.com/xmc/en/developers/xm-cloud/create-a-site-template-for-the-xm-cloud-dashboard.html).
 
@@ -488,7 +488,7 @@ Gets the site templates available in the environment that can be used for creati
 
 > **listSupportedLanguages**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L16)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:16](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L16)
 
 Retrieves the list of languages supported by Sitecore XM Cloud, and associated data.
 
@@ -510,7 +510,7 @@ Retrieves the list of languages supported by Sitecore XM Cloud, and associated d
 
 > **listTrackedSites**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:86](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L86)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:86](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L86)
 
 Fetches a list of sites that use an [analytics identifier](https://doc.sitecore.com/xmc/en/users/xm-cloud/manage-personalization-and-analytics-for-sites.html).
 
@@ -532,7 +532,7 @@ Fetches a list of sites that use an [analytics identifier](https://doc.sitecore.
 
 > **retrieveCollection**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:44](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L44)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:44](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L44)
 
 Fetches information about a site collection.
 
@@ -554,7 +554,7 @@ Fetches information about a site collection.
 
 > **retrieveHost**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L135)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:135](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L135)
 
 Fetches details about a site host.
 
@@ -576,7 +576,7 @@ Fetches details about a site host.
 
 > **retrieveJob**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L65)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:65](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L65)
 
 Fetches information about a background job.
 
@@ -598,7 +598,7 @@ Fetches information about a background job.
 
 > **retrieveLocalizationStatistics**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L156)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L156)
 
 Fetches localization statistics for a site, including the number of pages in each locale.
 
@@ -620,7 +620,7 @@ Fetches localization statistics for a site, including the number of pages in eac
 
 > **retrievePageHierarchy**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:107](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L107)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:107](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L107)
 
 Fetches hierarchy information about a page, including its children, ancestors, and siblings.
 
@@ -642,7 +642,7 @@ Fetches hierarchy information about a page, including its children, ancestors, a
 
 > **retrieveSite**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L79)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:79](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L79)
 
 Fetches information about a site.
 
@@ -664,7 +664,7 @@ Fetches information about a site.
 
 > **retrieveSiteHierarchy**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L100)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:100](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L100)
 
 Fetches hierarchy information about the main page of a site, including its children, ancestors, and siblings.
 
@@ -686,7 +686,7 @@ Fetches hierarchy information about the main page of a site, including its child
 
 > **retrieveSitemapConfiguration**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:163](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L163)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:163](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L163)
 
 Fetches a [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configure-a-sitemap.html) configuration.
 
@@ -708,7 +708,7 @@ Fetches a [sitemap](https://doc.sitecore.com/xmc/en/developers/xm-cloud/configur
 
 > **retrieveWorkflowStatistics**: `object`
 
-Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:170](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/1f70c0e343ae7c5af199be23e7e4eec043951068/packages/xmc/src/client-xmapp/augmentation.gen.ts#L170)
+Defined in: [packages/xmc/src/client-xmapp/augmentation.gen.ts:170](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/a6cf0c0c2c8e7d75cac76be4b25b10fb12675545/packages/xmc/src/client-xmapp/augmentation.gen.ts#L170)
 
 Fetches the workflows defined for a site, their states, and the number of pages in each state.
 

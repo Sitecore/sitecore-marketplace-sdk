@@ -6,6 +6,7 @@
 
 ## Enumerations
 
+- [AllowedTouchpoints](enumerations/AllowedTouchpoints.md)
 - [ErrorCode](enumerations/ErrorCode.md)
 
 ## Classes

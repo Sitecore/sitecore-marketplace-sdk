@@ -6,7 +6,7 @@
 
 # Interface: SecurityConfig
 
-Defined in: [packages/core/src/types.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L156)
+Defined in: [packages/core/src/types.ts:156](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/types.ts#L156)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [packages/core/src/types.ts:156](https://github.com/Sitecore/sitecor
 
 > `optional` **encryptionKey**: `string`
 
-Defined in: [packages/core/src/types.ts:158](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L158)
+Defined in: [packages/core/src/types.ts:158](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/types.ts#L158)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [packages/core/src/types.ts:158](https://github.com/Sitecore/sitecor
 
 > **trustedOrigins**: `string`[]
 
-Defined in: [packages/core/src/types.ts:157](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/164b50f088c64d06bdfc3339d06f7bcbd681db60/packages/core/src/types.ts#L157)
+Defined in: [packages/core/src/types.ts:157](https://github.com/Sitecore/sitecore-marketplace-sdk/blob/c654677445b16d8ca23b9ea08164f907627519f1/packages/core/src/types.ts#L157)

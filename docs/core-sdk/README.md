@@ -31,6 +31,7 @@
 - [HandshakeResponseMessage](interfaces/HandshakeResponseMessage.md)
 - [IframeMetadata](interfaces/IframeMetadata.md)
 - [MessageHandler](interfaces/MessageHandler.md)
+- [PagesContextParams](interfaces/PagesContextParams.md)
 - [PortalSchema](interfaces/PortalSchema.md)
 - [RequestMessage](interfaces/RequestMessage.md)
 - [ResponseMessage](interfaces/ResponseMessage.md)

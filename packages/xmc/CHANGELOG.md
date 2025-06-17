@@ -1,11 +1,5 @@
 # @sitecore-marketplace-sdk/xmc
 
-## 0.1.5
-
-### Patch Changes
-
-- @sitecore-marketplace-sdk/client@0.1.5
-
 ## 0.1.4
 
 ### Patch Changes

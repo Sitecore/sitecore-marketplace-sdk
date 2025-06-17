@@ -1,5 +1,11 @@
 # @sitecore-marketplace-sdk/core
 
+## 0.1.5
+
+### Patch Changes
+
+- 402b92a: Adds types for host init new property `applicationContext`
+
 ## 0.1.4
 
 ### Patch Changes

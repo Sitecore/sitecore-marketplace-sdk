@@ -99,6 +99,24 @@ export class GenericResponseData {
   }
 }
 
+export interface ApplicationResourceContext {
+  resourceId: string;
+  tenantId: string;
+  tenantName?: string;
+  tenantDisplayName?: string;
+  context: {
+    live: string;
+    preview: string;
+  };
+  [key: string]: any;
+}
+
+export interface ApplicationTouchpointContext {
+  touchpointId: string;
+  route?: string;
+  [key: string]: any;
+}
+
 export interface ApplicationContext {
   id: string;
   url: string;
@@ -107,24 +125,26 @@ export interface ApplicationContext {
   iconUrl?: string;
   state?: string;
   installationId?: string;
-  resources?: [
-    {
-      resourceId?: string;
-      tenantId?: string;
-      tenantName?: string;
-      context?: {
-        live?: string;
-        preview?: string;
-      };
-    }
-  ];
-  touchpoints?: [
-    {
-      touchpointId: string;
-      route: string
-    }
-  ];
+  resources?: ApplicationResourceContext[];
+  touchpoints?: ApplicationTouchpointContext[];
   [key: string]: any;
+}
+
+/**
+ * Represents the runtime context of an application.
+ */
+export interface ApplicationRuntimeContext {
+  installationId: string;
+  application: {
+    id: string;
+    name: string;
+    type: string;
+    url: string;
+    iconUrl?: string;
+    state: string;
+  };
+  resources: ApplicationResourceContext[];
+  touchpoints: ApplicationTouchpointContext[];
 }
 
 /**

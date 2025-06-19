@@ -115,18 +115,10 @@ export interface ApplicationResourceContext {
 }
 
 /**
- * Represents a basic touchpoint metadata in an application runtime context.
+ * Represents a touchpoint metadata in an application runtime context.
  */
-export interface ApplicationTouchpointMetaBasicContext {
+export interface ApplicationTouchpointMetaContext {
   route: string;
-  id: string;
-  [key: string]: any;
-}
-
-/**
- * Represents a detailed touchpoint metadata in an application runtime context.
- */
-export interface ApplicationTouchpointMetaDetailedContext extends ApplicationTouchpointMetaBasicContext {
   id: string;
   title?: string;
   description?: string;
@@ -142,7 +134,7 @@ export interface ApplicationTouchpointMetaDetailedContext extends ApplicationTou
 export interface ApplicationTouchpointContext {
   touchpointId: string;
   route?: string;
-  meta?: (ApplicationTouchpointMetaBasicContext | ApplicationTouchpointMetaDetailedContext)[];
+  meta?: ApplicationTouchpointMetaContext[];
   [key: string]: any;
 }
 

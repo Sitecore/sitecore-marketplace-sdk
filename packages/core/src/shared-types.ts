@@ -99,6 +99,9 @@ export class GenericResponseData {
   }
 }
 
+/**
+ * Represents a resource in an application runtime context.
+ */
 export interface ApplicationResourceContext {
   resourceId: string;
   tenantId: string;
@@ -111,9 +114,35 @@ export interface ApplicationResourceContext {
   [key: string]: any;
 }
 
+/**
+ * Represents a basic touchpoint metadata in an application runtime context.
+ */
+export interface ApplicationTouchpointMetaBasicContext {
+  route: string;
+  id: string;
+  [key: string]: any;
+}
+
+/**
+ * Represents a detailed touchpoint metadata in an application runtime context.
+ */
+export interface ApplicationTouchpointMetaDetailedContext extends ApplicationTouchpointMetaBasicContext {
+  id: string;
+  title?: string;
+  description?: string;
+  iconUrl?: string;
+  pictureUrl?: string;
+  developerName?: string;
+  [key: string]: any;
+}
+
+/**
+ * Represents a touchpoint in an application runtime context.
+ */
 export interface ApplicationTouchpointContext {
   touchpointId: string;
   route?: string;
+  meta?: (ApplicationTouchpointMetaBasicContext | ApplicationTouchpointMetaDetailedContext)[];
   [key: string]: any;
 }
 
@@ -142,9 +171,11 @@ export interface ApplicationRuntimeContext {
     url: string;
     iconUrl?: string;
     state: string;
+    [key: string]: any;
   };
   resources: ApplicationResourceContext[];
   touchpoints: ApplicationTouchpointContext[];
+  [key: string]: any;
 }
 
 /**
